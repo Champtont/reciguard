@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer style={{ position: "relative", bottom: 0 }}>
+    <footer>
       <div id="iconbox">
         <Row>
           <Col>
