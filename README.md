@@ -8,14 +8,14 @@ My wife has been a huge support and source of encouragement during this Bootcamp
 
 ## Features Include:
 
--- User can log In/Out
--- User has the option to logIn using Googles OAuth
--- User can edit their user info
--- User can change their avatar
--- User can save/edit/delete their own recipes (including a photo).
+- User can log In/Out
+- User has the option to logIn using Googles OAuth
+- User can edit their user info
+- User can change their avatar
+- User can save/edit/delete their own recipes (including a photo).
 
--- User will have a calendar that can hold recipes and create a shopping list regaurding a selected time range.
+- User will have a calendar that can hold recipes and create a shopping list regaurding a selected time range.
 
--- User can edit the shoping list
+- User can edit the shoping list
 
 The Back End for this project can be found here: https://github.com/Champtont/recigaurd_be
