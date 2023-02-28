@@ -1,41 +1,38 @@
 import { useState } from "react";
-import axios from "axios";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { baseAPI, user, newUser } from "../../../redux/actions/index.js";
+import { logInAction } from "../../../redux/actions/index.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userInfo = {
+    email: email,
+    password: password,
+  };
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const { data } = await axios.post(baseAPI + user, {
-        email,
-        password,
-      });
-      toast("Login successfull! 💪", { autoClose: 1000 });
-      localStorage.setItem("accessToken", data.accessToken);
-      navigate("/main");
-    } catch (error) {
-      setError(error.response.data.message);
-    }
+    e.preventDefault();
+    dispatch(logInAction(userInfo));
+    toast("Login successfull! 💪", { autoClose: 1000 });
   };
   return (
     <Container fluid className="p-5">
       <Row>
         <Col col="4" md="6">
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                onChange={(val) => setEmail(val.currentTarget.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -43,7 +40,8 @@ const LoginPage = () => {
               <Form.Control
                 type="password"
                 placeholder="Password"
-                onChange={(val) => setPassword(val.currentTarget.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
 
@@ -55,7 +53,7 @@ const LoginPage = () => {
               <p className="text-center fw-bold mx-3 mb-0">OR</p>
             </div>
 
-            <a href="http://localhost:3001/users/googleLogin">
+            <a href="http://localhost:3002/users/googleLogin">
               <Button
                 className="mb-4 w-100"
                 size="lg"

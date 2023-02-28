@@ -1,14 +1,31 @@
+import { SAVE_CURRENT_USER, SAVE_RECIPES, SAVE_USER_RECIPES } from "../actions";
+
 const initialState = {
-  user: null,
+  currentUser: null,
+  allRecipes: [],
+  userRecipes: [],
+  recipeSearch: [],
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_USER_PROFILE":
+    case SAVE_CURRENT_USER: {
+      return {
+        currentUser: action.payload,
+      };
+    }
+    case SAVE_RECIPES: {
       return {
         ...state,
-        user: action.payload,
+        allRecipes: action.payload,
       };
+    }
+    case SAVE_USER_RECIPES: {
+      return {
+        ...state,
+        userRecipes: action.payload,
+      };
+    }
     default:
       return {
         ...state,
