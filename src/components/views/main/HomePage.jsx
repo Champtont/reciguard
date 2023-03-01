@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCurrentUser } from "../../../redux/actions";
+import { fetchCurrentUser, fetchAllRecipes } from "../../../redux/actions";
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
+    dispatch(fetchAllRecipes());
   }, []);
 
   return (

@@ -84,7 +84,35 @@ export const fetchCurrentUser = () => {
         });
         console.log(getState());
       } else {
-        console.log("There was an issue fetching ");
+        console.log("There was an issue fetching user");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+//get All recipes
+export const fetchAllRecipes = () => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/recipes`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_RECIPES,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching recipes");
       }
     } catch (err) {
       console.log(err);
