@@ -1,6 +1,6 @@
 //ENV VARIABLES API
-export const baseAPI = "http://localhost:3002";
-export const feURL = "http://localhost:3000";
+export const baseAPI = `${process.env.REACT_APP_BE_URL}`;
+export const feURL = `${process.env.REACT_APP_FE_URL}`;
 
 //Common actions
 export const GET_USER = "GET_USER";
@@ -10,6 +10,7 @@ export const SAVE_USER_RECIPES = "GET_USER_RECIPES";
 export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
 
 //fetches
+//--login
 export const logInAction = (userInfo) => {
   return async (dispatch) => {
     try {
@@ -36,7 +37,27 @@ export const logInAction = (userInfo) => {
     }
   };
 };
+//--register
+export const registerAction = async (userInfo) => {
+  try {
+    let response = await fetch(`${baseAPI}/users/register`, {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      window.location.assign(`${feURL}/home`);
+    } else {
+      console.log("There was an error submitting your request");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
+//--get user
 export const fetchCurrentUser = () => {
   return async (dispatch) => {
     try {
