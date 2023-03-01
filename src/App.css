@@ -32,6 +32,10 @@
 }
 
 /*styling*/
+/***Login***/
+.loginContainer {
+  padding-top: 5em;
+}
 
 /***NAV***/
 #root > div > nav {
@@ -69,7 +73,7 @@
   height: 400px;
   margin: auto;
   box-shadow: #68273f 0 0 10px;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 .recipeCardNameBox {
   height: 75px;
@@ -126,8 +130,11 @@
   color: var(--coral);
 }
 /*Footer*/
+footer {
+  width: 100%;
+  background-color: #ba4771d4;
+}
 footer div {
   font-family: "Cabin Sketch";
   padding: 0.5em;
-  background-color: #ba4771d4;
 }

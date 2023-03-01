@@ -1,4 +1,5 @@
 import { AiOutlineFire, AiFillFire } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const SingleRecipe = ({ recipe }) => {
   console.log(recipe.title);
@@ -25,7 +26,9 @@ const SingleRecipe = ({ recipe }) => {
                 <AiOutlineFire size={26} />
               </div>
             </div>
-            <img src={recipe.photo} alt="food" className="img-fluid" />
+            <Link to={`/recipe/${recipe._id}`}>
+              <img src={recipe.photo} alt="food" className="img-fluid" />
+            </Link>
           </div>
         </div>
       )}

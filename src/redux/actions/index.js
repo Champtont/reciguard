@@ -119,3 +119,31 @@ export const fetchAllRecipes = () => {
     }
   };
 };
+
+//get Specifc recipe
+export const fetchSingleRecipe = () => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/recipes`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_SINGLE_RECIPE,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching recipes");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

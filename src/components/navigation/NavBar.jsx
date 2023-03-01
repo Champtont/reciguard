@@ -5,8 +5,17 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import ReciLogo from "../assets/googlereadyreci.png";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
+  const onLogOut = () => {
+    localStorage.removeItem("UserAccessToken");
+    localStorage.removeItem("firstName");
+    navigate("/");
+  };
+
   return (
     <Navbar className="nav" expand="lg">
       <Container>
@@ -23,6 +32,7 @@ const NavBar = () => {
           <Nav className="nav-spacer">
             <Link href="#home">Home</Link>
             <Link href="#link">About Us</Link>
+            <button onClick={() => onLogOut()}>Logout</button>
             <NavDropdown
               title="Dropdown"
               id="basic-nav-dropdown"

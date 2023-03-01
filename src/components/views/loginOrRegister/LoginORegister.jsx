@@ -34,7 +34,7 @@ const LoginPage = () => {
     toast("Login successfull! 💪", { autoClose: 1000 });
   };
   return (
-    <Container fluid className="p-5">
+    <Container fluid className="loginContainer">
       <Row>
         <Col col="4" md="6">
           {isRegister === false && (

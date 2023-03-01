@@ -7,6 +7,7 @@ import NavBar from "./components/navigation/NavBar";
 import Footer from "./components/navigation/Footer";
 import MyCalendar from "./components/views/myCalendar/MyCalendar";
 import HomePage from "./components/views/main/HomePage";
+import SingleRecipePage from "./components/views/Recipes/SingleRecipePage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/recipe/:recipeId" element={<SingleRecipePage />} />
           <Route path="/myCalendar" element={<MyCalendar />} />
         </Routes>
         <Footer />
