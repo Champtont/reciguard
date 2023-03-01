@@ -12,7 +12,7 @@ export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
 //fetches
 //--login
 export const logInAction = (userInfo) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       let response = await fetch(`${baseAPI}/users/login`, {
         method: "POST",
@@ -28,7 +28,6 @@ export const logInAction = (userInfo) => {
         localStorage.setItem("UserAccessToken", accessToken);
         localStorage.setItem("firstName", firstName);
         window.location.assign(`${feURL}/home`);
-        dispatch(fetchCurrentUser());
       } else {
         console.log("There was a problem logging into your account");
       }
@@ -38,28 +37,36 @@ export const logInAction = (userInfo) => {
   };
 };
 //--register
-export const registerAction = async (userInfo) => {
-  try {
-    let response = await fetch(`${baseAPI}/users/register`, {
-      method: "POST",
-      body: JSON.stringify(userInfo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      window.location.assign(`${feURL}/home`);
-    } else {
-      console.log("There was an error submitting your request");
+export const registerAction = (userInfo) => {
+  return async (dispatch, getState) => {
+    try {
+      let response = await fetch(`${baseAPI}/users/register`, {
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        console.log(fetchedData);
+        let accessToken = fetchedData.accessToken;
+        let firstName = fetchedData.firstName;
+        localStorage.setItem("UserAccessToken", accessToken);
+        localStorage.setItem("firstName", firstName);
+        window.location.assign(`${feURL}/home`);
+      } else {
+        console.log("There was an error submitting your request");
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
+  };
 };
 
 //--get user
 export const fetchCurrentUser = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       const accessToken = localStorage.getItem("UserAccessToken");
       const token = accessToken.split('"').join("");
@@ -75,6 +82,7 @@ export const fetchCurrentUser = () => {
           type: SAVE_CURRENT_USER,
           payload: fetchedData,
         });
+        console.log(getState());
       } else {
         console.log("There was an issue fetching ");
       }

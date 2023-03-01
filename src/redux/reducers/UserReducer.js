@@ -9,23 +9,20 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SAVE_CURRENT_USER: {
+    case SAVE_CURRENT_USER:
       return {
         currentUser: action.payload,
       };
-    }
-    case SAVE_RECIPES: {
+    case SAVE_RECIPES:
       return {
         ...state,
         allRecipes: action.payload,
       };
-    }
-    case SAVE_USER_RECIPES: {
+    case SAVE_USER_RECIPES:
       return {
         ...state,
         userRecipes: action.payload,
       };
-    }
     default:
       return {
         ...state,
