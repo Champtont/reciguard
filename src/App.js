@@ -1,5 +1,5 @@
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //routes and Nav
 import LoginPage from "./components/views/loginOrRegister/LoginORegister";
@@ -11,13 +11,15 @@ import HomePage from "./components/views/main/HomePage";
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/myCalendar" element={<MyCalendar />} />
-      </Routes>
-      <Footer />
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/myCalendar" element={<MyCalendar />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

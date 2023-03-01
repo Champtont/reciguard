@@ -1,17 +1,6 @@
 /*importing fonts*/
 @import url("https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Mali:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap");
 
-* {
-  font-family: "Mali";
-}
-
-.App {
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
 /*VARIABLES*/
 :root {
   --mantis: #5fad56;
@@ -21,8 +10,107 @@
   --raspberry: #b4436c;
 }
 
+.App {
+  text-align: center;
+  width: 100dvw;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  background-color: var(--raspberry);
+  font-family: "Mali";
+}
+.App::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+  position: fixed;
+  left: 20px;
+}
+.App::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(90deg, #68273f, var(--raspberry));
+  border-radius: 10px;
+}
+
 /*styling*/
-#root {
+
+/***NAV***/
+#root > div > nav {
+  padding: 0.5em;
+  background-color: #ba4771e7;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 6000;
+  display: flex;
+  justify-content: space-between;
+}
+#root > div > nav a {
+  text-decoration: none;
+  color: var(--viridian);
+}
+#navLogo {
+  height: 50px;
+  aspect-ratio: 1/1;
+}
+#hamburgermenu {
+  color: var(--viridian);
+}
+/***MainPage***/
+#homeMainBox {
+  padding-top: 4.5em;
+}
+/*recipeCards*/
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+  width: 90%;
+  height: 400px;
+  margin: auto;
+  box-shadow: #68273f 0 0 10px;
+  margin-bottom: 0.5em;
+}
+.recipeCardNameBox {
+  height: 75px;
+  display: flex;
+  gap: 5px;
+  padding: 0.5em;
+  background-image: linear-gradient(90deg, var(--coral) 35%, #bf623d 85%);
+}
+.recipeAvatarBox {
+  height: 50px;
+  width: 50px;
+  border-radius: 10px 0 10px 0;
+  border: var(--raspberry) 1pt solid;
+  box-shadow: var(--raspberry) -5px 5px 10px;
+  overflow: hidden;
+}
+.recipeCardPhotoBox {
+  height: 425px;
+  position: relative;
+}
+.recipeCardPhotoBox img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.recipeTitle {
+  color: white;
+  background-image: linear-gradient(#4d9079bd 45%, transparent);
+  padding: 0.5em;
+  font-weight: bold;
+  text-shadow: black 0 0 1px;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  right: 0;
+  border-radius: 0 0 0 20px;
+}
+.favoriteBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*Calendar*/
 .rbc-calendar {
@@ -40,4 +128,6 @@
 /*Footer*/
 footer div {
   font-family: "Cabin Sketch";
+  padding: 0.5em;
+  background-color: #ba4771d4;
 }

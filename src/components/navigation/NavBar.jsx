@@ -2,17 +2,21 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import ReciLogo from "../assets/googlereadyreci.png";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <Navbar className="nav" expand="lg">
-      <Container style={{ position: "fixed" }}>
-        <Link to="/main">ReciGuard</Link>
+      <Container>
+        <Link to="/home">
+          <img src={ReciLogo} alt="Reci logo" id="navLogo" />
+          eciGuard
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span>
-            <HiMenu id="hamburgermenu" />
+            <HiMenu id="hamburgermenu" size={26} />
           </span>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">

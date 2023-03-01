@@ -9,7 +9,9 @@ const Footer = () => {
             <div>ReciGaurd</div>
           </Col>
           <Col>
-            <div></div>
+            <a href="#">
+              <div>Back To Top</div>
+            </a>
           </Col>
         </Row>
       </div>
