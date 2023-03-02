@@ -26,6 +26,7 @@ const SingleRecipe = ({ recipe }) => {
                 <AiOutlineFire size={26} />
               </div>
             </div>
+            <div className="singleDescription">{recipe.description}</div>
             <Link to={`/recipe/${recipe._id}`}>
               <img src={recipe.photo} alt="food" className="img-fluid" />
             </Link>

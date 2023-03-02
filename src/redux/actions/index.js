@@ -36,6 +36,7 @@ export const logInAction = (userInfo) => {
     }
   };
 };
+
 //--register
 export const registerAction = (userInfo) => {
   return async (dispatch, getState) => {
@@ -92,6 +93,34 @@ export const fetchCurrentUser = () => {
   };
 };
 
+//fetch googleUser
+export const fetchCurrentGoogleUser = (googleAccessToken) => {
+  return async (dispatch, getState) => {
+    try {
+      await localStorage.setItem("UserAccessToken", googleAccessToken);
+      const accessToken = localStorage.getItem("UserAccessToken");
+      let response = await fetch(`${baseAPI}/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_CURRENT_USER,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching user");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 //get All recipes
 export const fetchAllRecipes = () => {
   return async (dispatch, getState) => {
@@ -121,12 +150,12 @@ export const fetchAllRecipes = () => {
 };
 
 //get Specifc recipe
-export const fetchSingleRecipe = () => {
+export const fetchSingleRecipe = (recipeId) => {
   return async (dispatch, getState) => {
     try {
       const accessToken = localStorage.getItem("UserAccessToken");
       const token = accessToken.split('"').join("");
-      let response = await fetch(`${baseAPI}/recipes`, {
+      let response = await fetch(`${baseAPI}/recipes/${recipeId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

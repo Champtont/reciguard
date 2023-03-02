@@ -30,7 +30,8 @@ const NavBar = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav-spacer">
-            <Link href="#home">Home</Link>
+            <Link to="/myProfile">My Profile</Link>
+            <Link to="/home">Home</Link>
             <Link href="#link">About Us</Link>
             <button onClick={() => onLogOut()}>Logout</button>
             <NavDropdown
