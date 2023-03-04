@@ -93,7 +93,7 @@ export const fetchCurrentUser = () => {
   };
 };
 
-//fetch googleUser
+//--fetch googleUser
 export const fetchCurrentGoogleUser = (googleAccessToken) => {
   return async (dispatch, getState) => {
     try {
@@ -121,7 +121,7 @@ export const fetchCurrentGoogleUser = (googleAccessToken) => {
   };
 };
 
-//get All recipes
+//--get All recipes
 export const fetchAllRecipes = () => {
   return async (dispatch, getState) => {
     try {
@@ -149,7 +149,7 @@ export const fetchAllRecipes = () => {
   };
 };
 
-//get Specifc recipe
+//--get Specifc recipe
 export const fetchSingleRecipe = (recipeId) => {
   return async (dispatch, getState) => {
     try {
@@ -170,6 +170,156 @@ export const fetchSingleRecipe = (recipeId) => {
         console.log(getState());
       } else {
         console.log("There was an issue fetching recipes");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+//--get my recipes
+export const fetchingMyRecipes = () => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/me/recipes`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_USER_RECIPES,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching recipes");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//Posts and puts
+//--Edit User
+export const editUser = (userInfo) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/me`, {
+        method: "PUT",
+        body: JSON.stringify(userInfo),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching user");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//--Change User Avatar
+export const changeUserAvatar = (image) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/me/avatar`, {
+        method: "POST",
+        body: image,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+      } else {
+        console.log("There was an issue fetching user");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//--Edit Recipe
+export const editRecipe = (recipeInfo, recipeId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/me/${recipeId}`, {
+        method: "PUT",
+        body: JSON.stringify(recipeInfo),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching Recipe");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//--Change Recipe Photo
+export const changeRecipePhoto = (image, recipeId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/recipes/${recipeId}/photo`, {
+        method: "POST",
+        body: image,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+      } else {
+        console.log("There was an issue fetching Recipe");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//--Add a New Recipe
+export const addANewRecipe = (recipeInfo) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/recipes`, {
+        method: "POST",
+        body: JSON.stringify(recipeInfo),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching Recipe");
       }
     } catch (err) {
       console.log(err);

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCurrentUser,
   fetchAllRecipes,
   fetchCurrentGoogleUser,
+  fetchingMyRecipes,
 } from "../../../redux/actions";
 import SingleRecipe from "../Recipes/SingleRecipe";
 import { useParams } from "react-router-dom";
@@ -21,6 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchCurrentUser());
     dispatch(fetchAllRecipes());
+    dispatch(fetchingMyRecipes());
     if (window.location.href !== `${feURL}/home`) {
       dispatch(fetchCurrentGoogleUser(`${accessToken}`));
     }

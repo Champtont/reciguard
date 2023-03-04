@@ -56,6 +56,12 @@
   height: 50px;
   aspect-ratio: 1/1;
 }
+#root > div > nav > div > button {
+  border: none;
+}
+#root > div > nav > div > button:focus {
+  border: none;
+}
 #hamburgermenu {
   color: var(--viridian);
 }
@@ -80,9 +86,28 @@
 .recipeCardNameBox {
   height: 75px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 5px;
   padding: 0.5em;
   background-image: linear-gradient(90deg, var(--coral) 35%, #bf623d 85%);
+}
+.recipeCardNameBox > div {
+  display: flex;
+  gap: 5px;
+}
+.recipeEditButton {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  border-radius: 50%;
+}
+.recipeEditButton:hover {
+  background-color: #4d9078;
+  color: var(--saffron);
 }
 .recipeAvatarBox {
   height: 50px;
@@ -91,6 +116,10 @@
   border: var(--raspberry) 1pt solid;
   box-shadow: var(--raspberry) -5px 5px 10px;
   overflow: hidden;
+}
+.recipeAvatarBox img {
+  height: 100%;
+  object-fit: cover;
 }
 .recipeCardPhotoBox {
   height: 425px;
@@ -137,6 +166,95 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   color: var(--coral);
+}
+/*MyProfile*/
+.profilePage {
+  padding-top: 6.5em;
+  position: relative;
+}
+#userPicBox {
+  width: 50%;
+  overflow: hidden;
+  border-radius: 10px 0 10px 0;
+  position: relative;
+}
+#userPicButtonFilter {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #5fad56ac;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  color: var(--saffron);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#userPicButtonFilter:hover {
+  opacity: 1;
+}
+#userPicBox img {
+  width: 100%;
+  height: 100%;
+}
+#changePicModal {
+  position: absolute;
+  background-color: #e17247;
+  border-radius: 0 10px 0 10px;
+  padding: 0.5em;
+  top: 104px;
+  right: 40px;
+  width: 75%;
+  height: 164px;
+  display: flex;
+  flex-direction: column;
+}
+#picModalTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#modalExitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0.5em;
+  position: absolute;
+  top: -20px;
+  right: -18px;
+  color: var(--saffron);
+  background-color: var(--viridian);
+}
+#modalExitButton:hover {
+  background-color: red;
+  color: white;
+}
+#nameAndEdit {
+  display: flex;
+  justify-content: space-around;
+}
+#nameAndEdit > h3 {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*edit Recipe Modal*/
+#editRecipeModal {
+  position: fixed;
+  top: 5.5em;
+  left: 0;
+  height: 75dvh;
+  width: 100dvw;
+  background-color: #4d9079e6;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
 }
 /*Footer*/
 footer {

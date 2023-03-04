@@ -5,10 +5,14 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import ReciLogo from "../assets/googlereadyreci.png";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { feURL } from "../../redux/actions";
+
+//still working on navbar options. Don't want them all to show on
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onLogOut = () => {
     localStorage.removeItem("UserAccessToken");
@@ -30,25 +34,30 @@ const NavBar = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav-spacer">
-            <Link to="/myProfile">My Profile</Link>
-            <Link to="/home">Home</Link>
+            {location.pathname !== "/" && (
+              <>
+                <NavDropdown
+                  title="Dropdown"
+                  id="basic-nav-dropdown"
+                  className="userDropdown"
+                >
+                  <NavDropdown.Item href="#action/3.1">
+                    <Link to="/myProfile">My Profile</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    <Link to="/home">Home</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Something
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    <button onClick={() => onLogOut()}>Logout</button>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            )}
             <Link href="#link">About Us</Link>
-            <button onClick={() => onLogOut()}>Logout</button>
-            <NavDropdown
-              title="Dropdown"
-              id="basic-nav-dropdown"
-              className="userDropdown"
-            >
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
