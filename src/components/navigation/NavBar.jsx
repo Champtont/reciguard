@@ -37,23 +37,20 @@ const NavBar = () => {
             {location.pathname !== "/" && (
               <>
                 <NavDropdown
-                  title="Dropdown"
+                  title="Options"
                   id="basic-nav-dropdown"
                   className="userDropdown"
                 >
-                  <NavDropdown.Item href="#action/3.1">
-                    <Link to="/myProfile">My Profile</Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    <Link to="/home">Home</Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    Something
-                  </NavDropdown.Item>
+                  <Link to="/myProfile">
+                    <div className="dropDownMenuItem">My Profile</div>
+                  </Link>
+                  <Link to="/home">
+                    <div className="dropDownMenuItem">Home</div>
+                  </Link>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
+                  <div className="dropDownMenuItem">
                     <button onClick={() => onLogOut()}>Logout</button>
-                  </NavDropdown.Item>
+                  </div>
                 </NavDropdown>
               </>
             )}
