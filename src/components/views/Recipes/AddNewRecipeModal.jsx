@@ -23,6 +23,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(addANewRecipe(recipeInfo));
+    setEdit(null);
   };
 
   return (

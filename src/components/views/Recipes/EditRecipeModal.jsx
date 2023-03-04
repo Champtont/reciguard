@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { editRecipe } from "../../../redux/actions";
 import { fetchSingleRecipe } from "../../../redux/actions";
 import { changeRecipePhoto } from "../../../redux/actions";
+import { deleteThisRecipe } from "../../../redux/actions";
 
 const EditRecipeModal = ({ recipe, setEdit }) => {
   const oneRecipe = useSelector((state) => state.user.singleRecipe);
@@ -36,6 +37,20 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(editRecipe(editedModal, recipe._id));
+    setEdit(null);
+  };
+
+  const onDelete = (e) => {
+    let answer = window.confirm(
+      "Are you sure that you want to delete this recipe?"
+    );
+    if (answer === false) {
+      setEdit(null);
+    }
+    if (answer === true) {
+      setEdit(null);
+      dispatch(deleteThisRecipe(recipe._id));
+    }
   };
 
   const onImageUpload = () => {
@@ -129,7 +144,9 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
           </Button>
         </form>
       </div>
-      <Button variant="danger">Delete This Recipe</Button>
+      <Button variant="danger" onClick={() => onDelete()}>
+        Delete This Recipe
+      </Button>
     </div>
   );
 };

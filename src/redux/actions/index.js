@@ -327,3 +327,29 @@ export const addANewRecipe = (recipeInfo) => {
     }
   };
 };
+//***Delete***
+//delete a recipe
+export const deleteThisRecipe = (recipeId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/me/${recipeId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        await dispatch(fetchingMyRecipes());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching Recipe");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
