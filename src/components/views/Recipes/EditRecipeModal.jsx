@@ -1,8 +1,10 @@
 import { Form, Button } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { editRecipe } from "../../../redux/actions";
 import { fetchSingleRecipe } from "../../../redux/actions";
+import { changeRecipePhoto } from "../../../redux/actions";
 
 const EditRecipeModal = ({ recipe, setEdit }) => {
   const oneRecipe = useSelector((state) => state.user.singleRecipe);
@@ -17,6 +19,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
   const [description, setDescription] = useState(recipe.description);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
   const [instructions, setInstructions] = useState(recipe.instructions);
+  const [image, setImage] = useState(null);
 
   const editedModal = {
     categoryTags: tags !== recipe.categoryTags ? tags.split(",") : tags,
@@ -32,7 +35,14 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(editRecipe(editedModal, `${recipe._id}`));
+    dispatch(editRecipe(editedModal, recipe._id));
+  };
+
+  const onImageUpload = () => {
+    const formData = new FormData();
+    formData.append("photo", image);
+    setImage(null);
+    dispatch(changeRecipePhoto(formData, recipe._id));
   };
 
   return (
@@ -43,7 +53,26 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
           <div onClick={() => setEdit(null)}>X</div>
         </div>
       </div>
-      <div>
+      <div id="editReciPhotoBox">
+        <Accordion flush>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
+            <Accordion.Body>
+              <div className="photoInputs">
+                <input
+                  onChange={(e) => setImage(e.target.files[0])}
+                  type="file"
+                  id="myFile"
+                  name="filename"
+                ></input>
+                <br />
+                <Button onClick={() => onImageUpload()}>Upload Photo</Button>
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+      <div id="editFormBox">
         <form onSubmit={onSubmitHandler}>
           <div>
             <label className="fw-bold">Title</label>
