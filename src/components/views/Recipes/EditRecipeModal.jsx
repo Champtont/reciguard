@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { editRecipe } from "../../../redux/actions";
 import { fetchSingleRecipe } from "../../../redux/actions";
 
-const EditRecipeModal = ({ recipe }) => {
+const EditRecipeModal = ({ recipe, setEdit }) => {
   const oneRecipe = useSelector((state) => state.user.singleRecipe);
   const dispatch = useDispatch();
 
@@ -37,7 +37,12 @@ const EditRecipeModal = ({ recipe }) => {
 
   return (
     <div id="editRecipeModal">
-      <h1>Edit {recipe.title}</h1>
+      <div>
+        <div id="editCloseBox">
+          <h1>Edit {recipe.title}</h1>
+          <div onClick={() => setEdit(null)}>X</div>
+        </div>
+      </div>
       <div>
         <form onSubmit={onSubmitHandler}>
           <div>

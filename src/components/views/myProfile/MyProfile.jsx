@@ -6,7 +6,7 @@ import { MdExitToApp } from "react-icons/md";
 import { changeUserAvatar } from "../../../redux/actions";
 import SingleRecipe from "../Recipes/SingleRecipe";
 import NameInput from "./NameInput";
-import AddNewRecipe from "../Recipes/AddNewRecipeModal";
+import AddNewRecipeModal from "../Recipes/AddNewRecipeModal";
 
 const MyProfile = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -110,6 +110,7 @@ const MyProfile = () => {
             <Button onClick={() => setEdit("addNewReci")}>
               Add A New Recipe
             </Button>
+            {edit === "addNewReci" && <AddNewRecipeModal setEdit={setEdit} />}
             <h3>My Recipes</h3>
           </Row>
           <Row>

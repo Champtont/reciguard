@@ -316,7 +316,8 @@ export const addANewRecipe = (recipeInfo) => {
         },
       });
       if (response.ok) {
-        dispatch(fetchCurrentUser());
+        await dispatch(fetchCurrentUser());
+        await dispatch(fetchingMyRecipes());
         console.log(getState());
       } else {
         console.log("There was an issue fetching Recipe");

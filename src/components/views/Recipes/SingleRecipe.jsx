@@ -11,7 +11,9 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
     <div>
       {recipe !== null && (
         <div className="recipeCard">
-          {edit === "editThisReci" && <EditRecipeModal recipe={recipe} />}
+          {edit === "editThisReci" && (
+            <EditRecipeModal recipe={recipe} setEdit={setEdit} />
+          )}
           <div className="recipeCardNameBox">
             <div>
               <div className="recipeAvatarBox">
