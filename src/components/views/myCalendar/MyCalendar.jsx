@@ -33,12 +33,16 @@ const MyCalendar = () => {
 export default MyCalendar;*/
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Calendar from "react-calendar";
 import { Button } from "react-bootstrap";
+import SingleDayPlanner from "./SingleDayPlanner";
 
 const MyCalendar = () => {
+  const userRecipes = useSelector((state) => state.user.userRecipes);
   const [date, setDate] = useState(new Date());
   const [selectRange, setSelectRange] = useState(false);
+  const [isSelected, setSelected] = useState(false);
 
   return (
     <div id="calendarPage">
@@ -64,7 +68,18 @@ const MyCalendar = () => {
       >
         {selectRange === false ? "Select Date Range" : "Plan A day"}
       </Button>
-      {selectRange === true && <Button>Create My Shopping List</Button>}
+      {selectRange === true ? (
+        <Button>Create My Shopping List</Button>
+      ) : (
+        <Button onClick={() => setSelected(true)}>Add Recipe(s) </Button>
+      )}
+      {isSelected === true && (
+        <SingleDayPlanner
+          date={date.toDateString()}
+          setSelected={setSelected}
+          recipes={userRecipes}
+        />
+      )}
     </div>
   );
 };

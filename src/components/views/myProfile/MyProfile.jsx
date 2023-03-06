@@ -12,7 +12,6 @@ const MyProfile = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const userRecipes = useSelector((state) => state.user.userRecipes);
   const [isSelected, setSelected] = useState(false);
-  const [isModal, setModal] = useState("");
   const [edit, setEdit] = useState(null);
   const [username, setUsername] = useState(currentUser.firstName);
   const [image, setImage] = useState(null);

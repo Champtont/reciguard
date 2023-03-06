@@ -191,6 +191,23 @@
 #calendarPage {
   margin-top: 5.5em;
 }
+#singleDayModal {
+  position: absolute;
+  top: 200px;
+  background-color: oldlace;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0.5em;
+  width: 95%;
+  margin: auto;
+  display: flex;
+}
+#singleModalExit {
+  position: absolute;
+  background-color: var(--raspberry);
+  right: 0;
+  top: 0;
+}
 /*MyProfile*/
 .profilePage {
   padding-top: 6.5em;
