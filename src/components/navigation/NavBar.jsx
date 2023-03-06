@@ -25,7 +25,7 @@ const NavBar = () => {
       <Container>
         <Link to="/home">
           <img src={ReciLogo} alt="Reci logo" id="navLogo" />
-          eciGuard
+          <span style={{ fontWeight: "bold" }}>eciGuard</span>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span>

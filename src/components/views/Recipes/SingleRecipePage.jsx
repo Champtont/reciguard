@@ -20,34 +20,34 @@ const SingleRecipePage = () => {
   }, []);
 
   return (
-    <Container>
+    <div id="singleRecipeContainer">
       {oneRecipe !== null && (
         <div>
+          <h1>{oneRecipe.title}</h1>
           <div id="singleRecipeImageBox">
             <img
               src={oneRecipe.photo}
               alt={oneRecipe.title}
-              className="img-fluid"
+              style={{ height: "100%", width: "100%", objectFit: "cover" }}
             />
           </div>
-          <div>
-            <h1>{oneRecipe.title}</h1>
-            <h4>Ingredients</h4>
+          <div id="singleRecipeRequirements">
+            <h2>Ingredients</h2>
             <ul>
               {oneRecipe.ingredients.map((ingredient) => (
-                <li>{ingredient}</li>
+                <li key={ingredient}>{ingredient}</li>
               ))}
             </ul>
-            <h4>Instructions</h4>
+            <h2>Instructions</h2>
             <ol>
               {oneRecipe.instructions.map((instruction) => (
-                <li>{instruction}</li>
+                <li key={instruction}>{instruction}</li>
               ))}
             </ol>
           </div>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 export default SingleRecipePage;

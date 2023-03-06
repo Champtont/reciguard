@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { editUser } from "../../../redux/actions";
 import { FiSave } from "react-icons/fi";
+import { FaRegWindowClose } from "react-icons/fa";
 
 const NameInput = (props) => {
   const dispatch = useDispatch();
@@ -21,11 +22,15 @@ const NameInput = (props) => {
         maxLength={25}
         autoFocus
       />
-      <Button onClick={() => submitHandler()}>
-        <FiSave />
+      <Button id="submitName" onClick={() => submitHandler()}>
+        <FiSave size={23} />
       </Button>
-      <Button variant="danger" onClick={() => props.setEdit(null)}>
-        X
+      <Button
+        id="cancelNameChange"
+        variant="danger"
+        onClick={() => props.setEdit(null)}
+      >
+        <FaRegWindowClose size={23} />
       </Button>
     </>
   );

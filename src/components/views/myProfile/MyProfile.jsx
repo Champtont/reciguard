@@ -16,6 +16,7 @@ const MyProfile = () => {
   const [edit, setEdit] = useState(null);
   const [username, setUsername] = useState(currentUser.firstName);
   const [image, setImage] = useState(null);
+  const [fileName, setFileName] = useState("No file chosen");
 
   const dispatch = useDispatch();
 
@@ -42,34 +43,39 @@ const MyProfile = () => {
           >
             <FiEdit2 size={60} />
           </div>
-          <img
-            alt={`${currentUser.firstName}`}
-            src={`${currentUser.avatar}`}
-            className="img-fluid"
-          />
+          <img alt={`${currentUser.firstName}`} src={`${currentUser.avatar}`} />
         </div>
         {isSelected === true && (
           <div id="changePicModal">
             <div id="picModalTop">
-              <div>Change your Photo</div>
+              <div>
+                <h2>Change your Photo:</h2>
+              </div>
               <div
                 id="modalExitButton"
                 onClick={() => {
                   setSelected(false);
+                  setFileName("No file chosen");
                 }}
               >
                 <MdExitToApp size={26} />
               </div>
             </div>
             <div className="picModalBottom">
+              <input
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  setFileName(e.target.files[0].name);
+                }}
+                type="file"
+                id="myFile"
+                name="filename"
+              ></input>
               <div className="photoInputs">
-                <input
-                  onChange={(e) => setImage(e.target.files[0])}
-                  type="file"
-                  id="myFile"
-                  name="filename"
-                ></input>
-                <br />
+                <div id="fileInputCover">
+                  <Button>Choose File</Button>
+                  <input type="text" value={fileName} />
+                </div>
                 <Button onClick={() => onImageUpload()}>Upload Avatar</Button>
               </div>
             </div>
@@ -107,7 +113,7 @@ const MyProfile = () => {
       <Row>
         <div id="recipeInfoBox">
           <Row>
-            <Button onClick={() => setEdit("addNewReci")}>
+            <Button id="addNewReciBtn" onClick={() => setEdit("addNewReci")}>
               Add A New Recipe
             </Button>
             {edit === "addNewReci" && <AddNewRecipeModal setEdit={setEdit} />}

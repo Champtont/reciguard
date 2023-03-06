@@ -17,18 +17,14 @@
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
-  background-color: var(--raspberry);
+  background-color: oldlace;
   font-family: "Mali";
 }
 .App::-webkit-scrollbar {
-  width: 8px;
-  background-color: transparent;
-  position: fixed;
-  left: 20px;
+  width: 2px;
 }
 .App::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(90deg, #68273f, var(--raspberry));
-  border-radius: 10px;
+  background-color: transparent;
 }
 
 /*styling*/
@@ -40,7 +36,7 @@
 /***NAV***/
 #root > div > nav {
   padding: 0.5em;
-  background-color: #ba4771e7;
+  background-color: #fa7f4eb8;
   width: 100%;
   position: fixed;
   top: 0;
@@ -164,6 +160,20 @@
   color: white;
   background-color: #bf623dc3;
 }
+/*singleRecipePage*/
+#singleRecipeContainer {
+  margin-top: 5em;
+  padding-bottom: 6em;
+}
+#singleRecipeImageBox {
+  border-radius: 10px 0 10px 0;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+#singleRecipeRequirements {
+  padding: 0 1em;
+}
 /*Calendar*/
 .rbc-calendar {
   background-color: white;
@@ -180,10 +190,12 @@
 /*MyProfile*/
 .profilePage {
   padding-top: 6.5em;
+  padding-bottom: 6em;
   position: relative;
 }
 #userPicBox {
   width: 50%;
+  height: 164px;
   overflow: hidden;
   border-radius: 10px 0 10px 0;
   position: relative;
@@ -206,7 +218,9 @@
 #userPicBox img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
+/*picture Modal*/
 #changePicModal {
   position: absolute;
   background-color: #e17247;
@@ -218,6 +232,7 @@
   height: 164px;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 #picModalTop {
   display: flex;
@@ -237,18 +252,93 @@
   background-color: var(--viridian);
 }
 #modalExitButton:hover {
-  background-color: red;
+  background-color: var(--raspberry);
   color: white;
 }
+.picModalBottom {
+  position: relative;
+  height: 100%;
+}
+#fileInputCover {
+  display: flex;
+  width: 100%;
+}
+#fileInputCover button {
+  font-size: 10pt;
+  background-color: var(--viridian);
+  border-radius: 5px 0 0 5px;
+  border: none;
+}
+#fileInputCover input {
+  width: 60%;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  padding-left: 0.5em;
+}
+.photoInputs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.photoInputs button {
+  background-color: var(--viridian);
+  border: none;
+}
+.picModalBottom > input {
+  opacity: 0;
+  position: absolute;
+  top: 11px;
+  left: -7px;
+}
+
 #nameAndEdit {
+  height: 50px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  position: relative;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+#nameAndEdit input {
+  font-size: 15pt;
+  width: 65%;
+  position: absolute;
+  left: 0;
+  border-radius: 0 10px 0 10px;
+  border: none;
+  border-bottom: #4d9078 1pt solid;
+  padding: 0.2em 0.5em;
+}
+#nameAndEdit input:focus {
+  border: none;
+}
+#submitName {
+  background-color: #4d9078;
+  position: absolute;
+  right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cancelNameChange {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #nameAndEdit > h3 {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#addNewReciBtn {
+  background-color: #4d9078;
+  font-weight: bold;
 }
 
 /*edit Recipe Modal*/
@@ -271,7 +361,7 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #ba4771d4;
+  background-color: var(--coral);
 }
 footer div {
   font-family: "Cabin Sketch";
