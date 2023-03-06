@@ -187,6 +187,10 @@
   border-radius: 5px;
   color: var(--coral);
 }
+/*Alt Calendar*/
+#calendarPage {
+  margin-top: 5.5em;
+}
 /*MyProfile*/
 .profilePage {
   padding-top: 6.5em;

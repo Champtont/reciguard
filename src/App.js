@@ -10,6 +10,7 @@ import MyCalendar from "./components/views/myCalendar/MyCalendar";
 import HomePage from "./components/views/main/HomePage";
 import MyProfile from "./components/views/myProfile/MyProfile";
 import SingleRecipePage from "./components/views/Recipes/SingleRecipePage";
+import MyShoppingList from "./components/views/myShoppingList/MyShoppingList";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/myProfile" element={<MyProfile />} />
           <Route path="/recipe/:recipeId" element={<SingleRecipePage />} />
           <Route path="/myCalendar" element={<MyCalendar />} />
+          <Route path="/myShoppingList" element={<MyShoppingList />} />
         </Routes>
         <Footer />
       </div>

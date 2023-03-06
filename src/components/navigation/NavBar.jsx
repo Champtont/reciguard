@@ -44,6 +44,12 @@ const NavBar = () => {
                   <Link to="/myProfile">
                     <div className="dropDownMenuItem">My Profile</div>
                   </Link>
+                  <Link to="/myCalendar">
+                    <div className="dropDownMenuItem">Calendar</div>
+                  </Link>
+                  <Link to="/myShoppingList">
+                    <div className="dropDownMenuItem">Shopping List</div>
+                  </Link>
                   <Link to="/home">
                     <div className="dropDownMenuItem">Home</div>
                   </Link>
