@@ -197,6 +197,8 @@
   width: 100dvw;
   position: absolute;
   top: 0;
+  display: flex;
+  justify-content: center;
 }
 #singleDayModal {
   position: absolute;
@@ -214,9 +216,10 @@
   background-color: var(--raspberry);
   color: oldlace;
   border-radius: 5px;
-  right: 14px;
-  top: 188px;
+  right: 4px;
+  top: 170px;
   z-index: 1;
+  padding: 0.5em;
 }
 .draggableBoxes {
   background-color: var(--coral);
@@ -400,9 +403,8 @@
 /*edit Recipe Modal*/
 #editRecipeModal {
   position: fixed;
-  top: 5.5em;
+  top: 4.1em;
   left: 0;
-  height: 75dvh;
   width: 100dvw;
   background-color: #4d9079e6;
   z-index: 100;
@@ -410,6 +412,50 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0.5em;
+}
+#editFormBox {
+  width: 100%;
+}
+.addEditExitBtn {
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  background-color: var(--raspberry);
+  color: oldlace;
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+/*Add Recipe Modal*/
+#addNewModal {
+  position: fixed;
+  top: 4.8em;
+  left: 0;
+  width: 100dvw;
+  background-color: #4d9079e6;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+}
+form {
+  width: 80%;
+  margin: auto;
+}
+.aFormBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+.aFormBox input,
+textarea {
+  border-radius: 0.5em;
+  border: none;
   padding: 0.5em;
 }
 /*Footer*/

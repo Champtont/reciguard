@@ -61,93 +61,97 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
   };
 
   return (
-    <div id="editRecipeModal">
-      <div>
-        <div id="editCloseBox">
-          <h1>Edit {recipe.title}</h1>
-          <div onClick={() => setEdit(null)}>X</div>
+    <>
+      <div id="editRecipeModal">
+        <div className="addEditExitBtn" onClick={() => setEdit(null)}>
+          X
         </div>
+        <div>
+          <div id="editCloseBox">
+            <h1>Edit {recipe.title}</h1>
+          </div>
+        </div>
+        <div id="editReciPhotoBox">
+          <Accordion flush>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
+              <Accordion.Body>
+                <div className="photoInputs">
+                  <input
+                    onChange={(e) => setImage(e.target.files[0])}
+                    type="file"
+                    id="myFile"
+                    name="filename"
+                  ></input>
+                  <br />
+                  <Button onClick={() => onImageUpload()}>Upload Photo</Button>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
+        <div id="editFormBox">
+          <form onSubmit={onSubmitHandler}>
+            <div className="aFormBox">
+              <label className="fw-bold">Title</label>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                placeholder={recipe.title}
+              />
+            </div>
+            <div className="aFormBox">
+              <label className="fw-bold">Category</label>
+              <input
+                onChange={(e) => setTags(e.target.value)}
+                value={tags}
+                type="text"
+                placeholder={recipe.categoryTags}
+              />
+            </div>
+            <div className="aFormBox">
+              <label className="fw-bold">Description</label>
+              <textarea
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                type="text"
+                placeholder={recipe.description}
+              />
+            </div>
+            <div className="aFormBox">
+              <label className="fw-bold">Ingredients</label>
+              <textarea
+                value={ingredients}
+                onChange={(e) => setIngredients(e.target.value)}
+                type="text"
+                placeholder={recipe.ingredients}
+              />
+            </div>
+            <div className="aFormBox">
+              <label className="fw-bold">Instructions</label>
+              <textarea
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+                type="text"
+                style={{ height: "100px" }}
+                placeholder={recipe.instructions}
+              />
+            </div>
+            <Button
+              className="login-80p mb-1 fw-bold"
+              variant="success"
+              type="submit"
+            >
+              Edit
+            </Button>
+          </form>
+        </div>
+        <Button variant="danger" onClick={() => onDelete()}>
+          Delete This Recipe
+        </Button>
       </div>
-      <div id="editReciPhotoBox">
-        <Accordion flush>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
-            <Accordion.Body>
-              <div className="photoInputs">
-                <input
-                  onChange={(e) => setImage(e.target.files[0])}
-                  type="file"
-                  id="myFile"
-                  name="filename"
-                ></input>
-                <br />
-                <Button onClick={() => onImageUpload()}>Upload Photo</Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </div>
-      <div id="editFormBox">
-        <form onSubmit={onSubmitHandler}>
-          <div>
-            <label className="fw-bold">Title</label>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              placeholder={recipe.title}
-            />
-          </div>
-          <div>
-            <label className="fw-bold">Category</label>
-            <input
-              onChange={(e) => setTags(e.target.value)}
-              value={tags}
-              type="text"
-              placeholder={recipe.categoryTags}
-            />
-          </div>
-          <div>
-            <label className="fw-bold">Description</label>
-            <textarea
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              type="text"
-              placeholder={recipe.description}
-            />
-          </div>
-          <div>
-            <label className="fw-bold">Ingredients</label>
-            <textarea
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-              type="text"
-              placeholder={recipe.ingredients}
-            />
-          </div>
-          <div>
-            <label className="fw-bold">Instructions</label>
-            <textarea
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              type="text"
-              style={{ height: "100px" }}
-              placeholder={recipe.instructions}
-            />
-          </div>
-          <Button
-            className="login-80p mb-4 fw-bold"
-            variant="success"
-            type="submit"
-          >
-            Edit
-          </Button>
-        </form>
-      </div>
-      <Button variant="danger" onClick={() => onDelete()}>
-        Delete This Recipe
-      </Button>
-    </div>
+    </>
   );
 };
 export default EditRecipeModal;

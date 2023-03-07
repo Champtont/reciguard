@@ -33,7 +33,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div onClick={() => setEdit(null)}>X</div>
       </div>
       <form onSubmit={onSubmitHandler}>
-        <div>
+        <div className="aFormBox">
           <label className="fw-bold">Title</label>
           <input
             value={title}
@@ -42,7 +42,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
             placeholder="title"
           />
         </div>
-        <div>
+        <div className="aFormBox">
           <label className="fw-bold">Category</label>
           <input
             onChange={(e) => setTags(e.target.value)}
@@ -51,7 +51,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
             placeholder="ex: oven,quick,dinner"
           />
         </div>
-        <div>
+        <div className="aFormBox">
           <label className="fw-bold">Description</label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
@@ -60,23 +60,23 @@ const AddNewRecipeModal = ({ setEdit }) => {
             placeholder="description"
           />
         </div>
-        <div>
+        <div className="aFormBox">
           <label className="fw-bold">Ingredients</label>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             type="text"
-            placeholder="ingredients"
+            placeholder="be sure to separate each ingredient with a comma(,)"
           />
         </div>
-        <div>
+        <div className="aFormBox">
           <label className="fw-bold">Instructions</label>
           <textarea
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
             type="text"
             style={{ height: "100px" }}
-            placeholder="instructions"
+            placeholder="be sure to separate each instruction with a comma(,)"
           />
         </div>
         <Button
