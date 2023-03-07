@@ -37,6 +37,7 @@ import { useSelector } from "react-redux";
 import Calendar from "react-calendar";
 import { Button } from "react-bootstrap";
 import SingleDayPlanner from "./SingleDayPlanner";
+import { changeOpacity } from "../../../redux/actions";
 
 const MyCalendar = () => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
@@ -52,7 +53,6 @@ const MyCalendar = () => {
         {date.length > 0 ? (
           <p className="text-center">
             <span className="bold">Start:</span> {date[0].toDateString()}
-            &nbsp;|&nbsp;
             <span className="bold">End:</span> {date[1].toDateString()}
           </p>
         ) : (
@@ -64,6 +64,7 @@ const MyCalendar = () => {
       <Button
         onClick={() => {
           selectRange === false ? setSelectRange(true) : setSelectRange(false);
+          setDate(new Date());
         }}
       >
         {selectRange === false ? "Select Date Range" : "Plan A day"}
@@ -71,7 +72,13 @@ const MyCalendar = () => {
       {selectRange === true ? (
         <Button>Create My Shopping List</Button>
       ) : (
-        <Button onClick={() => setSelected(true)}>Add Recipe(s) </Button>
+        <Button
+          onClick={() => {
+            setSelected(true);
+          }}
+        >
+          Add Recipe(s) to: {date.toDateString()}
+        </Button>
       )}
       {isSelected === true && (
         <SingleDayPlanner

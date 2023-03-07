@@ -353,3 +353,10 @@ export const deleteThisRecipe = (recipeId) => {
     }
   };
 };
+
+//******Other Actions Of the Site******
+
+export const changeOpacity = (elementId) => {
+  const modalFilter = document.getElementById(elementId);
+  modalFilter.style.opacity = 1;
+};

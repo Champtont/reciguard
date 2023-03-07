@@ -191,6 +191,13 @@
 #calendarPage {
   margin-top: 5.5em;
 }
+#singleModalFilter {
+  background-color: #4d9079c0;
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  top: 0;
+}
 #singleDayModal {
   position: absolute;
   top: 200px;
@@ -205,8 +212,36 @@
 #singleModalExit {
   position: absolute;
   background-color: var(--raspberry);
-  right: 0;
-  top: 0;
+  color: oldlace;
+  border-radius: 5px;
+  right: 14px;
+  top: 188px;
+  z-index: 1;
+}
+.draggableBoxes {
+  background-color: var(--coral);
+  color: oldlace;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  display: flex;
+  max-height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+.draggableBoxes p {
+  margin: 0;
+}
+#singleDayDowner {
+  min-height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  border: var(--viridian) 2pt solid;
+}
+#singleDayOptBox {
+  padding: 0.5em;
+  display: flex;
+  justify-content: space-around;
 }
 /*MyProfile*/
 .profilePage {
