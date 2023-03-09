@@ -6,23 +6,23 @@ import { addANewRecipe } from "../../../redux/actions";
 const AddNewRecipeModal = ({ setEdit }) => {
   const dispatch = useDispatch();
 
-  const [tags, setTags] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [catTags, setCatTags] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newIngredients, setNewIngredients] = useState("");
+  const [newInstructions, setNewInstructions] = useState("");
 
-  const recipeInfo = {
-    categoryTags: tags.split(","),
-    title: title,
-    description: description,
-    ingredients: ingredients.split(","),
-    instructions: instructions.split(","),
+  const newRecipeInfo = {
+    categoryTags: catTags.split(","),
+    title: newTitle,
+    description: newDescription,
+    ingredients: newIngredients.split(","),
+    instructions: newInstructions.split(","),
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addANewRecipe(recipeInfo));
+    dispatch(addANewRecipe(newRecipeInfo));
     setEdit(null);
   };
 
@@ -36,8 +36,8 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div className="aFormBox">
           <label className="fw-bold">Title</label>
           <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
             type="text"
             placeholder="title"
           />
@@ -45,8 +45,8 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div className="aFormBox">
           <label className="fw-bold">Category</label>
           <input
-            onChange={(e) => setTags(e.target.value)}
-            value={tags}
+            onChange={(e) => setCatTags(e.target.value)}
+            value={catTags}
             type="text"
             placeholder="ex: oven,quick,dinner"
           />
@@ -54,8 +54,8 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div className="aFormBox">
           <label className="fw-bold">Description</label>
           <textarea
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            onChange={(e) => setNewDescription(e.target.value)}
+            value={newDescription}
             type="text"
             placeholder="description"
           />
@@ -63,8 +63,8 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div className="aFormBox">
           <label className="fw-bold">Ingredients</label>
           <textarea
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
+            value={newIngredients}
+            onChange={(e) => setNewIngredients(e.target.value)}
             type="text"
             placeholder="be sure to separate each ingredient with a comma(,)"
           />
@@ -72,8 +72,8 @@ const AddNewRecipeModal = ({ setEdit }) => {
         <div className="aFormBox">
           <label className="fw-bold">Instructions</label>
           <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={newInstructions}
+            onChange={(e) => setNewInstructions(e.target.value)}
             type="text"
             style={{ height: "100px" }}
             placeholder="be sure to separate each instruction with a comma(,)"

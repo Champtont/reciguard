@@ -11,6 +11,7 @@ import AddNewRecipeModal from "../Recipes/AddNewRecipeModal";
 const MyProfile = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const userRecipes = useSelector((state) => state.user.userRecipes);
+  const oneRecipe = useSelector((state) => state.user.SingleRecipe);
   const [isSelected, setSelected] = useState(false);
   const [edit, setEdit] = useState(null);
   const [username, setUsername] = useState(currentUser.firstName);

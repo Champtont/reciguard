@@ -3,16 +3,28 @@ import { FiEdit2 } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import EditRecipeModal from "./EditRecipeModal";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchSingleRecipe } from "../../../redux/actions";
 
 const SingleRecipe = ({ recipe, setEdit, edit }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const prepareEditBox = () => {
+    dispatch(fetchSingleRecipe(recipe._id));
+  };
 
   return (
     <div>
       {recipe !== null && (
         <div className="recipeCard">
-          {edit === "editThisReci" && (
-            <EditRecipeModal recipe={recipe} setEdit={setEdit} />
+          {edit === `${recipe._id}` && (
+            <EditRecipeModal
+              key={recipe._id}
+              recipe={recipe}
+              setEdit={setEdit}
+            />
           )}
           <div className="recipeCardNameBox">
             <div>
@@ -30,7 +42,9 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
             {location.pathname === "/myProfile" && (
               <div
                 className="recipeEditButton"
-                onClick={() => setEdit("editThisReci")}
+                onClick={() => {
+                  setEdit(`${recipe._id}`);
+                }}
               >
                 <FiEdit2 size={26} />
               </div>

@@ -292,7 +292,8 @@ export const changeRecipePhoto = (image, recipeId) => {
         },
       });
       if (response.ok) {
-        dispatch(fetchCurrentUser());
+        await dispatch(fetchCurrentUser());
+        await dispatch(fetchingMyRecipes());
       } else {
         console.log("There was an issue fetching Recipe");
       }

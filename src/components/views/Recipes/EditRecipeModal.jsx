@@ -8,12 +8,7 @@ import { changeRecipePhoto } from "../../../redux/actions";
 import { deleteThisRecipe } from "../../../redux/actions";
 
 const EditRecipeModal = ({ recipe, setEdit }) => {
-  const oneRecipe = useSelector((state) => state.user.singleRecipe);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchSingleRecipe(recipe._id));
-  }, []);
 
   const [tags, setTags] = useState(recipe.categoryTags);
   const [title, setTitle] = useState(recipe.title);
@@ -23,15 +18,15 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
   const [image, setImage] = useState(null);
 
   const editedModal = {
-    categoryTags: tags !== recipe.categoryTags ? tags.split(",") : tags,
+    categoryTags: tags === recipe.categoryTags ? tags : tags.split(","),
     title: title,
     description: description,
     ingredients:
-      ingredients !== recipe.ingredients ? ingredients.split(",") : ingredients,
+      ingredients === recipe.ingredients ? ingredients : ingredients.split(","),
     instructions:
-      instructions !== recipe.instructions
-        ? instructions.split(",")
-        : instructions,
+      instructions === recipe.instructions
+        ? instructions
+        : instructions.split(","),
   };
 
   const onSubmitHandler = (e) => {
@@ -53,11 +48,12 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
     }
   };
 
-  const onImageUpload = () => {
+  const onImageUpload = async () => {
     const formData = new FormData();
     formData.append("photo", image);
     setImage(null);
     dispatch(changeRecipePhoto(formData, recipe._id));
+    setEdit(null);
   };
 
   return (
