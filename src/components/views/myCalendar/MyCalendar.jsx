@@ -72,14 +72,14 @@ const MyCalendar = () => {
     if (userCalendarMenus.length > 0) {
       if (
         view === "month" &&
-        date.getDate(userCalendarMenus[1].planDate) ==
-          format(new Date(userCalendarMenus[1].planDate), "dd")
+        date.getDate(userCalendarMenus[0].planDate) ==
+          format(new Date(userCalendarMenus[0].planDate), "dd")
       ) {
         console.log(
           `rendering: ${format(
-            new Date(userCalendarMenus[1].planDate),
+            new Date(userCalendarMenus[0].planDate),
             "dd"
-          )} and ${date.getDate(userCalendarMenus[1].planDate)}`
+          )} and ${date.getDate(userCalendarMenus[0].planDate)}`
         );
         return <div className="mt-2">❤</div>;
       } else {
