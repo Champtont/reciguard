@@ -17,7 +17,8 @@
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
-  background-color: oldlace;
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 800px;
   font-family: "Mali";
 }
 .App::-webkit-scrollbar {
@@ -30,7 +31,83 @@
 /*styling*/
 /***Login***/
 .loginContainer {
-  padding-top: 5em;
+  padding-top: 8em;
+}
+.form-control {
+  transition: box-shadow 0.5s ease-in-out;
+}
+.form-control:focus {
+  border: var(--coral) solid 1pt;
+  box-shadow: #e17347d0 0 0 10px 2px;
+}
+
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg {
+  background-color: var(--viridian);
+  border: none;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg:hover {
+  background-color: #315d4e;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg:active {
+  background-color: #6dccab;
+}
+
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm {
+  background-color: var(--coral);
+  border: none;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm:hover {
+  background-color: #c56741;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm:active {
+  background-color: #e17247;
+}
+
+#root > div > div > div:nth-child(1) > div > form > a > button {
+  background-color: var(--viridian);
+  border: none;
+}
+#root > div > div > div:nth-child(1) > div > form > a > button:hover {
+  background-color: #315d4e;
+}
+#root > div > div > div:nth-child(1) > div > form > a > button:active {
+  background-color: #6dccab;
 }
 
 /***NAV***/
@@ -44,9 +121,22 @@
   display: flex;
   justify-content: space-between;
 }
+#basic-navbar-nav {
+  justify-content: flex-end;
+}
+#basic-navbar-nav > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 #root > div > nav a {
   text-decoration: none;
   color: var(--viridian);
+}
+#logoBox {
+  width: 50%;
+  text-align: left;
 }
 #navLogo {
   height: 50px;
@@ -58,15 +148,37 @@
 .dropDownMenuItem:hover {
   background-color: var(--saffron);
 }
+#basic-navbar-nav > div > div > div > div:hover {
+  background-color: transparent;
+}
 .dropDownMenuItem > button {
   width: 100%;
   border: none;
+}
+#basic-navbar-nav > div > div > div {
+  background-color: oldlace;
+  border-radius: 0 10px 0 10px;
+  box-shadow: #315d4e 0 0 10px;
+}
+#basic-navbar-nav > div > div > div > div > button {
+  width: 100%;
+  border-radius: 5px;
+  padding: 0 2em;
+  background-color: var(--raspberry);
+  font-weight: bold;
+  color: oldlace;
+  transition: box-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+#basic-navbar-nav > div > div > div > div > button:hover {
+  box-shadow: var(--coral) 0 0 10px;
+  color: var(--saffron);
 }
 #root > div > nav > div > button {
   border: none;
 }
 #root > div > nav > div > button:focus {
   border: none;
+  box-shadow: none;
 }
 #hamburgermenu {
   color: var(--viridian);
@@ -75,6 +187,11 @@
 #homeMainBox {
   padding-top: 4.5em;
   padding-bottom: 5.5em;
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 800px;
+}
+#allRecipeList {
+  padding-bottom: 2em;
 }
 /*recipeCards*/
 .recipeCard {
@@ -110,10 +227,12 @@
   align-items: center;
   padding: 0.5em;
   border-radius: 50%;
+  transition: background-color 0.5s ease-in-out;
 }
 .recipeEditButton:hover {
   background-color: #4d9078;
   color: var(--saffron);
+  box-shadow: none;
 }
 .recipeAvatarBox {
   height: 50px;
@@ -191,6 +310,12 @@
 #calendarPage {
   margin-top: 5.5em;
 }
+#calendarPage > div > div {
+  width: 100%;
+  height: 350px;
+  background-color: rgba(253, 245, 230, 0.699);
+}
+
 #singleModalFilter {
   background-color: #4d9079c0;
   height: 100dvh;
@@ -247,6 +372,10 @@
   justify-content: space-around;
 }
 /*MyProfile*/
+#profileBox {
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 800px;
+}
 .profilePage {
   padding-top: 6.5em;
   padding-bottom: 6em;
@@ -254,7 +383,7 @@
 }
 #userPicBox {
   width: 50%;
-  height: 164px;
+  height: 200px;
   overflow: hidden;
   border-radius: 10px 0 10px 0;
   position: relative;
@@ -275,7 +404,6 @@
   opacity: 1;
 }
 #userPicBox img {
-  width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -283,12 +411,13 @@
 #changePicModal {
   position: absolute;
   background-color: #e17247;
+  box-shadow: var(--viridian) 0 0 10px 1px;
   border-radius: 0 10px 0 10px;
   padding: 0.5em;
   top: 104px;
   right: 40px;
   width: 75%;
-  height: 164px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -322,11 +451,18 @@
   display: flex;
   width: 100%;
 }
+#fileInputCover:hover {
+  cursor: pointer;
+}
 #fileInputCover button {
   font-size: 10pt;
   background-color: var(--viridian);
   border-radius: 5px 0 0 5px;
   border: none;
+}
+#fileInputCover button:hover {
+  background-color: #315d4e;
+  cursor: pointer;
 }
 #fileInputCover input {
   width: 60%;
@@ -345,11 +481,21 @@
   background-color: var(--viridian);
   border: none;
 }
+.photoInputs button:hover {
+  background-color: #315d4e;
+}
+.photoInputs button:active {
+  background-color: #5fb395;
+}
 .picModalBottom > input {
   opacity: 0;
   position: absolute;
-  top: 11px;
+  top: 27px;
   left: -7px;
+  z-index: 1;
+}
+#myFile:hover {
+  cursor: pointer;
 }
 
 #nameAndEdit {
@@ -372,8 +518,10 @@
   padding: 0.2em 0.5em;
 }
 #nameAndEdit input:focus {
-  border: none;
+  outline: none;
+  box-shadow: grey 0 0 10px;
 }
+
 #submitName {
   background-color: #4d9078;
   position: absolute;
@@ -381,6 +529,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  transition: background-color 0.5s ease-in-out;
+}
+#submitName:hover {
+  background-color: #315d4e;
 }
 #cancelNameChange {
   position: absolute;
@@ -388,6 +541,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--raspberry);
+  color: oldlace;
+  border: none;
+  transition: background-color 0.5s ease-in-out;
+}
+#cancelNameChange:hover {
+  background-color: #68273f;
 }
 #nameAndEdit > h3 {
   margin: 0;
@@ -395,9 +555,16 @@
   justify-content: center;
   align-items: center;
 }
+#recipeInfoBox > .row {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
 #addNewReciBtn {
   background-color: #4d9078;
   font-weight: bold;
+  border: none;
+  width: 50px;
+  margin-right: 2em;
 }
 
 /*edit Recipe Modal*/
@@ -413,6 +580,11 @@
   justify-content: center;
   align-items: center;
   padding: 0.5em;
+}
+#myEditFile {
+  opacity: 0;
+  position: absolute;
+  top: 122px;
 }
 #editFormBox {
   width: 100%;
@@ -442,6 +614,16 @@
   align-items: center;
   padding: 0.5em;
 }
+.addNewExitBtn {
+  position: absolute;
+  background-color: var(--raspberry);
+  border-radius: 5px;
+  padding: 0.5em;
+  font-weight: bold;
+  color: white;
+  left: 3px;
+  top: 6px;
+}
 form {
   width: 80%;
   margin: auto;
@@ -457,6 +639,10 @@ textarea {
   border-radius: 0.5em;
   border: none;
   padding: 0.5em;
+  outline: none;
+  caret-color: var(--coral);
+  color: var(--viridian);
+  background-color: oldlace;
 }
 /*Footer*/
 footer {
@@ -468,4 +654,38 @@ footer {
 footer div {
   font-family: "Cabin Sketch";
   padding: 0.5em;
+}
+#backToTop {
+  color: oldlace;
+}
+
+/*Animation!!!!*/
+
+@keyframes threesixty {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

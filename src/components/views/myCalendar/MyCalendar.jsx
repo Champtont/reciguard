@@ -32,24 +32,65 @@ const MyCalendar = () => {
 
 export default MyCalendar;*/
 import "react-calendar/dist/Calendar.css";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Calendar from "react-calendar";
 import { Button } from "react-bootstrap";
 import SingleDayPlanner from "./SingleDayPlanner";
-import { changeOpacity } from "../../../redux/actions";
+import { fetchCurrentUser, getMyCalenderItems } from "../../../redux/actions";
+import { isSameDay, format } from "date-fns";
 
 const MyCalendar = () => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
+  const userCalendarMenus = useSelector(
+    (state) => state.user.currentUser.calendar
+  );
+  const [menus, setMenus] = useState(userCalendarMenus);
   const [date, setDate] = useState(new Date());
   const [selectRange, setSelectRange] = useState(false);
   const [isSelected, setSelected] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, []);
+
+  // const datesToAddContentTo = [isTomorrow];
+
+  /* function tileContent({ date, view }) {
+    // Add class to tiles in month view only
+    if (view === "month") {
+      // Check if a date React-Calendar wants to check is on the list of dates to add class to
+      if (datesToAddContentTo.find((dDate) => isSameDay(dDate, date))) {
+        return "My content";
+      }
+    }
+  }*/
+
+  const tileContent = ({ date, view }) =>
+    view === "month" &&
+    date.getDate(userCalendarMenus[1].planDate) ==
+      format(new Date(userCalendarMenus[1].planDate), "dd") ? (
+      <div className="mt-2">❤</div>
+    ) : null;
+  console.log(
+    `rendering: ${format(
+      new Date(userCalendarMenus[1].planDate),
+      "dd"
+    )} and ${date.getDate(userCalendarMenus[1].planDate)}`
+  );
 
   return (
     <div id="calendarPage">
       <h2>Calendar</h2>
       <div className="calendar-container">
-        <Calendar onChange={setDate} value={date} selectRange={selectRange} />
+        <Calendar
+          onChange={setDate}
+          value={date}
+          selectRange={selectRange}
+          tileContent={tileContent}
+        />
         {date.length > 0 ? (
           <p className="text-center">
             <span className="bold">Start:</span> {date[0].toDateString()}

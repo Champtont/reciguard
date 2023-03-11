@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Container, Row, Button } from "react-bootstrap";
 import { FiEdit2 } from "react-icons/fi";
 import { MdExitToApp } from "react-icons/md";
+import { TiPlusOutline } from "react-icons/ti";
 import { changeUserAvatar } from "../../../redux/actions";
 import SingleRecipe from "../Recipes/SingleRecipe";
 import NameInput from "./NameInput";
@@ -32,111 +33,124 @@ const MyProfile = () => {
   };
 
   return (
-    <Container className="profilePage">
-      <div>
-        <div id="userPicBox">
-          <div
-            id="userPicButtonFilter"
-            onClick={() => {
-              setSelected(true);
-            }}
-          >
-            <FiEdit2 size={60} />
-          </div>
-          <img alt={`${currentUser.firstName}`} src={`${currentUser.avatar}`} />
-        </div>
-        {isSelected === true && (
-          <div id="changePicModal">
-            <div id="picModalTop">
-              <div>
-                <h2>Change your Photo:</h2>
-              </div>
-              <div
-                id="modalExitButton"
-                onClick={() => {
-                  setSelected(false);
-                  setFileName("No file chosen");
-                }}
-              >
-                <MdExitToApp size={26} />
-              </div>
+    <div id="profileBox">
+      <Container className="profilePage">
+        <div>
+          <div id="userPicBox">
+            <div
+              id="userPicButtonFilter"
+              onClick={() => {
+                setSelected(true);
+              }}
+            >
+              <FiEdit2 size={60} />
             </div>
-            <div className="picModalBottom">
-              <input
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  setFileName(e.target.files[0].name);
-                }}
-                type="file"
-                id="myFile"
-                name="filename"
-              ></input>
-              <div className="photoInputs">
-                <div id="fileInputCover">
-                  <Button>Choose File</Button>
-                  <input type="text" value={fileName} />
+            <img
+              alt={`${currentUser.firstName}`}
+              src={`${currentUser.avatar}`}
+            />
+          </div>
+          {isSelected === true && (
+            <div id="changePicModal">
+              <div id="picModalTop">
+                <div>
+                  <h2>Change your Photo:</h2>
                 </div>
-                <Button onClick={() => onImageUpload()}>Upload Avatar</Button>
+                <div
+                  id="modalExitButton"
+                  onClick={() => {
+                    setSelected(false);
+                    setFileName("No file chosen");
+                  }}
+                >
+                  <MdExitToApp size={26} />
+                </div>
+              </div>
+              <div className="picModalBottom">
+                <input
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                    setFileName(e.target.files[0].name);
+                  }}
+                  type="file"
+                  id="myFile"
+                  name="filename"
+                ></input>
+                <div className="photoInputs">
+                  <div id="fileInputCover">
+                    <Button>Choose File</Button>
+                    <input type="text" value={fileName} readOnly />
+                  </div>
+                  <Button onClick={() => onImageUpload()}>Upload Avatar</Button>
+                </div>
               </div>
             </div>
+          )}
+          <div id="nameBox">
+            <div id="nameAndEdit">
+              <h3>{currentUser.firstName}</h3>
+              {edit === "changeName" && (
+                <NameInput
+                  value={username}
+                  setName={setUsername}
+                  editedUser={editedUser}
+                  setEdit={setEdit}
+                />
+              )}
+              {edit !== "changeName" && (
+                <div
+                  onClick={() => setEdit("changeName")}
+                  className="recipeEditButton"
+                  style={{ animation: "threesixty 3s infinite linear" }}
+                >
+                  <FiEdit2 size={26} />
+                </div>
+              )}
+            </div>
           </div>
-        )}
-        <div id="nameBox">
-          <div id="nameAndEdit">
-            <h3>{currentUser.firstName}</h3>
-            {edit === "changeName" && (
-              <NameInput
-                value={username}
-                setName={setUsername}
-                editedUser={editedUser}
-                setEdit={setEdit}
-              />
-            )}
-            {edit !== "changeName" && (
-              <div
-                onClick={() => setEdit("changeName")}
-                className="recipeEditButton"
-              >
-                <FiEdit2 size={20} />
-              </div>
-            )}
+          <div id="recipeCount">
+            You have Saved{" "}
+            <span style={{ fontWeight: "bold", color: "green" }}>
+              {currentUser.recipeBook.length}
+            </span>{" "}
+            Recipe(s) in your book.
           </div>
         </div>
-        <div id="recipeCount">
-          I have Saved{" "}
-          <span style={{ fontWeight: "bold", color: "green" }}>
-            {currentUser.recipeBook.length}
-          </span>{" "}
-          Recipe(s) in my book.
-        </div>
-      </div>
-      <Row>
-        <div id="recipeInfoBox">
-          <Row>
-            <Button id="addNewReciBtn" onClick={() => setEdit("addNewReci")}>
-              Add A New Recipe
-            </Button>
-            {edit === "addNewReci" && <AddNewRecipeModal setEdit={setEdit} />}
-            <h3>My Recipes</h3>
-          </Row>
-          <Row>
-            <div id="recipeSearch"></div>
-            {userRecipes !== null && (
-              <div id="recipeResults">
-                {userRecipes.map((recipe) => (
-                  <SingleRecipe
-                    key={recipe._id}
-                    recipe={recipe}
-                    setEdit={setEdit}
-                    edit={edit}
-                  />
-                ))}
-              </div>
-            )}
-          </Row>
-        </div>
-      </Row>
-    </Container>
+        <Row>
+          <div id="recipeInfoBox">
+            <Row>
+              <h3>
+                <Button
+                  id="addNewReciBtn"
+                  onClick={() => setEdit("addNewReci")}
+                >
+                  <TiPlusOutline size={26} />
+                </Button>
+                {edit === "addNewReci" && (
+                  <AddNewRecipeModal setEdit={setEdit} />
+                )}
+                My Recipes
+              </h3>
+            </Row>
+            <Row>
+              <div id="recipeSearch"></div>
+              {userRecipes !== null && (
+                <div id="recipeResults">
+                  {userRecipes.map((recipe) => (
+                    <SingleRecipe
+                      key={recipe._id}
+                      recipe={recipe}
+                      setEdit={setEdit}
+                      edit={edit}
+                    />
+                  ))}
+                </div>
+              )}
+            </Row>
+          </div>
+        </Row>
+      </Container>
+    </div>
   );
 };
 export default MyProfile;

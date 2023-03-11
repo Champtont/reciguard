@@ -8,6 +8,7 @@ import { changeRecipePhoto } from "../../../redux/actions";
 import { deleteThisRecipe } from "../../../redux/actions";
 
 const EditRecipeModal = ({ recipe, setEdit }) => {
+  const [fileName, setFileName] = useState("No file chosen");
   const dispatch = useDispatch();
 
   const [tags, setTags] = useState(recipe.categoryTags);
@@ -74,11 +75,18 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
               <Accordion.Body>
                 <div className="photoInputs">
                   <input
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                      setFileName(e.target.files[0].name);
+                    }}
                     type="file"
-                    id="myFile"
+                    id="myEditFile"
                     name="filename"
                   ></input>
+                  <div id="fileInputCover">
+                    <Button>Choose File</Button>
+                    <input type="text" value={fileName} readOnly />
+                  </div>
                   <br />
                   <Button onClick={() => onImageUpload()}>Upload Photo</Button>
                 </div>
@@ -89,7 +97,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
         <div id="editFormBox">
           <form onSubmit={onSubmitHandler}>
             <div className="aFormBox">
-              <label className="fw-bold">Title</label>
+              <label className="">Title</label>
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -98,7 +106,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
               />
             </div>
             <div className="aFormBox">
-              <label className="fw-bold">Category</label>
+              <label className="">Category</label>
               <input
                 onChange={(e) => setTags(e.target.value)}
                 value={tags}
@@ -107,7 +115,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
               />
             </div>
             <div className="aFormBox">
-              <label className="fw-bold">Description</label>
+              <label className="">Description</label>
               <textarea
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
@@ -116,7 +124,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
               />
             </div>
             <div className="aFormBox">
-              <label className="fw-bold">Ingredients</label>
+              <label className="">Ingredients</label>
               <textarea
                 value={ingredients}
                 onChange={(e) => setIngredients(e.target.value)}
@@ -125,7 +133,7 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
               />
             </div>
             <div className="aFormBox">
-              <label className="fw-bold">Instructions</label>
+              <label className="">Instructions</label>
               <textarea
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}

@@ -23,10 +23,12 @@ const NavBar = () => {
   return (
     <Navbar className="nav" expand="lg">
       <Container>
-        <Link to="/home">
-          <img src={ReciLogo} alt="Reci logo" id="navLogo" />
-          <span style={{ fontWeight: "bold" }}>eciGuard</span>
-        </Link>
+        <div id="logoBox">
+          <Link to={location.pathname === "/" ? "" : "/home"}>
+            <img src={ReciLogo} alt="Reci logo" id="navLogo" />
+            <span style={{ fontWeight: "bold" }}>eciGuard</span>
+          </Link>
+        </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span>
             <HiMenu id="hamburgermenu" size={26} />

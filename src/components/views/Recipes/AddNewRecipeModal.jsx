@@ -30,7 +30,9 @@ const AddNewRecipeModal = ({ setEdit }) => {
     <div id="addNewModal">
       <div id="newRecipeCloseBox">
         <h1>Add Something New!</h1>
-        <div onClick={() => setEdit(null)}>X</div>
+        <div onClick={() => setEdit(null)} className="addNewExitBtn">
+          X
+        </div>
       </div>
       <form onSubmit={onSubmitHandler}>
         <div className="aFormBox">

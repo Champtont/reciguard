@@ -9,6 +9,10 @@ export const SAVE_RECIPES = "GET_RECIPES";
 export const SAVE_USER_RECIPES = "GET_USER_RECIPES";
 export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
 
+//Calendar Actions
+export const SAVE_USER_MENUS = "SAVE_USER_MENUS";
+export const GET_USER_MENUS = "GET_USER_MENUS";
+
 //fetches
 //--login
 export const logInAction = (userInfo) => {
@@ -360,4 +364,33 @@ export const deleteThisRecipe = (recipeId) => {
 export const changeOpacity = (elementId) => {
   const modalFilter = document.getElementById(elementId);
   modalFilter.style.opacity = 1;
+};
+
+//**** Calendar Stuff ****
+
+export const getMyCalenderItems = () => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/calendar`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_USER_MENUS,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching menus");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };

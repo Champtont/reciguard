@@ -76,11 +76,7 @@ const LoginPage = () => {
               </div>
 
               <a href={`${baseAPI}/users/googleLogin`}>
-                <Button
-                  className="mb-4 w-100"
-                  size="lg"
-                  style={{ backgroundColor: "#55acee" }}
-                >
+                <Button className="mb-4 w-100" size="lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

@@ -3,6 +3,7 @@ import {
   SAVE_RECIPES,
   SAVE_USER_RECIPES,
   SAVE_SINGLE_RECIPE,
+  SAVE_USER_MENUS,
 } from "../actions";
 
 const initialState = {
@@ -11,6 +12,9 @@ const initialState = {
   userRecipes: [],
   singleRecipe: null,
   recipeSearch: [],
+  favorites: [],
+  calendar: [],
+  shoppingList: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,6 +38,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userRecipes: action.payload,
+      };
+    case SAVE_USER_MENUS:
+      return {
+        ...state,
+        calendar: action.payload,
       };
     default:
       return {
