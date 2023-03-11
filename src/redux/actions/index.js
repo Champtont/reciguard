@@ -141,7 +141,7 @@ export const fetchAllRecipes = () => {
         let fetchedData = await response.json();
         dispatch({
           type: SAVE_RECIPES,
-          payload: fetchedData,
+          payload: fetchedData.reverse(),
         });
         console.log(getState());
       } else {
