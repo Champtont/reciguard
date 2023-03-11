@@ -68,18 +68,25 @@ const MyCalendar = () => {
     }
   }*/
 
-  const tileContent = ({ date, view }) =>
-    view === "month" &&
-    date.getDate(userCalendarMenus[1].planDate) ==
-      format(new Date(userCalendarMenus[1].planDate), "dd") ? (
-      <div className="mt-2">❤</div>
-    ) : null;
-  console.log(
-    `rendering: ${format(
-      new Date(userCalendarMenus[1].planDate),
-      "dd"
-    )} and ${date.getDate(userCalendarMenus[1].planDate)}`
-  );
+  const tileContent = ({ date, view }) => {
+    if (userCalendarMenus.length > 0) {
+      if (
+        view === "month" &&
+        date.getDate(userCalendarMenus[1].planDate) ==
+          format(new Date(userCalendarMenus[1].planDate), "dd")
+      ) {
+        console.log(
+          `rendering: ${format(
+            new Date(userCalendarMenus[1].planDate),
+            "dd"
+          )} and ${date.getDate(userCalendarMenus[1].planDate)}`
+        );
+        return <div className="mt-2">❤</div>;
+      } else {
+        return null;
+      }
+    }
+  };
 
   return (
     <div id="calendarPage">
