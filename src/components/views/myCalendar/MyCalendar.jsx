@@ -69,8 +69,30 @@ const MyCalendar = () => {
   }*/
 
   const tileContent = ({ date, view }) => {
-    if (userCalendarMenus.length > 0) {
-      if (
+    //console.log(format(date, "MM dd"));
+    //console.log(format(new Date(userCalendarMenus[0].planDate), "MM dd"));
+    /*if (
+      view === "month" &&
+      format(date, "MM dd") ==
+        format(new Date(userCalendarMenus[0].planDate), "MM dd")
+    ) {
+      return <div>x</div>;
+    }*/
+    if (userCalendarMenus.length > 0 && view === "month") {
+      for (let i = 0; i < userCalendarMenus.length; i++) {
+        console.log("in the loop");
+        if (
+          format(date, "MM dd") ===
+          format(new Date(userCalendarMenus[i].planDate), "MM dd")
+        ) {
+          return userCalendarMenus[i].recipes.map((recipe) => (
+            <div key={recipe._id}>{recipe.title}</div>
+          ));
+        }
+      }
+      console.log("I checked length");
+
+      /* if (
         view === "month" &&
         date.getDate(userCalendarMenus[0].planDate) ==
           format(new Date(userCalendarMenus[0].planDate), "dd")
@@ -84,7 +106,7 @@ const MyCalendar = () => {
         return <div className="mt-2">❤</div>;
       } else {
         return null;
-      }
+      }*/
     }
   };
 

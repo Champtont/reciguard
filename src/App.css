@@ -18,7 +18,7 @@
   overflow-y: scroll;
   position: relative;
   background-image: url("./components/assets/recigaurdTableCloth.png");
-  background-size: 800px;
+  background-size: 500px;
   font-family: "Mali";
 }
 .App::-webkit-scrollbar {
@@ -113,7 +113,7 @@
 /***NAV***/
 #root > div > nav {
   padding: 0.5em;
-  background-color: #fa7f4eb8;
+  background-color: #fa7f4ed7;
   width: 100%;
   position: fixed;
   top: 0;
@@ -188,7 +188,7 @@
   padding-top: 4.5em;
   padding-bottom: 5.5em;
   background-image: url("./components/assets/recigaurdTableCloth.png");
-  background-size: 800px;
+  background-size: 500px;
 }
 #allRecipeList {
   padding-bottom: 2em;
@@ -270,6 +270,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+.favoriteBox:hover {
+  transform: scale(1.1);
 }
 .singleDescription {
   position: absolute;
@@ -309,13 +313,16 @@
 /*Alt Calendar*/
 #calendarPage {
   margin-top: 5.5em;
+  width: 100dvw;
+  padding: 0.5em;
 }
-#calendarPage > div > div {
+#calendarPage .react-calendar {
   width: 100%;
-  height: 350px;
-  background-color: rgba(253, 245, 230, 0.699);
+  border-radius: 5px;
+  background-color: rgba(253, 245, 230, 0.687);
+  color: var(--viridian);
+  font-family: "Mali";
 }
-
 #singleModalFilter {
   background-color: #4d9079c0;
   height: 100dvh;
@@ -374,7 +381,7 @@
 /*MyProfile*/
 #profileBox {
   background-image: url("./components/assets/recigaurdTableCloth.png");
-  background-size: 800px;
+  background-size: 500px;
 }
 .profilePage {
   padding-top: 6.5em;
