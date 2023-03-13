@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCurrentUser,
@@ -9,10 +9,13 @@ import {
 import SingleRecipe from "../Recipes/SingleRecipe";
 import { useParams } from "react-router-dom";
 import { feURL } from "../../../redux/actions";
+import LoadingAnimation from "../loading/LoadingAnimation.jsx";
 
 const HomePage = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const allRecipes = useSelector((state) => state.user.allRecipes);
+
+  const [loading, isLoading] = useState(true);
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -21,7 +24,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
-    dispatch(fetchAllRecipes());
+    dispatch(fetchAllRecipes(isLoading));
     dispatch(fetchingMyRecipes());
     if (window.location.href !== `${feURL}/home`) {
       dispatch(fetchCurrentGoogleUser(`${accessToken}`));
@@ -33,11 +36,15 @@ const HomePage = () => {
       {currentUser !== null && (
         <h1>Welcome {currentUser.firstName}, browse some recipes!</h1>
       )}
-      <div id="allRecipeList">
-        {allRecipes.map((recipe) => (
-          <SingleRecipe key={recipe._id} recipe={recipe} />
-        ))}
-      </div>
+      {loading === true ? (
+        <LoadingAnimation />
+      ) : (
+        <div id="allRecipeList">
+          {allRecipes.map((recipe) => (
+            <SingleRecipe key={recipe._id} recipe={recipe} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -183,6 +183,91 @@
 #hamburgermenu {
   color: var(--viridian);
 }
+/****LoadingPage****/
+#loadingPage {
+  height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+#loadingPan {
+  position: absolute;
+  top: 131px;
+  left: 273px;
+  height: 200px;
+  width: 600px;
+  display: flex;
+  transform: rotate(-10deg);
+  z-index: 1;
+  animation: saute 1.5s infinite cubic-bezier(0.93, 0.85, 0.47, 0.02);
+}
+#loadingPan img {
+  width: 100%;
+  object-fit: cover;
+}
+#loadingBurner {
+  position: absolute;
+}
+#loadingText {
+  width: 45%;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+#loadingH3 {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: bold;
+  color: var(--raspberry);
+}
+#loadingH3 span {
+  animation: bounce 0.3s ease infinite alternate;
+}
+#loadingH3 span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+#loadingH3 span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+#loadingH3 span:nth-child(9) {
+  animation-delay: 0.7s;
+}
+
+#loadingH3 span:nth-child(11) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(14) {
+  animation-delay: 1.2s;
+}
+#loadingH3 span:nth-child(15) {
+  animation-delay: 1.3s;
+}
+#loadingH3 span:nth-child(17) {
+  animation-delay: 0.2s;
+}
+#loadingH3 span:nth-child(20) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(21) {
+  animation-delay: 0.2s;
+}
+#loadingH3 span:nth-child(22) {
+  animation-delay: 0.3s;
+}
+#loadingH3 span:nth-child(23) {
+  animation-delay: 0.4s;
+}
 /***MainPage***/
 #homeMainBox {
   padding-top: 4.5em;
@@ -695,5 +780,25 @@ footer div {
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes bounce {
+  100% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes saute {
+  25% {
+    transform: rotate(0);
+    transform: translateX(80px);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-10deg);
   }
 }

@@ -126,7 +126,7 @@ export const fetchCurrentGoogleUser = (googleAccessToken) => {
 };
 
 //--get All recipes
-export const fetchAllRecipes = () => {
+export const fetchAllRecipes = (isLoading) => {
   return async (dispatch, getState) => {
     try {
       const accessToken = localStorage.getItem("UserAccessToken");
@@ -143,6 +143,9 @@ export const fetchAllRecipes = () => {
           type: SAVE_RECIPES,
           payload: fetchedData.reverse(),
         });
+        //setTimeout(function () {
+        //  isLoading(false);
+        //}, 3500);
         console.log(getState());
       } else {
         console.log("There was an issue fetching recipes");
