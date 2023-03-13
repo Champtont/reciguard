@@ -1,12 +1,40 @@
 import Pan from "../../assets/Pan.png";
 import Fire from "../../assets/flame.gif";
+import Onion from "../../assets/Onion.png";
+import Padron from "../../assets/padronColor.png";
+import Carrot from "../../assets/carrotColor.png";
+import Tomato from "../../assets/tomatoColor.png";
+import Mushroom from "../../assets/mushroom.png";
+import Potato from "../../assets/potatoColor.png";
+import Oil from "../../assets/oilBottle.png";
 
 const LoadingAnimation = () => {
   return (
     <div id="loadingPage">
-      <div id="loadingBasket"></div>
       <div id="loadingPan">
         <img src={Pan} alt="cooking skillet" />
+        <div id="loadingBasket">
+          <div className="loadingIngredients">
+            <img src={Onion} alt="cooking onion" />
+          </div>
+          <div className="loadingIngredients">
+            <img src={Padron} alt="cooking padron" />
+          </div>
+          <div className="loadingIngredients">
+            <img src={Carrot} alt="cooking carrot" />
+          </div>
+          <div className="loadingIngredients">
+            <img src={Mushroom} alt="cooking mushroom" />
+          </div>
+          <div className="loadingIngredients">
+            <img src={Tomato} alt="cooking tomato" />
+          </div>
+          <div className="loadingIngredients">
+            <img src={Potato} alt="cooking potato" />
+          </div>
+        </div>
+        <div id="panCover"></div>
+        <div id="panCoverLow"></div>
       </div>
       <div id="loadingBurner">
         <img src={Fire} alt="fire" />

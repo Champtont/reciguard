@@ -143,9 +143,9 @@ export const fetchAllRecipes = (isLoading) => {
           type: SAVE_RECIPES,
           payload: fetchedData.reverse(),
         });
-        //setTimeout(function () {
-        //  isLoading(false);
-        //}, 3500);
+        setTimeout(function () {
+          isLoading(false);
+        }, 3500);
         console.log(getState());
       } else {
         console.log("There was an issue fetching recipes");
