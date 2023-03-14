@@ -194,6 +194,17 @@
   justify-content: space-around;
   position: relative;
 }
+#loadingOil {
+  position: absolute;
+  height: 300px;
+  top: 100px;
+  left: 300px;
+  animation: tipMeOver 1.5s infinite linear;
+}
+#loadingOil img {
+  height: 100%;
+  object-fit: cover;
+}
 #loadingBasket {
   width: 100%;
   height: 300px;
@@ -874,5 +885,60 @@ footer div {
   }
   100% {
     transform: translateY(-20px) rotate(1080deg);
+  }
+}
+@keyframes tipMeOver {
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/*Media Queries*/
+@media only screen and (max-width: 400px) {
+  /*loading Screen*/
+  #loadingOil {
+    left: -52px;
+    top: 220px;
+    height: 200px;
+  }
+  #loadingBasket {
+    left: 180px;
+    bottom: -6px;
+  }
+  .loadingIngredients {
+    width: 45px;
+    bottom: 61px;
+  }
+  #loadingPan {
+    width: 320px;
+    top: 198px;
+  }
+  #panCover {
+    width: 140px;
+    height: 26px;
+    bottom: 63px;
+    left: 46px;
+    border-radius: 5px 5px 50px 50px;
+  }
+  #panCoverLow {
+    height: 33px;
+    width: 152px;
+    bottom: 54px;
+    left: 38px;
+    border-radius: 5px 5px 100px 100px;
+  }
+  #loadingBurner {
+    width: 100px;
+  }
+  #loadingBurner img {
+    width: 100%;
+    object-fit: cover;
+  }
+  #loadingText {
+  }
+  #loadingH3 {
   }
 }
