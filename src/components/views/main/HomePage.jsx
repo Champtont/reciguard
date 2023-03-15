@@ -23,11 +23,14 @@ const HomePage = () => {
   const accessToken = params.key;
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-    dispatch(fetchAllRecipes(isLoading));
-    dispatch(fetchingMyRecipes());
     if (window.location.href !== `${feURL}/home`) {
       dispatch(fetchCurrentGoogleUser(`${accessToken}`));
+      dispatch(fetchAllRecipes(isLoading));
+      dispatch(fetchingMyRecipes());
+    } else {
+      dispatch(fetchCurrentUser());
+      dispatch(fetchAllRecipes(isLoading));
+      dispatch(fetchingMyRecipes());
     }
   }, []);
 

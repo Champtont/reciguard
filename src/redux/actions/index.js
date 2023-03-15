@@ -12,6 +12,7 @@ export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
 //Calendar Actions
 export const SAVE_USER_MENUS = "SAVE_USER_MENUS";
 export const GET_USER_MENUS = "GET_USER_MENUS";
+export const GET_USER_MENUS_IN_RANGE = "GET_USER_MENUS_IN_RANGE";
 
 //fetches
 //--login
@@ -417,6 +418,35 @@ export const postNewMenu = (menuEvent, date) => {
         console.log(getState());
       } else {
         console.log("There was an issue posting Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//get menus within a range
+export const getMenusInRange = (start, end) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/calendar/${start}/${end}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_USER_MENUS,
+          payload: fetchedData,
+        });
+        console.log(getState());
+      } else {
+        console.log(
+          "There was an issue fetching menus within the date specified"
+        );
       }
     } catch (err) {
       console.log(err);

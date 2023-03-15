@@ -4,8 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Calendar from "react-calendar";
 import { Button } from "react-bootstrap";
 import SingleDayPlanner from "./SingleDayPlanner";
-import { fetchCurrentUser, getMyCalenderItems } from "../../../redux/actions";
-import { isSameDay, format } from "date-fns";
+import {
+  fetchCurrentUser,
+  getMyCalenderItems,
+  getMenusInRange,
+} from "../../../redux/actions";
+import { isSameDay, format, parseISO } from "date-fns";
 
 const MyCalendar = () => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
@@ -80,7 +84,18 @@ const MyCalendar = () => {
         {selectRange === false ? "Select Date Range" : "Plan A day"}
       </Button>
       {selectRange === true ? (
-        <Button>Create My Shopping List</Button>
+        <Button
+          onClick={() =>
+            dispatch(
+              getMenusInRange(
+                format(parseISO(date[0].toISOString()), "yyyy-MM-dd"),
+                format(parseISO(date[1].toISOString()), "yyyy-MM-dd")
+              )
+            )
+          }
+        >
+          Create My Shopping List
+        </Button>
       ) : (
         <Button
           onClick={() => {
