@@ -4,6 +4,8 @@ import { useDrop } from "react-dnd";
 import DragableListItem from "./DragableListItem";
 import SaveSpaceItem from "./SaveSpaceItem";
 import { Button } from "react-bootstrap";
+import { format } from "date-fns";
+import parseISO from "date-fns/parseISO";
 
 const SingleDayPlanner = (props) => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
@@ -17,10 +19,23 @@ const SingleDayPlanner = (props) => {
   }));
 
   useEffect(() => {
-    if (saveSpace.length) {
-      console.log(saveSpace);
+    checkSaveSpace();
+    console.log("fired");
+  }, []);
+
+  const checkSaveSpace = () => {
+    for (let i = 0; i < props.menus.length; i++) {
+      if (
+        format(parseISO(props.date.toISOString()), "MM dd") ===
+        format(new Date(props.menus[i].planDate), "MM dd")
+      ) {
+        for (let j = 0; j < props.menus[i].recipes.length; j++) {
+          let menuItem = props.menus[i].recipes[j];
+          setSaveSpace((saveSpace) => [...saveSpace, menuItem]);
+        }
+      }
     }
-  }, [saveSpace]);
+  };
 
   const addDivToSaveSpace = (id) => {
     const menuItemOfDay = userRecipes.filter((recipe) => id === recipe._id);
@@ -50,7 +65,7 @@ const SingleDayPlanner = (props) => {
         <div id="singleDayModal">
           <div id="singleDayLeft">
             <div id="singleDayUpper">
-              <h1>Select Recipe(s) for {props.date}</h1>
+              <h1>Select Recipe(s) for {props.date.toDateString()}</h1>
             </div>
             <div id="singleDayDowner" ref={drop}>
               {saveSpace.map((recipe) => {

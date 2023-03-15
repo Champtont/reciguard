@@ -1,36 +1,3 @@
-/*import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import format from "date-fns/format";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-import getDay from "date-fns/getDay";
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-
-const locales = {
-  "en-US": require("date-fns/locale/en-US"),
-};
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-});
-
-const MyCalendar = () => {
-  return (
-    <Calendar
-      localizer={localizer}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-    />
-  );
-};
-
-export default MyCalendar;*/
 import "react-calendar/dist/Calendar.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -69,18 +36,8 @@ const MyCalendar = () => {
   }*/
 
   const tileContent = ({ date, view }) => {
-    //console.log(format(date, "MM dd"));
-    //console.log(format(new Date(userCalendarMenus[0].planDate), "MM dd"));
-    /*if (
-      view === "month" &&
-      format(date, "MM dd") ==
-        format(new Date(userCalendarMenus[0].planDate), "MM dd")
-    ) {
-      return <div>x</div>;
-    }*/
     if (userCalendarMenus.length > 0 && view === "month") {
       for (let i = 0; i < userCalendarMenus.length; i++) {
-        console.log("in the loop");
         if (
           format(date, "MM dd") ===
           format(new Date(userCalendarMenus[i].planDate), "MM dd")
@@ -90,23 +47,6 @@ const MyCalendar = () => {
           ));
         }
       }
-      console.log("I checked length");
-
-      /* if (
-        view === "month" &&
-        date.getDate(userCalendarMenus[0].planDate) ==
-          format(new Date(userCalendarMenus[0].planDate), "dd")
-      ) {
-        console.log(
-          `rendering: ${format(
-            new Date(userCalendarMenus[0].planDate),
-            "dd"
-          )} and ${date.getDate(userCalendarMenus[0].planDate)}`
-        );
-        return <div className="mt-2">❤</div>;
-      } else {
-        return null;
-      }*/
     }
   };
 
@@ -152,9 +92,10 @@ const MyCalendar = () => {
       )}
       {isSelected === true && (
         <SingleDayPlanner
-          date={date.toDateString()}
+          date={date}
           setSelected={setSelected}
           recipes={userRecipes}
+          menus={userCalendarMenus}
         />
       )}
     </div>

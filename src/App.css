@@ -479,6 +479,34 @@
   color: var(--viridian);
   font-family: "Mali";
 }
+#calendarPage .react-calendar__tile {
+  color: var(--viridian);
+  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+}
+#calendarPage .react-calendar__tile--active {
+  background: var(--raspberry);
+  font-weight: bold;
+  color: oldlace;
+}
+#calendarPage .react-calendar__tile--now {
+  background: var(--saffron);
+}
+
+#calendarPage .react-calendar__month-view__days :hover {
+  background-color: #f7825496;
+}
+
+#calendarPage > button:nth-child(3) {
+  background-color: var(--coral);
+  border: none;
+}
+#calendarPage > button:nth-child(4) {
+  background-color: var(--viridian);
+  border: none;
+}
+
 #singleModalFilter {
   background-color: #4d9079c0;
   height: 100dvh;
