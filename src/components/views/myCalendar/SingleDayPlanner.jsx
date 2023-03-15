@@ -1,23 +1,28 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDrop } from "react-dnd";
 import DragableListItem from "./DragableListItem";
 import SaveSpaceItem from "./SaveSpaceItem";
 import { Button } from "react-bootstrap";
 import { format } from "date-fns";
 import parseISO from "date-fns/parseISO";
-import { postNewMenu, deleteThisMenu } from "../../../redux/actions/index.js";
+import {
+  postNewMenu,
+  deleteThisMenu,
+  editMenu,
+} from "../../../redux/actions/index.js";
 
 const SingleDayPlanner = (props) => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
   const [saveSpace, setSaveSpace] = useState([]);
   const [editSpace, setEditSpace] = useState([]);
+  const [check, setCheck] = useState(false);
   const [thisMenu, setThisMenu] = useState(null);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "div",
     drop: (item) => {
-      if (editSpace.length > 0) {
-        addDivToEditSpace();
+      if (stateRef.current === true) {
+        addDivToEditSpace(item.id);
       } else {
         addDivToSaveSpace(item.id);
       }
@@ -27,7 +32,10 @@ const SingleDayPlanner = (props) => {
     }),
   }));
 
+  const stateRef = useRef();
   const dispatch = useDispatch();
+
+  stateRef.current = check;
 
   useEffect(() => {
     checkSaveSpace();
@@ -44,6 +52,8 @@ const SingleDayPlanner = (props) => {
           let menuItem = props.menus[i].recipes[j];
           setEditSpace((editSpace) => [...editSpace, menuItem]);
           setThisMenu(props.menus[i]);
+          setCheck(true);
+          console.log(check);
         }
       }
     }
@@ -55,6 +65,7 @@ const SingleDayPlanner = (props) => {
     if (currentSaveSpace.includes(menuItemOfDay)) {
       alert("already there");
     } else {
+      console.log("added to save space");
       setSaveSpace((saveSpace) => [...saveSpace, menuItemOfDay[0]]);
     }
   };
@@ -64,6 +75,7 @@ const SingleDayPlanner = (props) => {
     if (currentEditSpace.includes(menuItemOfDay)) {
       alert("already there");
     } else {
+      console.log("added to edit space");
       setEditSpace((editSpace) => [...editSpace, menuItemOfDay[0]]);
     }
   };
@@ -80,8 +92,7 @@ const SingleDayPlanner = (props) => {
   };
 
   const editEvent = {
-    recipes: [editSpace],
-    planDate: props.date.toISOString(),
+    recipes: editSpace,
   };
 
   const event = {
@@ -90,7 +101,15 @@ const SingleDayPlanner = (props) => {
   return (
     <>
       <div id="singleModalFilter">
-        <div id="singleModalExit" onClick={() => props.setSelected(false)}>
+        <div
+          id="singleModalExit"
+          onClick={() => {
+            setSaveSpace([]);
+            setEditSpace([]);
+            setCheck(false);
+            props.setSelected(false);
+          }}
+        >
           X
         </div>
         <div id="singleDayModal">
@@ -124,7 +143,16 @@ const SingleDayPlanner = (props) => {
             </div>
             {editSpace.length > 0 ? (
               <>
-                <Button className="mt-1">Edit This menu</Button>
+                <Button
+                  className="mt-1"
+                  onClick={() => {
+                    dispatch(editMenu(editEvent, thisMenu._id));
+                    setCheck(false);
+                    props.setSelected(false);
+                  }}
+                >
+                  Edit This menu
+                </Button>
                 <Button
                   className="mt-1 ms-1"
                   onClick={() => {
@@ -147,6 +175,7 @@ const SingleDayPlanner = (props) => {
                       )
                     );
                     props.setSelected(false);
+                    setSaveSpace([]);
                   }}
                 >
                   Save This menu

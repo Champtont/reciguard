@@ -423,6 +423,31 @@ export const postNewMenu = (menuEvent, date) => {
     }
   };
 };
+//edit a menu
+export const editMenu = (menuInfo, menuId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/calendar/${menuId}`, {
+        method: "PUT",
+        body: JSON.stringify(menuInfo),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue editing Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 //delete a menu
 export const deleteThisMenu = (menuId) => {
   return async (dispatch, getState) => {
