@@ -397,3 +397,53 @@ export const getMyCalenderItems = () => {
     }
   };
 };
+
+//post new menu
+export const postNewMenu = (menuEvent, date) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/calendar/${date}`, {
+        method: "POST",
+        body: JSON.stringify(menuEvent),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue posting Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//delete a menu
+export const deleteThisMenu = (menuId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/calendar/${menuId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching this Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
