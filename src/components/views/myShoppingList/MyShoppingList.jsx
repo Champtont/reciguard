@@ -2,24 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../../../redux/actions";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
+import SingleShoppingItem from "./SingleShoppingItem";
 
 const MyShoppingList = () => {
   const userShopMenus = useSelector((state) => state.user.calendar);
   const [shoppingIngredients, setShoppingIngredients] = useState([]);
-  //loop for ingredients
-  //let shoppingIngredients = [];
 
   const generateIngredients = () => {
     for (let i = 0; i < userShopMenus.length; i++) {
-      console.log("1");
       for (let j = 0; j < userShopMenus[i].recipes.length; j++) {
-        console.log("2");
         for (
           let n = 0;
           n < userShopMenus[i].recipes[j].ingredients.length;
           n++
         ) {
-          console.log(shoppingIngredients);
           if (
             shoppingIngredients.includes(
               userShopMenus[i].recipes[j].ingredients[n]
@@ -55,13 +51,13 @@ const MyShoppingList = () => {
     <div id="shoppingPage">
       <h2>My Shopping List</h2>
       {stateRef.current.length > 0 ? (
-        <ul>
+        <ul id="shoppingList">
           {newShopArray.map((ingredient) => (
-            <li>{ingredient}</li>
+            <SingleShoppingItem ingredient={ingredient} key={ingredient} />
           ))}
         </ul>
       ) : (
-        <div>nothing yet</div>
+        <div>Select a date range on your calendar to get started!</div>
       )}
     </div>
   );

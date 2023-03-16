@@ -836,6 +836,21 @@ textarea {
   color: var(--viridian);
   background-color: oldlace;
 }
+/*Shopping List*/
+#shoppingPage {
+  padding-top: 5em;
+}
+#shoppingPage li {
+  list-style: none;
+  margin-bottom: 0.5em;
+  padding: 0 0.5em;
+  border-radius: 5px;
+  color: var(--saffron);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--viridian);
+}
 /*Footer*/
 footer {
   position: absolute;
