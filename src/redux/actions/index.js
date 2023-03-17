@@ -84,9 +84,14 @@ export const fetchCurrentUser = () => {
       });
       if (response.ok) {
         let fetchedData = await response.json();
+        let shoppingMenus = fetchedData.shoppingMenus;
         dispatch({
           type: SAVE_CURRENT_USER,
           payload: fetchedData,
+        });
+        dispatch({
+          type: SAVE_USER_MENUS,
+          payload: shoppingMenus,
         });
         console.log(getState());
       } else {
