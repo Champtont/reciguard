@@ -3,10 +3,14 @@ import { fetchCurrentUser } from "../../../redux/actions";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import SingleShoppingItem from "./SingleShoppingItem";
+import { Button } from "react-bootstrap";
+import { postNewList } from "../../../redux/actions";
 
 const MyShoppingList = () => {
   const userShopMenus = useSelector((state) => state.user.calendar);
+  const userRecentList = useSelector((state) => state.user.shoppingList.items);
   const [shoppingIngredients, setShoppingIngredients] = useState([]);
+  const [newItem, setNewItem] = useState("");
 
   const generateIngredients = () => {
     for (let i = 0; i < userShopMenus.length; i++) {
@@ -42,20 +46,81 @@ const MyShoppingList = () => {
     return stateRef.current.indexOf(elem) == pos;
   });
 
+  const pushIntoArray = () => {
+    console.log("I'm here");
+    setShoppingIngredients((shoppingIngredients) => [
+      ...shoppingIngredients,
+      newItem,
+    ]);
+    console.log("i ran");
+    setNewItem("");
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      pushIntoArray();
+    }
+  };
+  const removeItemFromArray = (ingredient) => {
+    setShoppingIngredients((current) => {
+      console.log(current);
+      return current.filter((recipe) => recipe !== ingredient);
+    });
+  };
+
+  const getLastSaved = () => {
+    setShoppingIngredients([]);
+    for (let i = 0; i < userRecentList.length; i++) {
+      setShoppingIngredients((shoppingIngredients) => [
+        ...shoppingIngredients,
+        userRecentList[i],
+      ]);
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchCurrentUser());
     generateIngredients();
-  }, [shoppingIngredients]);
+  }, []);
+
+  const addToList = {
+    items: newShopArray,
+  };
 
   return (
     <div id="shoppingPage">
       <h2>My Shopping List</h2>
+      {userRecentList.length > 0 && (
+        <Button onClick={() => getLastSaved()}>Get saved List</Button>
+      )}
       {stateRef.current.length > 0 ? (
-        <ul id="shoppingList">
-          {newShopArray.map((ingredient) => (
-            <SingleShoppingItem ingredient={ingredient} key={ingredient} />
-          ))}
-        </ul>
+        <>
+          <ul id="shoppingList">
+            {newShopArray.map((ingredient) => (
+              <SingleShoppingItem
+                ingredient={ingredient}
+                key={ingredient}
+                remove={removeItemFromArray}
+              />
+            ))}
+          </ul>
+          <input
+            type="text"
+            value={newItem}
+            placeholder="add more to your list"
+            onChange={(e) => {
+              setNewItem(e.target.value);
+            }}
+            onKeyDown={handleKeyDown}
+          />
+          <Button
+            onClick={(e) => {
+              console.log("clicked");
+              dispatch(postNewList(addToList));
+            }}
+          >
+            Save This List
+          </Button>
+        </>
       ) : (
         <div>Select a date range on your calendar to get started!</div>
       )}

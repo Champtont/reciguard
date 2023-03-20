@@ -4,6 +4,7 @@ import {
   SAVE_USER_RECIPES,
   SAVE_SINGLE_RECIPE,
   SAVE_USER_MENUS,
+  SAVE_USER_SHOPPING,
 } from "../actions";
 
 const initialState = {
@@ -43,6 +44,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         calendar: action.payload,
+      };
+    case SAVE_USER_SHOPPING:
+      return {
+        ...state,
+        shoppingList: action.payload,
       };
     default:
       return {

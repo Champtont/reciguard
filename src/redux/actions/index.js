@@ -13,6 +13,7 @@ export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
 export const SAVE_USER_MENUS = "SAVE_USER_MENUS";
 export const GET_USER_MENUS = "GET_USER_MENUS";
 export const GET_USER_MENUS_IN_RANGE = "GET_USER_MENUS_IN_RANGE";
+export const SAVE_USER_SHOPPING = "SAVE_USER_SHOPPING";
 
 //fetches
 //--login
@@ -85,6 +86,7 @@ export const fetchCurrentUser = () => {
       if (response.ok) {
         let fetchedData = await response.json();
         let shoppingMenus = fetchedData.shoppingMenus;
+        let shoppingList = fetchedData.list;
         dispatch({
           type: SAVE_CURRENT_USER,
           payload: fetchedData,
@@ -92,6 +94,10 @@ export const fetchCurrentUser = () => {
         dispatch({
           type: SAVE_USER_MENUS,
           payload: shoppingMenus,
+        });
+        dispatch({
+          type: SAVE_USER_SHOPPING,
+          payload: shoppingList,
         });
         console.log(getState());
       } else {
@@ -501,6 +507,31 @@ export const deleteThisMenu = (menuId) => {
         console.log(getState());
       } else {
         console.log("There was an issue fetching this Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+// Post shopping list
+export const postNewList = (newList) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/list`, {
+        method: "POST",
+        body: JSON.stringify(newList),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue posting Menu");
       }
     } catch (err) {
       console.log(err);

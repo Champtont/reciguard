@@ -53,9 +53,11 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
           <div className="recipeCardPhotoBox">
             <div className="recipeTitle">
               <div className="singleTitle">{recipe.title}</div>
-              <div className="favoriteBox ms-2">
-                <AiOutlineFire size={26} />
-              </div>
+              {location.pathname !== "/myProfile" && (
+                <div className="favoriteBox ms-2">
+                  <AiOutlineFire size={26} />
+                </div>
+              )}
             </div>
             <div className="singleDescription">{recipe.description}</div>
             <Link to={`/recipe/${recipe._id}`}>
