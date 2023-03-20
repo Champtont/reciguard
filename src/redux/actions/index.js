@@ -8,6 +8,8 @@ export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const SAVE_RECIPES = "GET_RECIPES";
 export const SAVE_USER_RECIPES = "GET_USER_RECIPES";
 export const SAVE_SINGLE_RECIPE = "GET_SINGLE_RECIPE";
+export const SAVE_TO_FAV = "SAVE_TO_FAV";
+export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 
 //Calendar Actions
 export const SAVE_USER_MENUS = "SAVE_USER_MENUS";
@@ -87,6 +89,7 @@ export const fetchCurrentUser = () => {
         let fetchedData = await response.json();
         let shoppingMenus = fetchedData.shoppingMenus;
         let shoppingList = fetchedData.list;
+        let favorites = fetchedData.favorites;
         dispatch({
           type: SAVE_CURRENT_USER,
           payload: fetchedData,
@@ -99,6 +102,10 @@ export const fetchCurrentUser = () => {
           type: SAVE_USER_SHOPPING,
           payload: shoppingList,
         });
+        dispatch({
+          type: SAVE_TO_FAV,
+          payload: favorites,
+        });
         console.log(getState());
       } else {
         console.log("There was an issue fetching user");
@@ -110,6 +117,7 @@ export const fetchCurrentUser = () => {
 };
 
 //--fetch googleUser
+//*****DO NOT FORGET TO ADD DISPATCHES HERE!!! */
 export const fetchCurrentGoogleUser = (googleAccessToken) => {
   return async (dispatch, getState) => {
     try {
@@ -532,6 +540,55 @@ export const postNewList = (newList) => {
         console.log(getState());
       } else {
         console.log("There was an issue posting Menu");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+//****ADDING TO AND REMOVING FAVORITES *****/
+export const addToFavs = (newReci) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/favorites`, {
+        method: "POST",
+        body: JSON.stringify(newReci),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue posting favorite");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const removeFromFavs = (reciId) => {
+  return async (dispatch, getState) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`${baseAPI}/users/favorites/${reciId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        await dispatch(fetchCurrentUser());
+        console.log(getState());
+      } else {
+        console.log("There was an issue fetching this favorite");
       }
     } catch (err) {
       console.log(err);

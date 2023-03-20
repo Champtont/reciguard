@@ -5,6 +5,7 @@ import {
   SAVE_SINGLE_RECIPE,
   SAVE_USER_MENUS,
   SAVE_USER_SHOPPING,
+  SAVE_TO_FAV,
 } from "../actions";
 
 const initialState = {
@@ -49,6 +50,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         shoppingList: action.payload,
+      };
+    case SAVE_TO_FAV:
+      return {
+        ...state,
+        favorites: action.payload,
       };
     default:
       return {

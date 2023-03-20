@@ -1,11 +1,9 @@
 import { AiOutlineFire, AiFillFire } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import EditRecipeModal from "./EditRecipeModal";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { fetchSingleRecipe } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleRecipe, addToFavs } from "../../../redux/actions";
 
 const SingleRecipe = ({ recipe, setEdit, edit }) => {
   const location = useLocation();
@@ -14,6 +12,8 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
   const prepareEditBox = () => {
     dispatch(fetchSingleRecipe(recipe._id));
   };
+
+  const thisRecipe = recipe;
 
   return (
     <div>
@@ -54,7 +54,10 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
             <div className="recipeTitle">
               <div className="singleTitle">{recipe.title}</div>
               {location.pathname !== "/myProfile" && (
-                <div className="favoriteBox ms-2">
+                <div
+                  className="favoriteBox ms-2"
+                  onClick={() => dispatch(addToFavs(thisRecipe))}
+                >
                   <AiOutlineFire size={26} />
                 </div>
               )}
