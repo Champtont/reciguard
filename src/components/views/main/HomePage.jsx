@@ -14,6 +14,7 @@ import LoadingAnimation from "../loading/LoadingAnimation.jsx";
 const HomePage = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const allRecipes = useSelector((state) => state.user.allRecipes);
+  const favorites = useSelector((state) => state.user.favorites);
 
   const [loading, isLoading] = useState(true);
 
@@ -31,6 +32,7 @@ const HomePage = () => {
       dispatch(fetchCurrentUser());
       dispatch(fetchAllRecipes(isLoading));
       dispatch(fetchingMyRecipes());
+      console.log(favorites);
     }
   }, []);
 
@@ -44,7 +46,11 @@ const HomePage = () => {
       ) : (
         <div id="allRecipeList">
           {allRecipes.map((recipe) => (
-            <SingleRecipe key={recipe._id} recipe={recipe} />
+            <SingleRecipe
+              key={recipe._id}
+              recipe={recipe}
+              favorites={favorites}
+            />
           ))}
         </div>
       )}

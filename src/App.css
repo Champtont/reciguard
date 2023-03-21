@@ -985,3 +985,7 @@ footer div {
   #loadingH3 {
   }
 }
+/*JS CSS*/
+.hidden {
+  display: none;
+}

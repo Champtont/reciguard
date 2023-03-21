@@ -577,7 +577,7 @@ export const removeFromFavs = (reciId) => {
     try {
       const accessToken = localStorage.getItem("UserAccessToken");
       const token = accessToken.split('"').join("");
-      let response = await fetch(`${baseAPI}/users/favorites/${reciId}`, {
+      let response = await fetch(`${baseAPI}/users/favorite/${reciId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -586,6 +586,10 @@ export const removeFromFavs = (reciId) => {
       });
       if (response.ok) {
         await dispatch(fetchCurrentUser());
+        dispatch({
+          type: REMOVE_FROM_FAV,
+          payload: reciId,
+        });
         console.log(getState());
       } else {
         console.log("There was an issue fetching this favorite");

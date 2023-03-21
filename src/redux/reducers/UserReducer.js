@@ -6,6 +6,7 @@ import {
   SAVE_USER_MENUS,
   SAVE_USER_SHOPPING,
   SAVE_TO_FAV,
+  REMOVE_FROM_FAV,
 } from "../actions";
 
 const initialState = {
@@ -55,6 +56,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         favorites: action.payload,
+      };
+    case REMOVE_FROM_FAV:
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (recId) => recId._id !== action.payload
+        ),
       };
     default:
       return {

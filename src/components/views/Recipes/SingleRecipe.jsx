@@ -3,15 +3,38 @@ import { FiEdit2 } from "react-icons/fi";
 import { useLocation, Link } from "react-router-dom";
 import EditRecipeModal from "./EditRecipeModal";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleRecipe, addToFavs } from "../../../redux/actions";
+import {
+  fetchSingleRecipe,
+  addToFavs,
+  removeFromFavs,
+} from "../../../redux/actions";
+import { useRef, useState } from "react";
 
 const SingleRecipe = ({ recipe, setEdit, edit }) => {
+  const userFavorites = useSelector((state) => state.user.favorites);
+  const [favorites, setFavorites] = useState([]);
+  const [show, setShow] = useState(true);
+  const [reference, setReference] = useState("");
   const location = useLocation();
   const dispatch = useDispatch();
+  const stateRef = useRef();
+
+  stateRef.current = favorites;
 
   const prepareEditBox = () => {
     dispatch(fetchSingleRecipe(recipe._id));
   };
+
+  const isInArray = () => {
+    for (let i = 0; i < userFavorites.length; i++) {
+      setFavorites((favorites) => [...favorites, userFavorites[i]]);
+      if (userFavorites[i]._id === recipe._id) {
+        setReference(`${recipe._id}`);
+      }
+    }
+  };
+
+  useState(() => isInArray(), []);
 
   const thisRecipe = recipe;
 
@@ -53,13 +76,48 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
           <div className="recipeCardPhotoBox">
             <div className="recipeTitle">
               <div className="singleTitle">{recipe.title}</div>
-              {location.pathname !== "/myProfile" && (
-                <div
-                  className="favoriteBox ms-2"
-                  onClick={() => dispatch(addToFavs(thisRecipe))}
-                >
-                  <AiOutlineFire size={26} />
-                </div>
+              {reference !== recipe._id ? (
+                <>
+                  <div
+                    className={show === true ? "favoriteBox ms-2" : "hidden"}
+                    onClick={() => {
+                      dispatch(addToFavs(thisRecipe));
+                      setShow(false);
+                    }}
+                  >
+                    <AiOutlineFire size={26} />
+                  </div>
+                  <div
+                    className={show === false ? "favoriteBox ms-2" : "hidden"}
+                    onClick={() => {
+                      dispatch(removeFromFavs(recipe._id));
+                      setShow(true);
+                    }}
+                  >
+                    <AiFillFire size={26} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    className={show === true ? "favoriteBox ms-2" : "hidden"}
+                    onClick={() => {
+                      dispatch(removeFromFavs(recipe._id));
+                      setShow(false);
+                    }}
+                  >
+                    <AiFillFire size={26} />
+                  </div>
+                  <div
+                    className={show === false ? "favoriteBox ms-2" : "hidden"}
+                    onClick={() => {
+                      dispatch(addToFavs(thisRecipe));
+                      setShow(true);
+                    }}
+                  >
+                    <AiOutlineFire size={26} />
+                  </div>
+                </>
               )}
             </div>
             <div className="singleDescription">{recipe.description}</div>
