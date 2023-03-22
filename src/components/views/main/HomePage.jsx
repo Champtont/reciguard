@@ -9,12 +9,14 @@ import {
 import SingleRecipe from "../Recipes/SingleRecipe";
 import { useParams } from "react-router-dom";
 import { feURL } from "../../../redux/actions";
+import { Form } from "react-bootstrap";
 import LoadingAnimation from "../loading/LoadingAnimation.jsx";
 
 const HomePage = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const allRecipes = useSelector((state) => state.user.allRecipes);
   const favorites = useSelector((state) => state.user.favorites);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [loading, isLoading] = useState(true);
 
@@ -45,13 +47,24 @@ const HomePage = () => {
         <LoadingAnimation />
       ) : (
         <div id="allRecipeList">
-          {allRecipes.map((recipe) => (
-            <SingleRecipe
-              key={recipe._id}
-              recipe={recipe}
-              favorites={favorites}
+          <Form.Group>
+            <Form.Label>Search</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Search here"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-          ))}
+          </Form.Group>
+          {allRecipes
+            .filter((r) => r.title.toLowerCase().includes(searchQuery))
+            .map((recipe) => (
+              <SingleRecipe
+                key={recipe._id}
+                recipe={recipe}
+                favorites={favorites}
+              />
+            ))}
         </div>
       )}
     </div>

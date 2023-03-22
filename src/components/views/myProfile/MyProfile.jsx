@@ -8,11 +8,14 @@ import { changeUserAvatar } from "../../../redux/actions";
 import SingleRecipe from "../Recipes/SingleRecipe";
 import NameInput from "./NameInput";
 import AddNewRecipeModal from "../Recipes/AddNewRecipeModal";
+import { Form } from "react-bootstrap";
 
 const MyProfile = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const userRecipes = useSelector((state) => state.user.userRecipes);
-  const oneRecipe = useSelector((state) => state.user.SingleRecipe);
+  const favorites = useSelector((state) => state.user.favorites);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showFavs, setShowFavs] = useState(false);
   const [isSelected, setSelected] = useState(false);
   const [edit, setEdit] = useState(null);
   const [username, setUsername] = useState(currentUser.firstName);
@@ -120,33 +123,92 @@ const MyProfile = () => {
           <div id="recipeInfoBox">
             <Row>
               <h3>
-                <Button
-                  id="addNewReciBtn"
-                  onClick={() => setEdit("addNewReci")}
-                >
-                  <TiPlusOutline size={26} />
-                </Button>
+                {!showFavs && (
+                  <Button
+                    id="addNewReciBtn"
+                    onClick={() => setEdit("addNewReci")}
+                  >
+                    <TiPlusOutline size={26} />
+                  </Button>
+                )}
                 {edit === "addNewReci" && (
                   <AddNewRecipeModal setEdit={setEdit} />
                 )}
-                My Recipes
+                {showFavs === false ? "My Recipes" : "My Favorites"}
+                <Button
+                  id="seeFavs"
+                  onClick={() => {
+                    if (showFavs === false) {
+                      setShowFavs(true);
+                    } else {
+                      setShowFavs(false);
+                    }
+                  }}
+                >
+                  {showFavs === false ? "Favs" : "My Book"}
+                </Button>
               </h3>
             </Row>
-            <Row>
-              <div id="recipeSearch"></div>
-              {userRecipes !== null && (
-                <div id="recipeResults">
-                  {userRecipes.map((recipe) => (
-                    <SingleRecipe
-                      key={recipe._id}
-                      recipe={recipe}
-                      setEdit={setEdit}
-                      edit={edit}
-                    />
-                  ))}
-                </div>
-              )}
-            </Row>
+            {showFavs === false ? (
+              <Row>
+                <div id="recipeSearch"></div>
+                {userRecipes !== null && (
+                  <div id="recipeResults">
+                    <Form.Group>
+                      <Form.Label>Search</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Search here"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                      />
+                    </Form.Group>
+                    {userRecipes
+                      .filter((r) =>
+                        r.title.toLowerCase().includes(searchQuery)
+                      )
+                      .map((recipe) => (
+                        <SingleRecipe
+                          key={recipe._id}
+                          recipe={recipe}
+                          setEdit={setEdit}
+                          edit={edit}
+                        />
+                      ))}
+                  </div>
+                )}
+              </Row>
+            ) : (
+              <Row>
+                <div id="recipeSearch"></div>
+                {favorites !== null && (
+                  <div id="recipeResults">
+                    <Form.Group>
+                      <Form.Label>Search</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Search here"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                      />
+                    </Form.Group>
+                    {favorites
+                      .filter((r) =>
+                        r.title.toLowerCase().includes(searchQuery)
+                      )
+                      .map((recipe) => (
+                        <SingleRecipe
+                          key={recipe._id}
+                          recipe={recipe}
+                          setEdit={setEdit}
+                          edit={edit}
+                          showFavs={showFavs}
+                        />
+                      ))}
+                  </div>
+                )}
+              </Row>
+            )}
           </div>
         </Row>
       </Container>

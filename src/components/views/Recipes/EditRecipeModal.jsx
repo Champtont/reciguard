@@ -1,15 +1,20 @@
 import { Form, Button } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { editRecipe } from "../../../redux/actions";
-import { fetchSingleRecipe } from "../../../redux/actions";
-import { changeRecipePhoto } from "../../../redux/actions";
-import { deleteThisRecipe } from "../../../redux/actions";
+import { useState, useEffect, useRef } from "react";
+import {
+  deleteThisRecipe,
+  addANewRecipe,
+  changeRecipePhoto,
+  editRecipe,
+} from "../../../redux/actions";
 
-const EditRecipeModal = ({ recipe, setEdit }) => {
+const EditRecipeModal = ({ recipe, setEdit, showFavs }) => {
   const [fileName, setFileName] = useState("No file chosen");
   const dispatch = useDispatch();
+  const stateRef = useRef();
+
+  stateRef.current = showFavs;
 
   const [tags, setTags] = useState(recipe.categoryTags);
   const [title, setTitle] = useState(recipe.title);
@@ -31,9 +36,15 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
   };
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
-    dispatch(editRecipe(editedModal, recipe._id));
-    setEdit(null);
+    if (!showFavs) {
+      e.preventDefault();
+      dispatch(editRecipe(editedModal, recipe._id));
+      setEdit(null);
+    } else {
+      e.preventDefault();
+      dispatch(addANewRecipe(editedModal));
+      setEdit(null);
+    }
   };
 
   const onDelete = (e) => {
@@ -68,32 +79,36 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
             <h1>Edit {recipe.title}</h1>
           </div>
         </div>
-        <div id="editReciPhotoBox">
-          <Accordion flush>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
-              <Accordion.Body>
-                <div className="photoInputs">
-                  <input
-                    onChange={(e) => {
-                      setImage(e.target.files[0]);
-                      setFileName(e.target.files[0].name);
-                    }}
-                    type="file"
-                    id="myEditFile"
-                    name="filename"
-                  ></input>
-                  <div id="fileInputCover">
-                    <Button>Choose File</Button>
-                    <input type="text" value={fileName} readOnly />
+        {!showFavs && (
+          <div id="editReciPhotoBox">
+            <Accordion flush>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
+                <Accordion.Body>
+                  <div className="photoInputs">
+                    <input
+                      onChange={(e) => {
+                        setImage(e.target.files[0]);
+                        setFileName(e.target.files[0].name);
+                      }}
+                      type="file"
+                      id="myEditFile"
+                      name="filename"
+                    ></input>
+                    <div id="fileInputCover">
+                      <Button>Choose File</Button>
+                      <input type="text" value={fileName} readOnly />
+                    </div>
+                    <br />
+                    <Button onClick={() => onImageUpload()}>
+                      Upload Photo
+                    </Button>
                   </div>
-                  <br />
-                  <Button onClick={() => onImageUpload()}>Upload Photo</Button>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        )}
         <div id="editFormBox">
           <form onSubmit={onSubmitHandler}>
             <div className="aFormBox">
@@ -142,13 +157,17 @@ const EditRecipeModal = ({ recipe, setEdit }) => {
                 placeholder={recipe.instructions}
               />
             </div>
-            <Button
-              className="login-80p mb-1 fw-bold"
-              variant="success"
-              type="submit"
-            >
-              Edit
-            </Button>
+            {showFavs ? (
+              <Button type="submit">Save My changes</Button>
+            ) : (
+              <Button
+                className="login-80p mb-1 fw-bold"
+                variant="success"
+                type="submit"
+              >
+                Edit
+              </Button>
+            )}
           </form>
         </div>
         <Button variant="danger" onClick={() => onDelete()}>

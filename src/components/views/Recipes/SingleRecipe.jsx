@@ -10,7 +10,7 @@ import {
 } from "../../../redux/actions";
 import { useRef, useState } from "react";
 
-const SingleRecipe = ({ recipe, setEdit, edit }) => {
+const SingleRecipe = ({ recipe, setEdit, edit, showFavs }) => {
   const userFavorites = useSelector((state) => state.user.favorites);
   const [favorites, setFavorites] = useState([]);
   const [show, setShow] = useState(true);
@@ -47,21 +47,24 @@ const SingleRecipe = ({ recipe, setEdit, edit }) => {
               key={recipe._id}
               recipe={recipe}
               setEdit={setEdit}
+              showFavs={showFavs}
             />
           )}
           <div className="recipeCardNameBox">
-            <div>
-              <div className="recipeAvatarBox">
-                <img
-                  src={recipe.author.avatar}
-                  alt="user avatar"
-                  className="img-fluid"
-                />
+            {location.pathname !== "/myProfile" && (
+              <div>
+                <div className="recipeAvatarBox">
+                  <img
+                    src={recipe.author.avatar}
+                    alt="user avatar"
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="recipeCardAuthor">
+                  <h4>{recipe.author.firstName}</h4>
+                </div>
               </div>
-              <div className="recipeCardAuthor">
-                <h4>{recipe.author.firstName}</h4>
-              </div>
-            </div>
+            )}
             {location.pathname === "/myProfile" && (
               <div
                 className="recipeEditButton"
