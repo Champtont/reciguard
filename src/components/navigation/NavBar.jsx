@@ -5,12 +5,14 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import ReciLogo from "../assets/googlereadyreci.png";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { feURL } from "../../redux/actions";
 
 //still working on navbar options. Don't want them all to show on
 
 const NavBar = () => {
+  const [navMenu, setNavMenu] = useState("collapsed");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -21,7 +23,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar className="nav" expand="lg">
+    <Navbar className={navMenu === "collapsed" ? "nav" : "darker"} expand="lg">
       <Container>
         <div id="logoBox">
           <Link to={location.pathname === "/" ? "" : "/home"}>
@@ -30,7 +32,13 @@ const NavBar = () => {
           </Link>
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
-          <span>
+          <span
+            onClick={() =>
+              navMenu === "collapsed"
+                ? setNavMenu("expanded")
+                : setNavMenu("collapsed")
+            }
+          >
             <HiMenu id="hamburgermenu" size={26} />
           </span>
         </Navbar.Toggle>
@@ -39,7 +47,7 @@ const NavBar = () => {
             {location.pathname !== "/" && (
               <>
                 <NavDropdown
-                  title="Options"
+                  title="Menu"
                   id="basic-nav-dropdown"
                   className="userDropdown"
                 >

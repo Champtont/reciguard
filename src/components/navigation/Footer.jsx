@@ -15,14 +15,15 @@ const Footer = () => {
               Copyright <AiOutlineCopyright /> 2023 ReciGaurd
             </div>
           </Col>
-          {location.pathname !== "/" && (
+          {location.pathname !== "/" && location.pathname !== "/myCalendar" && (
             <Col>
               <a href="#">
                 <div
                   id="backToTop"
                   style={{
                     animation:
-                      location.pathname === "/home"
+                      location.pathname === "/home" ||
+                      location.pathname === "/myProfile"
                         ? "upDown 0.5s infinite linear"
                         : "",
                   }}

@@ -36,7 +36,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
       </div>
       <form onSubmit={onSubmitHandler}>
         <div className="aFormBox">
-          <label className="fw-bold">Title</label>
+          <label>Title</label>
           <input
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
@@ -45,7 +45,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
           />
         </div>
         <div className="aFormBox">
-          <label className="fw-bold">Category</label>
+          <label>Category</label>
           <input
             onChange={(e) => setCatTags(e.target.value)}
             value={catTags}
@@ -54,7 +54,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
           />
         </div>
         <div className="aFormBox">
-          <label className="fw-bold">Description</label>
+          <label>Description</label>
           <textarea
             onChange={(e) => setNewDescription(e.target.value)}
             value={newDescription}
@@ -63,7 +63,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
           />
         </div>
         <div className="aFormBox">
-          <label className="fw-bold">Ingredients</label>
+          <label>Ingredients</label>
           <textarea
             value={newIngredients}
             onChange={(e) => setNewIngredients(e.target.value)}
@@ -72,7 +72,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
           />
         </div>
         <div className="aFormBox">
-          <label className="fw-bold">Instructions</label>
+          <label>Instructions</label>
           <textarea
             value={newInstructions}
             onChange={(e) => setNewInstructions(e.target.value)}
@@ -82,7 +82,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
           />
         </div>
         <Button
-          className="login-80p mb-4 fw-bold"
+          className="login-80p my-2 fw-bold"
           variant="success"
           type="submit"
         >

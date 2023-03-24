@@ -111,6 +111,9 @@
 }
 
 /***NAV***/
+nav:has(#basic-navbar-nav .show) {
+  background-color: var(--coral);
+}
 #root > div > nav {
   padding: 0.5em;
   background-color: #fa7f4ed7;
@@ -156,9 +159,8 @@
   border: none;
 }
 #basic-navbar-nav > div > div > div {
-  background-color: oldlace;
-  border-radius: 0 10px 0 10px;
-  box-shadow: #315d4e 0 0 10px;
+  background-color: transparent;
+  border: none;
 }
 #basic-navbar-nav > div > div > div > div > button {
   width: 100%;
@@ -346,6 +348,9 @@
   background-image: url("./components/assets/recigaurdTableCloth.png");
   background-size: 500px;
 }
+#mainSearchBox {
+  padding: 0.8em 1em;
+}
 #allRecipeList {
   padding-bottom: 2em;
 }
@@ -451,7 +456,16 @@
   overflow: hidden;
 }
 #singleRecipeRequirements {
-  padding: 0 1em;
+  padding: 2em 1em;
+  background-color: #b4436ccf;
+  color: oldlace;
+}
+ul > li {
+  list-style-type: none;
+}
+ol > li {
+  text-align: start;
+  margin-bottom: 0.5em;
 }
 /*Calendar*/
 .rbc-calendar {
@@ -472,12 +486,42 @@
   width: 100dvw;
   padding: 0.5em;
 }
+#calendarToast {
+  position: absolute;
+  width: 90%;
+  left: 20px;
+  top: 300px;
+  background-color: var(--viridian);
+  color: white;
+  font-size: 20pt;
+  font-weight: bold;
+  border-radius: 5px;
+}
 #calendarPage .react-calendar {
   width: 100%;
   border-radius: 5px;
   background-color: rgba(253, 245, 230, 0.687);
   color: var(--viridian);
   font-family: "Mali";
+}
+#calendarPage .react-calendar .react-calendar__navigation button {
+  color: var(--saffron);
+  text-shadow: var(--viridian) 0 0 2px;
+  background: #488671cb;
+  font-size: 20px;
+  font-weight: bold;
+}
+#calendarPage
+  .react-calendar__viewContainer
+  .react-calendar__month-view__weekdays {
+  font-size: 16px;
+}
+
+#calendarPage
+  .react-calendar
+  .react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.6;
+  color: var(--raspberry);
 }
 #calendarPage .react-calendar__tile {
   color: var(--viridian);
@@ -487,20 +531,42 @@
 }
 #calendarPage .react-calendar__tile--active {
   background: var(--raspberry);
+  border-radius: 5px;
   font-weight: bold;
   color: oldlace;
 }
 #calendarPage .react-calendar__tile--now {
   background: var(--saffron);
+  box-shadow: #315d4e 0 0 10px;
 }
-
 #calendarPage .react-calendar__month-view__days :hover {
   background-color: #f7825496;
+}
+#calendarPage .react-calendar__tile--range {
+  border-radius: 0;
+  background-color: #b4436c7d;
+  color: white;
+}
+#calendarPage .react-calendar .react-calendar__tile--rangeEnd {
+  border-radius: 0 5px 5px 0;
+  background-color: var(--raspberry);
+  color: white;
+}
+#calendarPage .react-calendar .react-calendar__tile--rangeStart {
+  border-radius: 5px;
+  background-color: var(--raspberry);
+  color: white;
+}
+.calendarReflectedDates {
+  border-radius: 5px;
+  background-image: linear-gradient(var(--saffron), transparent);
+  color: var(--viridian);
 }
 
 #calendarPage > button:nth-child(3) {
   background-color: var(--coral);
   border: none;
+  margin-bottom: 0.5em;
 }
 #calendarPage > button:nth-child(4) {
   background-color: var(--viridian);
@@ -513,10 +579,11 @@
   width: 100dvw;
   position: absolute;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
 }
-#singleDayModal {
+#singleDayBtnBox {
   position: absolute;
   top: 200px;
   background-color: oldlace;
@@ -526,6 +593,31 @@
   width: 95%;
   margin: auto;
   display: flex;
+  flex-direction: column;
+}
+#singleDaySwitch {
+  position: absolute;
+  z-index: 1;
+  top: 175px;
+  right: 46px;
+  background-color: var(--saffron);
+  border: none;
+  font-weight: bold;
+  text-shadow: #315d4e 0 0 2px;
+  box-shadow: var(--viridian) 0 0 2px;
+}
+#singleDayModal {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+#singleDayLeft {
+  width: 517.8px;
+  height: 239.5px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#singleDayUpper > h1 {
+  font-size: 16pt;
 }
 #singleModalExit {
   position: absolute;
@@ -536,6 +628,20 @@
   top: 170px;
   z-index: 1;
   padding: 0.5em;
+}
+#singleDayEditDelete {
+  display: flex;
+  justify-content: space-around;
+}
+#singleDayEditDelete button:first-child {
+  background-color: var(--viridian);
+  border: none;
+  font-weight: bold;
+}
+#singleDayEditDelete button:nth-child(2) {
+  background-color: var(--raspberry);
+  border: none;
+  font-weight: bold;
 }
 .draggableBoxes {
   background-color: var(--coral);
@@ -560,7 +666,11 @@
 #singleDayOptBox {
   padding: 0.5em;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 239.5px;
 }
 /*MyProfile*/
 #profileBox {
@@ -596,8 +706,6 @@
 }
 #userPicBox img {
   height: 100%;
-  width: 100%;
-  object-fit: cover;
 }
 /*picture Modal*/
 #changePicModal {
@@ -701,7 +809,7 @@
 }
 #nameAndEdit input {
   font-size: 15pt;
-  width: 65%;
+  width: 68%;
   position: absolute;
   left: 0;
   border-radius: 0 10px 0 10px;
@@ -749,20 +857,41 @@
 }
 #recipeInfoBox > .row {
   margin-top: 0.5em;
-  margin-bottom: 1em;
+}
+#recipeInfoBox > .row > h3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0;
 }
 #addNewReciBtn {
   background-color: #4d9078;
   font-weight: bold;
   border: none;
   width: 50px;
-  margin-right: 2em;
+}
+#seeFavs {
+  background-color: #4d9078;
+  font-weight: bold;
+  border: none;
+  width: 50px;
+  padding: 0.5em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#recipeResults > div:first-child {
+  width: 90%;
+  margin: auto;
+}
+#recipeResults > div > input {
+  margin-bottom: 1em;
 }
 
 /*edit Recipe Modal*/
 #editRecipeModal {
   position: fixed;
-  top: 4.1em;
+  top: 5.1em;
   left: 0;
   width: 100dvw;
   background-color: #4d9079e6;
@@ -771,7 +900,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.5em;
+  padding: 1em 0.5em;
 }
 #myEditFile {
   opacity: 0;
@@ -824,7 +953,6 @@ form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 0.5em;
 }
 .aFormBox input,
 textarea {
@@ -851,6 +979,25 @@ textarea {
   align-items: center;
   background-color: var(--viridian);
 }
+#shoppingSaveBox {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+#shoppingSaveBox input {
+  border-radius: 5px;
+  margin-bottom: 0.5em;
+  border: var(--viridian) 1pt solid;
+  padding: 0.5em;
+  color: var(--viridian);
+  transition: box-shadow 0.5s ease-in-out;
+}
+#shoppingSaveBox input:focus {
+  outline: none;
+  border-color: var(--coral);
+  box-shadow: var(--coral) 0 0 10px;
+}
 /*Footer*/
 footer {
   position: absolute;
@@ -860,7 +1007,13 @@ footer {
 }
 footer div {
   font-family: "Cabin Sketch";
+  font-size: 8pt;
   padding: 0.5em;
+}
+#iconbox > .row > .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #backToTop {
   color: oldlace;
@@ -985,7 +1138,17 @@ footer div {
   #loadingH3 {
   }
 }
+@media only screen and (min-width: 992px) {
+  #basic-navbar-nav > div > div > div {
+    background-color: oldlace;
+    border-radius: 0 10px 0 10px;
+    box-shadow: #315d4e 0 0 10px;
+  }
+}
 /*JS CSS*/
 .hidden {
   display: none;
+}
+.darker {
+  background-color: var(--coral) !important;
 }

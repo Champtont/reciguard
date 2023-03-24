@@ -9,6 +9,7 @@ const NameInput = (props) => {
 
   const submitHandler = () => {
     dispatch(editUser(props.editedUser));
+    props.setEdit(null);
   };
 
   return (

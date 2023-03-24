@@ -161,7 +161,7 @@ const EditRecipeModal = ({ recipe, setEdit, showFavs }) => {
               <Button type="submit">Save My changes</Button>
             ) : (
               <Button
-                className="login-80p mb-1 fw-bold"
+                className="login-80p my-2 fw-bold"
                 variant="success"
                 type="submit"
               >

@@ -9,7 +9,7 @@ import {
   getMyCalenderItems,
   getMenusInRange,
 } from "../../../redux/actions";
-import { isSameDay, format, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const MyCalendar = () => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
@@ -20,24 +20,12 @@ const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
   const [selectRange, setSelectRange] = useState(false);
   const [isSelected, setSelected] = useState(false);
-
+  const [toast, setToast] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, []);
-
-  // const datesToAddContentTo = [isTomorrow];
-
-  /* function tileContent({ date, view }) {
-    // Add class to tiles in month view only
-    if (view === "month") {
-      // Check if a date React-Calendar wants to check is on the list of dates to add class to
-      if (datesToAddContentTo.find((dDate) => isSameDay(dDate, date))) {
-        return "My content";
-      }
-    }
-  }*/
 
   const tileContent = ({ date, view }) => {
     if (userCalendarMenus.length > 0 && view === "month") {
@@ -47,7 +35,9 @@ const MyCalendar = () => {
           format(new Date(userCalendarMenus[i].planDate), "MM dd")
         ) {
           return userCalendarMenus[i].recipes.map((recipe) => (
-            <div key={recipe._id}>{recipe.title}</div>
+            <div className="text-truncate" key={recipe._id}>
+              {recipe.title}
+            </div>
           ));
         }
       }
@@ -57,6 +47,9 @@ const MyCalendar = () => {
   return (
     <div id="calendarPage">
       <h2>Calendar</h2>
+      {toast === true && (
+        <div id="calendarToast">Your List has Been Created!</div>
+      )}
       <div className="calendar-container">
         <Calendar
           onChange={setDate}
@@ -65,17 +58,19 @@ const MyCalendar = () => {
           tileContent={tileContent}
         />
         {date.length > 0 ? (
-          <p className="text-center">
-            <span className="bold">Start:</span> {date[0].toDateString()}
-            <span className="bold">End:</span> {date[1].toDateString()}
-          </p>
+          <div className="text-center my-2 calendarReflectedDates">
+            <strong>Start:</strong> {date[0].toDateString()}
+            <br />
+            <strong>End:</strong> {date[1].toDateString()}
+          </div>
         ) : (
-          <p className="text-center">
-            <span className="bold">selected date:</span> {date.toDateString()}
-          </p>
+          <div className="text-center my-2 calendarReflectedDates">
+            <strong>selected date:</strong> {date.toDateString()}
+          </div>
         )}
       </div>
       <Button
+        className={selectRange ? "mb-0 me-1" : "mb-1"}
         onClick={() => {
           selectRange === false ? setSelectRange(true) : setSelectRange(false);
           setDate(new Date());
@@ -85,14 +80,23 @@ const MyCalendar = () => {
       </Button>
       {selectRange === true ? (
         <Button
-          onClick={() =>
+          style={{
+            animation:
+              date.length > 0 ? "bounce 0.5s infinite 0.5s ease-in-out" : "",
+          }}
+          onClick={() => {
             dispatch(
               getMenusInRange(
                 format(parseISO(date[0].toISOString()), "yyyy-MM-dd"),
                 format(parseISO(date[1].toISOString()), "yyyy-MM-dd")
               )
-            )
-          }
+            );
+            setToast(true);
+            setTimeout(function () {
+              setToast(false);
+            }, 2000);
+            setDate(new Date());
+          }}
         >
           Create My Shopping List
         </Button>

@@ -131,9 +131,24 @@ export const fetchCurrentGoogleUser = (googleAccessToken) => {
       });
       if (response.ok) {
         let fetchedData = await response.json();
+        let shoppingMenus = fetchedData.shoppingMenus;
+        let shoppingList = fetchedData.list;
+        let favorites = fetchedData.favorites;
         dispatch({
           type: SAVE_CURRENT_USER,
           payload: fetchedData,
+        });
+        dispatch({
+          type: SAVE_USER_MENUS,
+          payload: shoppingMenus,
+        });
+        dispatch({
+          type: SAVE_USER_SHOPPING,
+          payload: shoppingList,
+        });
+        dispatch({
+          type: SAVE_TO_FAV,
+          payload: favorites,
         });
         console.log(getState());
       } else {

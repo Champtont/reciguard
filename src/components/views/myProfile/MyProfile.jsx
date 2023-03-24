@@ -33,6 +33,7 @@ const MyProfile = () => {
     formData.append("avatar", image);
     setImage(null);
     dispatch(changeUserAvatar(formData));
+    setSelected(false);
   };
 
   return (
@@ -49,6 +50,7 @@ const MyProfile = () => {
               <FiEdit2 size={60} />
             </div>
             <img
+              className="fluid"
               alt={`${currentUser.firstName}`}
               src={`${currentUser.avatar}`}
             />
@@ -131,9 +133,7 @@ const MyProfile = () => {
                     <TiPlusOutline size={26} />
                   </Button>
                 )}
-                {edit === "addNewReci" && (
-                  <AddNewRecipeModal setEdit={setEdit} />
-                )}
+
                 {showFavs === false ? "My Recipes" : "My Favorites"}
                 <Button
                   id="seeFavs"
@@ -148,14 +148,13 @@ const MyProfile = () => {
                   {showFavs === false ? "Favs" : "My Book"}
                 </Button>
               </h3>
+              {edit === "addNewReci" && <AddNewRecipeModal setEdit={setEdit} />}
             </Row>
             {showFavs === false ? (
               <Row>
-                <div id="recipeSearch"></div>
                 {userRecipes !== null && (
                   <div id="recipeResults">
                     <Form.Group>
-                      <Form.Label>Search</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Search here"
@@ -184,7 +183,6 @@ const MyProfile = () => {
                 {favorites !== null && (
                   <div id="recipeResults">
                     <Form.Group>
-                      <Form.Label>Search</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Search here"

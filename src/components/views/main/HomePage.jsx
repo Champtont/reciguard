@@ -47,8 +47,7 @@ const HomePage = () => {
         <LoadingAnimation />
       ) : (
         <div id="allRecipeList">
-          <Form.Group>
-            <Form.Label>Search</Form.Label>
+          <Form.Group id="mainSearchBox">
             <Form.Control
               type="text"
               placeholder="Search here"

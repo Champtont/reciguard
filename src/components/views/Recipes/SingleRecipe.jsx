@@ -50,7 +50,13 @@ const SingleRecipe = ({ recipe, setEdit, edit, showFavs }) => {
               showFavs={showFavs}
             />
           )}
-          <div className="recipeCardNameBox">
+          <div
+            className={
+              location.pathname === "/myProfile"
+                ? "recipeCardNameBox justify-content-center"
+                : "recipeCardNameBox"
+            }
+          >
             {location.pathname !== "/myProfile" && (
               <div>
                 <div className="recipeAvatarBox">
@@ -125,7 +131,7 @@ const SingleRecipe = ({ recipe, setEdit, edit, showFavs }) => {
             </div>
             <div className="singleDescription">{recipe.description}</div>
             <Link to={`/recipe/${recipe._id}`}>
-              <img src={recipe.photo} alt="food" className="img-fluid" />
+              <img src={recipe.photo} alt="food" className="" />
             </Link>
           </div>
         </div>

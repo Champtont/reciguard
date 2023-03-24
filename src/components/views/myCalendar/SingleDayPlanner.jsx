@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDrop } from "react-dnd";
 import DragableListItem from "./DragableListItem";
 import SaveSpaceItem from "./SaveSpaceItem";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { format } from "date-fns";
 import parseISO from "date-fns/parseISO";
 import {
@@ -16,8 +16,10 @@ const SingleDayPlanner = (props) => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
   const [saveSpace, setSaveSpace] = useState([]);
   const [editSpace, setEditSpace] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [check, setCheck] = useState(false);
   const [thisMenu, setThisMenu] = useState(null);
+  const [favRecipes, setFavRecipes] = useState(null);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "div",
     drop: (item) => {
@@ -101,6 +103,16 @@ const SingleDayPlanner = (props) => {
   return (
     <>
       <div id="singleModalFilter">
+        {searchQuery === "" && (
+          <Button
+            id="singleDaySwitch"
+            onClick={() => {
+              favRecipes === null ? setFavRecipes("favs") : setFavRecipes(null);
+            }}
+          >
+            {favRecipes === null ? "Search Favs" : "Search Recipes"}
+          </Button>
+        )}
         <div
           id="singleModalExit"
           onClick={() => {
@@ -112,35 +124,58 @@ const SingleDayPlanner = (props) => {
         >
           X
         </div>
-        <div id="singleDayModal">
-          <div id="singleDayLeft">
-            <div id="singleDayUpper">
-              <h1>Select Recipe(s) for {props.date.toDateString()}</h1>
+        <div id="singleDayBtnBox">
+          <div id="singleDayModal">
+            <div id="singleDayLeft">
+              <div id="singleDayUpper">
+                <h1>Select Recipe(s) for {props.date.toDateString()}</h1>
+              </div>
+              <div id="singleDayDowner" ref={drop}>
+                {saveSpace.map((recipe) => {
+                  return (
+                    <SaveSpaceItem
+                      id={recipe._id}
+                      title={recipe.title}
+                      saveSpace={saveSpace}
+                      key={recipe._id}
+                      remove={removeDivFromSaveSpace}
+                    />
+                  );
+                })}
+                {editSpace.map((recipe) => {
+                  return (
+                    <SaveSpaceItem
+                      id={recipe._id}
+                      title={recipe.title}
+                      saveSpace={editSpace}
+                      key={recipe._id}
+                      remove={removeDivFromEditSpace}
+                    />
+                  );
+                })}
+              </div>
             </div>
-            <div id="singleDayDowner" ref={drop}>
-              {saveSpace.map((recipe) => {
-                return (
-                  <SaveSpaceItem
+            <div id="singleDayOptBox">
+              <Form.Group id="singleDaySearchBox">
+                <Form.Control
+                  type="text"
+                  placeholder="Search Recipes"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Form.Group>
+              {props.recipes
+                .filter((r) => r.title.toLowerCase().includes(searchQuery))
+                .map((recipe) => (
+                  <DragableListItem
                     id={recipe._id}
                     title={recipe.title}
-                    saveSpace={saveSpace}
                     key={recipe._id}
-                    remove={removeDivFromSaveSpace}
                   />
-                );
-              })}
-              {editSpace.map((recipe) => {
-                return (
-                  <SaveSpaceItem
-                    id={recipe._id}
-                    title={recipe.title}
-                    saveSpace={editSpace}
-                    key={recipe._id}
-                    remove={removeDivFromEditSpace}
-                  />
-                );
-              })}
+                ))}
             </div>
+          </div>
+          <div id="singleDayEditDelete">
             {editSpace.length > 0 ? (
               <>
                 <Button
@@ -154,7 +189,7 @@ const SingleDayPlanner = (props) => {
                   Edit This menu
                 </Button>
                 <Button
-                  className="mt-1 ms-1"
+                  className="mt-1"
                   onClick={() => {
                     dispatch(deleteThisMenu(thisMenu._id));
                     props.setSelected(false);
@@ -182,15 +217,6 @@ const SingleDayPlanner = (props) => {
                 </Button>
               )
             )}
-          </div>
-          <div id="singleDayOptBox">
-            {props.recipes.map((recipe) => (
-              <DragableListItem
-                id={recipe._id}
-                title={recipe.title}
-                key={recipe._id}
-              />
-            ))}
           </div>
         </div>
       </div>

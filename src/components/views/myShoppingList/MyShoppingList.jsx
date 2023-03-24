@@ -103,23 +103,25 @@ const MyShoppingList = () => {
               />
             ))}
           </ul>
-          <input
-            type="text"
-            value={newItem}
-            placeholder="add more to your list"
-            onChange={(e) => {
-              setNewItem(e.target.value);
-            }}
-            onKeyDown={handleKeyDown}
-          />
-          <Button
-            onClick={(e) => {
-              console.log("clicked");
-              dispatch(postNewList(addToList));
-            }}
-          >
-            Save This List
-          </Button>
+          <div id="shoppingSaveBox">
+            <input
+              type="text"
+              value={newItem}
+              placeholder="add more to your list"
+              onChange={(e) => {
+                setNewItem(e.target.value);
+              }}
+              onKeyDown={handleKeyDown}
+            />
+            <Button
+              onClick={(e) => {
+                console.log("clicked");
+                dispatch(postNewList(addToList));
+              }}
+            >
+              Save This List
+            </Button>
+          </div>
         </>
       ) : (
         <div>Select a date range on your calendar to get started!</div>
