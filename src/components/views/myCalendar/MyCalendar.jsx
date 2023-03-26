@@ -16,6 +16,7 @@ const MyCalendar = () => {
   const userCalendarMenus = useSelector(
     (state) => state.user.currentUser.calendar
   );
+  const userFavs = useSelector((state) => state.user.favorites);
   const [menus, setMenus] = useState(userCalendarMenus);
   const [date, setDate] = useState(new Date());
   const [selectRange, setSelectRange] = useState(false);
@@ -115,6 +116,7 @@ const MyCalendar = () => {
           setSelected={setSelected}
           recipes={userRecipes}
           menus={userCalendarMenus}
+          favs={userFavs}
         />
       )}
     </div>

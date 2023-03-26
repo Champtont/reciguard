@@ -39,7 +39,7 @@ const SingleRecipe = ({ recipe, setEdit, edit, showFavs }) => {
   const thisRecipe = recipe;
 
   return (
-    <div>
+    <div className="reciBox">
       {recipe !== null && (
         <div className="recipeCard">
           {edit === `${recipe._id}` && (

@@ -40,6 +40,7 @@ const HomePage = () => {
 
   return (
     <div id="homeMainBox">
+      <div id="topOfPage"></div>
       {currentUser !== null && (
         <h1>Welcome {currentUser.firstName}, browse some recipes!</h1>
       )}
@@ -55,15 +56,17 @@ const HomePage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </Form.Group>
-          {allRecipes
-            .filter((r) => r.title.toLowerCase().includes(searchQuery))
-            .map((recipe) => (
-              <SingleRecipe
-                key={recipe._id}
-                recipe={recipe}
-                favorites={favorites}
-              />
-            ))}
+          <div id="mainReciBox">
+            {allRecipes
+              .filter((r) => r.title.toLowerCase().includes(searchQuery))
+              .map((recipe) => (
+                <SingleRecipe
+                  key={recipe._id}
+                  recipe={recipe}
+                  favorites={favorites}
+                />
+              ))}
+          </div>
         </div>
       )}
     </div>

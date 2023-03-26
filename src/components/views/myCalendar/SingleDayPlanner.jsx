@@ -14,7 +14,9 @@ import {
 
 const SingleDayPlanner = (props) => {
   const userRecipes = useSelector((state) => state.user.userRecipes);
+  const userFavs = useSelector((state) => state.user.favorites);
   const [saveSpace, setSaveSpace] = useState([]);
+  const [favSpace, setFavSpace] = useState([]);
   const [editSpace, setEditSpace] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [check, setCheck] = useState(false);
@@ -23,7 +25,7 @@ const SingleDayPlanner = (props) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "div",
     drop: (item) => {
-      if (stateRef.current === true) {
+      if (stateRef.current === true && favRecipes === null) {
         addDivToEditSpace(item.id);
       } else {
         addDivToSaveSpace(item.id);
@@ -38,6 +40,7 @@ const SingleDayPlanner = (props) => {
   const dispatch = useDispatch();
 
   stateRef.current = check;
+  stateRef.now = favRecipes;
 
   useEffect(() => {
     checkSaveSpace();
@@ -63,12 +66,24 @@ const SingleDayPlanner = (props) => {
 
   const addDivToSaveSpace = (id) => {
     const menuItemOfDay = userRecipes.filter((recipe) => id === recipe._id);
+    const favItem = userFavs.filter((recipe) => id === recipe._id);
     const currentSaveSpace = saveSpace;
-    if (currentSaveSpace.includes(menuItemOfDay)) {
+    if (stateRef.now === null) {
+      setSaveSpace((saveSpace) => [...saveSpace, menuItemOfDay[0]]);
+      console.log(menuItemOfDay);
+    } else if (stateRef.now !== null) {
+      setSaveSpace((saveSpace) => [...saveSpace, favItem[0]]);
+      console.log(favItem);
+    }
+  };
+  const addFavDivToFavSpace = (id) => {
+    const menuItem = userFavs.filter((recipe) => id === recipe._id);
+    const currentSaveSpace = favSpace;
+    if (currentSaveSpace.includes(menuItem)) {
       alert("already there");
     } else {
-      console.log("added to save space");
-      setSaveSpace((saveSpace) => [...saveSpace, menuItemOfDay[0]]);
+      console.log("added to fav space");
+      setFavSpace((favSpace) => [...favSpace, menuItem[0]]);
     }
   };
   const addDivToEditSpace = (id) => {
@@ -118,6 +133,7 @@ const SingleDayPlanner = (props) => {
           onClick={() => {
             setSaveSpace([]);
             setEditSpace([]);
+            setFavSpace([]);
             setCheck(false);
             props.setSelected(false);
           }}
@@ -130,6 +146,7 @@ const SingleDayPlanner = (props) => {
               <div id="singleDayUpper">
                 <h1>Select Recipe(s) for {props.date.toDateString()}</h1>
               </div>
+
               <div id="singleDayDowner" ref={drop}>
                 {saveSpace.map((recipe) => {
                   return (
@@ -159,20 +176,34 @@ const SingleDayPlanner = (props) => {
               <Form.Group id="singleDaySearchBox">
                 <Form.Control
                   type="text"
-                  placeholder="Search Recipes"
+                  placeholder={
+                    favRecipes === null ? "Search Recipes" : "Search Favs"
+                  }
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </Form.Group>
-              {props.recipes
-                .filter((r) => r.title.toLowerCase().includes(searchQuery))
-                .map((recipe) => (
-                  <DragableListItem
-                    id={recipe._id}
-                    title={recipe.title}
-                    key={recipe._id}
-                  />
-                ))}
+              {favRecipes === null &&
+                props.recipes
+                  .filter((r) => r.title.toLowerCase().includes(searchQuery))
+                  .map((recipe) => (
+                    <DragableListItem
+                      id={recipe._id}
+                      title={recipe.title}
+                      key={recipe._id}
+                    />
+                  ))}
+              {favRecipes === "favs" &&
+                props.favs &&
+                props.favs
+                  .filter((r) => r.title.toLowerCase().includes(searchQuery))
+                  .map((recipe) => (
+                    <DragableListItem
+                      id={recipe._id}
+                      title={recipe.title}
+                      key={recipe._id}
+                    />
+                  ))}
             </div>
           </div>
           <div id="singleDayEditDelete">

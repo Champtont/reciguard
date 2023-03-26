@@ -12,8 +12,8 @@
 
 .App {
   text-align: center;
-  min-width: 100dvw;
-  min-height: 100dvh;
+  width: 100dvw;
+  height: 100dvh;
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
@@ -22,10 +22,18 @@
   font-family: "Mali";
 }
 .App::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
+  background-color: transparent;
 }
 .App::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
 }
 
 /*styling*/
@@ -120,6 +128,7 @@ nav:has(#basic-navbar-nav .show) {
   width: 100%;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 6000;
   display: flex;
   justify-content: space-between;
@@ -145,10 +154,14 @@ nav:has(#basic-navbar-nav .show) {
   height: 50px;
   aspect-ratio: 1/1;
 }
+#basic-navbar-nav > div > div {
+  width: 100%;
+}
 .dropDownMenuItem {
   padding: 0.1em 1em;
 }
 .dropDownMenuItem:hover {
+  border-radius: 5px;
   background-color: var(--saffron);
 }
 #basic-navbar-nav > div > div > div > div:hover {
@@ -347,7 +360,25 @@ nav:has(#basic-navbar-nav .show) {
   padding-bottom: 5.5em;
   background-image: url("./components/assets/recigaurdTableCloth.png");
   background-size: 500px;
+  /*height: 100dvh;
+  width: 100dvw;
+  overflow-x: hidden;
+  overflow-y: scroll;*/
 }
+/*#homeMainBox::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+#homeMainBox::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
+}*/
 #mainSearchBox {
   padding: 0.8em 1em;
 }
@@ -436,6 +467,7 @@ nav:has(#basic-navbar-nav .show) {
 .favoriteBox:hover {
   transform: scale(1.1);
 }
+
 .singleDescription {
   position: absolute;
   bottom: 0;
@@ -891,7 +923,7 @@ ol > li {
 /*edit Recipe Modal*/
 #editRecipeModal {
   position: fixed;
-  top: 5.1em;
+  top: 4.1em;
   left: 0;
   width: 100dvw;
   background-color: #4d9079e6;
@@ -967,17 +999,53 @@ textarea {
 /*Shopping List*/
 #shoppingPage {
   padding-top: 5em;
+  padding-bottom: 7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#shoppingPage > button:first-of-type {
+  border: none;
+  background-color: var(--saffron);
+  color: var(--viridian);
+}
+#shoppingPage #shoppingSaveBox button {
+  border: none;
+  background-color: var(--coral);
+  color: oldlace;
+  font-weight: bold;
+}
+#shoppingList {
+  width: 100%;
+  padding: 1em;
 }
 #shoppingPage li {
   list-style: none;
+  position: relative;
   margin-bottom: 0.5em;
-  padding: 0 0.5em;
+  padding: 0 0 0 0.5em;
   border-radius: 5px;
   color: var(--saffron);
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--viridian);
+}
+.shoppingListCheckCover {
+  position: relative;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: oldlace;
+}
+
+#shoppingPage li button {
+  border: none;
+  background-color: var(--raspberry);
+  color: oldlace;
 }
 #shoppingSaveBox {
   display: flex;
@@ -1000,7 +1068,7 @@ textarea {
 }
 /*Footer*/
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: var(--coral);
@@ -1143,6 +1211,30 @@ footer div {
     background-color: oldlace;
     border-radius: 0 10px 0 10px;
     box-shadow: #315d4e 0 0 10px;
+    right: 210px;
+  }
+  #basic-navbar-nav > div > a {
+    width: 200px;
+  }
+  #mainSearchBox > input {
+    width: 90%;
+    margin: auto;
+  }
+  #mainReciBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 90%;
+    margin: auto;
+  }
+  .reciBox {
+    width: 30%;
+  }
+  #userPicBox {
+    width: 22%;
+  }
+  #userPicBox img {
+    width: 100%;
   }
 }
 /*JS CSS*/
@@ -1151,4 +1243,20 @@ footer div {
 }
 .darker {
   background-color: var(--coral) !important;
+}
+.checkedBox {
+  text-decoration: line-through;
+  background-color: #25463b !important;
+  font-style: italic;
+}
+.afterCheck {
+  position: relative;
+  border-radius: 5px;
+  border: var(--saffron) dotted 1pt;
+  width: 30px;
+  height: 30px;
+  background-color: #25463b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

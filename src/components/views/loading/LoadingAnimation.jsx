@@ -52,7 +52,7 @@ const LoadingAnimation = () => {
             <span>i</span>
             <span>n</span>
             <span>g</span>
-            <span> </span>
+            <span className="mx-1"> </span>
             <span>S</span>
             <span>o</span>
             <span>m</span>
@@ -62,7 +62,7 @@ const LoadingAnimation = () => {
             <span>i</span>
             <span>n</span>
             <span>g</span>
-            <span> </span>
+            <span className="mx-1"> </span>
             <span>u</span>
             <span>p</span>
             <span>.</span>

@@ -38,6 +38,7 @@ const MyProfile = () => {
 
   return (
     <div id="profileBox">
+      <div id="topOfPage"></div>
       <Container className="profilePage">
         <div>
           <div id="userPicBox">

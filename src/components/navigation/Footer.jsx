@@ -17,7 +17,7 @@ const Footer = () => {
           </Col>
           {location.pathname !== "/" && location.pathname !== "/myCalendar" && (
             <Col>
-              <a href="#">
+              <a href="#topOfPage">
                 <div
                   id="backToTop"
                   style={{

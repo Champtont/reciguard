@@ -8,7 +8,7 @@ import { postNewList } from "../../../redux/actions";
 
 const MyShoppingList = () => {
   const userShopMenus = useSelector((state) => state.user.calendar);
-  const userRecentList = useSelector((state) => state.user.shoppingList.items);
+  const userRecentList = useSelector((state) => state.user.shoppingList);
   const [shoppingIngredients, setShoppingIngredients] = useState([]);
   const [newItem, setNewItem] = useState("");
 
@@ -41,6 +41,7 @@ const MyShoppingList = () => {
   const dispatch = useDispatch();
 
   stateRef.current = shoppingIngredients;
+  stateRef.now = userRecentList;
 
   const newShopArray = stateRef.current.filter(function (elem, pos) {
     return stateRef.current.indexOf(elem) == pos;
@@ -69,17 +70,19 @@ const MyShoppingList = () => {
 
   const getLastSaved = () => {
     setShoppingIngredients([]);
-    for (let i = 0; i < userRecentList.length; i++) {
+    for (let i = 0; i < userRecentList.items.length; i++) {
       setShoppingIngredients((shoppingIngredients) => [
         ...shoppingIngredients,
-        userRecentList[i],
+        userRecentList.items[i],
       ]);
     }
   };
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-    generateIngredients();
+    if (userShopMenus !== undefined) {
+      dispatch(fetchCurrentUser());
+      generateIngredients();
+    }
   }, []);
 
   const addToList = {
@@ -89,7 +92,7 @@ const MyShoppingList = () => {
   return (
     <div id="shoppingPage">
       <h2>My Shopping List</h2>
-      {userRecentList.length > 0 && (
+      {userRecentList !== undefined && (
         <Button onClick={() => getLastSaved()}>Get saved List</Button>
       )}
       {stateRef.current.length > 0 ? (
@@ -124,7 +127,10 @@ const MyShoppingList = () => {
           </div>
         </>
       ) : (
-        <div>Select a date range on your calendar to get started!</div>
+        <div>
+          Save some menus and Select a date range on your calendar to get
+          started!
+        </div>
       )}
     </div>
   );
