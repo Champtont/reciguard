@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 //routes and Nav
 import LoginPage from "./components/views/loginOrRegister/LoginORegister";
 import NavBar from "./components/navigation/NavBar";
@@ -14,9 +15,10 @@ import SingleRecipePage from "./components/views/Recipes/SingleRecipePage";
 import MyShoppingList from "./components/views/myShoppingList/MyShoppingList";
 
 function App() {
+  let width = window.innerWidth;
   return (
     <BrowserRouter>
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={width < 850 ? TouchBackend : HTML5Backend}>
         <div className="App">
           <NavBar />
           <Routes>
