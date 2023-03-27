@@ -24,15 +24,15 @@ const EditRecipeModal = ({ recipe, setEdit, showFavs }) => {
   const [image, setImage] = useState(null);
 
   const editedModal = {
-    categoryTags: tags === recipe.categoryTags ? tags : tags.split(","),
+    categoryTags: tags === recipe.categoryTags ? tags : tags.split(";"),
     title: title,
     description: description,
     ingredients:
-      ingredients === recipe.ingredients ? ingredients : ingredients.split(","),
+      ingredients === recipe.ingredients ? ingredients : ingredients.split(";"),
     instructions:
       instructions === recipe.instructions
         ? instructions
-        : instructions.split(","),
+        : instructions.split(";"),
   };
 
   const onSubmitHandler = (e) => {

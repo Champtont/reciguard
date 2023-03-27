@@ -13,11 +13,11 @@ const AddNewRecipeModal = ({ setEdit }) => {
   const [newInstructions, setNewInstructions] = useState("");
 
   const newRecipeInfo = {
-    categoryTags: catTags.split(","),
+    categoryTags: catTags.split(";"),
     title: newTitle,
     description: newDescription,
-    ingredients: newIngredients.split(","),
-    instructions: newInstructions.split(","),
+    ingredients: newIngredients.split(";"),
+    instructions: newInstructions.split(";"),
   };
 
   const onSubmitHandler = (e) => {
@@ -50,7 +50,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
             onChange={(e) => setCatTags(e.target.value)}
             value={catTags}
             type="text"
-            placeholder="ex: oven,quick,dinner"
+            placeholder="Separate with semicolon ex: oven;quick;dinner"
           />
         </div>
         <div className="aFormBox">
@@ -68,7 +68,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
             value={newIngredients}
             onChange={(e) => setNewIngredients(e.target.value)}
             type="text"
-            placeholder="be sure to separate each ingredient with a comma(,)"
+            placeholder="be sure to separate each ingredient with a semicolon(;)"
           />
         </div>
         <div className="aFormBox">
@@ -78,7 +78,7 @@ const AddNewRecipeModal = ({ setEdit }) => {
             onChange={(e) => setNewInstructions(e.target.value)}
             type="text"
             style={{ height: "100px" }}
-            placeholder="be sure to separate each instruction with a comma(,)"
+            placeholder="be sure to separate each instruction with a semicolon(;)"
           />
         </div>
         <Button

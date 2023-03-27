@@ -164,6 +164,12 @@ const MyProfile = () => {
                       />
                     </Form.Group>
                     <div id="reciCardBox">
+                      {currentUser.recipeBook.length === 0 && (
+                        <h3>
+                          You do not Have any recipes saved yet. try writing a
+                          recipe to get started!
+                        </h3>
+                      )}
                       {userRecipes
                         .filter((r) =>
                           r.title.toLowerCase().includes(searchQuery)
