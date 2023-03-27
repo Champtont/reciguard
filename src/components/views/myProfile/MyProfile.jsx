@@ -163,18 +163,20 @@ const MyProfile = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                       />
                     </Form.Group>
-                    {userRecipes
-                      .filter((r) =>
-                        r.title.toLowerCase().includes(searchQuery)
-                      )
-                      .map((recipe) => (
-                        <SingleRecipe
-                          key={recipe._id}
-                          recipe={recipe}
-                          setEdit={setEdit}
-                          edit={edit}
-                        />
-                      ))}
+                    <div id="reciCardBox">
+                      {userRecipes
+                        .filter((r) =>
+                          r.title.toLowerCase().includes(searchQuery)
+                        )
+                        .map((recipe) => (
+                          <SingleRecipe
+                            key={recipe._id}
+                            recipe={recipe}
+                            setEdit={setEdit}
+                            edit={edit}
+                          />
+                        ))}
+                    </div>
                   </div>
                 )}
               </Row>
@@ -191,19 +193,21 @@ const MyProfile = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                       />
                     </Form.Group>
-                    {favorites
-                      .filter((r) =>
-                        r.title.toLowerCase().includes(searchQuery)
-                      )
-                      .map((recipe) => (
-                        <SingleRecipe
-                          key={recipe._id}
-                          recipe={recipe}
-                          setEdit={setEdit}
-                          edit={edit}
-                          showFavs={showFavs}
-                        />
-                      ))}
+                    <div id="reciCardBox">
+                      {favorites
+                        .filter((r) =>
+                          r.title.toLowerCase().includes(searchQuery)
+                        )
+                        .map((recipe) => (
+                          <SingleRecipe
+                            key={recipe._id}
+                            recipe={recipe}
+                            setEdit={setEdit}
+                            edit={edit}
+                            showFavs={showFavs}
+                          />
+                        ))}
+                    </div>
                   </div>
                 )}
               </Row>

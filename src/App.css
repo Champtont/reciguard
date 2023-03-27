@@ -768,11 +768,11 @@ ol > li {
   position: absolute;
   top: -20px;
   right: -18px;
-  color: var(--saffron);
-  background-color: var(--viridian);
+  color: oldlace;
+  background-color: var(--raspberry);
 }
 #modalExitButton:hover {
-  background-color: var(--raspberry);
+  background-color: #68273f;
   color: white;
 }
 .picModalBottom {
@@ -1231,10 +1231,18 @@ footer div {
     width: 30%;
   }
   #userPicBox {
-    width: 22%;
+    width: 16%;
   }
   #userPicBox img {
     width: 100%;
+  }
+  #changePicModal {
+    right: 112px;
+  }
+  #reciCardBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 }
 /*JS CSS*/
