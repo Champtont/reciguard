@@ -200,7 +200,7 @@ nav:has(#basic-navbar-nav .show) {
 }
 /****LoadingPage****/
 #loadingPage {
-  height: 100dvh;
+  height: calc(100dvh - 3em);
   width: 100dvw;
   overflow: hidden;
   display: flex;
@@ -901,16 +901,32 @@ ol > li {
   font-weight: bold;
   border: none;
   width: 50px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+#addNewReciBtn:hover {
+  background-color: #25463b;
+  transform: scale(1.1);
+}
+#addNewReciBtn:active {
+  box-shadow: inset var(--coral) 0 0 2px 3px;
 }
 #seeFavs {
   background-color: #4d9078;
   font-weight: bold;
   border: none;
-  width: 50px;
+  width: 85px;
   padding: 0.5em 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+#seeFavs:hover {
+  background-color: #25463b;
+  transform: scale(1.1);
+}
+#seeFavs:active {
+  box-shadow: inset var(--coral) 0 0 2px 3px;
 }
 #recipeResults > div:first-child {
   width: 90%;
@@ -933,6 +949,15 @@ ol > li {
   justify-content: center;
   align-items: center;
   padding: 1em 0.5em;
+  height: 606px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#editRecipeModal::-webkit-scrollbar {
+  width: 2px;
+}
+#editRecipeModal::-webkit-scrollbar-thumb {
+  background-color: #25463b;
 }
 #myEditFile {
   opacity: 0;
@@ -976,6 +1001,10 @@ ol > li {
   color: white;
   left: 3px;
   top: 6px;
+}
+.addNewExitBtn:hover {
+  background-color: #68273f;
+  cursor: pointer;
 }
 form {
   width: 80%;
@@ -1243,6 +1272,13 @@ footer div {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+  #editRecipeModal {
+    height: 654px;
+    overflow: hidden;
+  }
+  #seeFavs {
+    width: 100px;
   }
 }
 /*JS CSS*/
