@@ -9,6 +9,7 @@ const NameInput = (props) => {
 
   const submitHandler = () => {
     dispatch(editUser(props.editedUser));
+    props.setEdit(null);
   };
 
   return (
@@ -25,11 +26,7 @@ const NameInput = (props) => {
       <Button id="submitName" onClick={() => submitHandler()}>
         <FiSave size={23} />
       </Button>
-      <Button
-        id="cancelNameChange"
-        variant="danger"
-        onClick={() => props.setEdit(null)}
-      >
+      <Button id="cancelNameChange" onClick={() => props.setEdit(null)}>
         <FaRegWindowClose size={23} />
       </Button>
     </>

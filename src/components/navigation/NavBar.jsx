@@ -5,12 +5,14 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import ReciLogo from "../assets/googlereadyreci.png";
 import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { feURL } from "../../redux/actions";
 
 //still working on navbar options. Don't want them all to show on
 
 const NavBar = () => {
+  const [navMenu, setNavMenu] = useState("collapsed");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -21,14 +23,22 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar className="nav" expand="lg">
+    <Navbar className={navMenu === "collapsed" ? "nav" : "darker"} expand="lg">
       <Container>
-        <Link to="/home">
-          <img src={ReciLogo} alt="Reci logo" id="navLogo" />
-          <span style={{ fontWeight: "bold" }}>eciGuard</span>
-        </Link>
+        <div id="logoBox">
+          <Link to={location.pathname === "/" ? "" : "/home"}>
+            <img src={ReciLogo} alt="Reci logo" id="navLogo" />
+            <span style={{ fontWeight: "bold" }}>eciGuard</span>
+          </Link>
+        </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
-          <span>
+          <span
+            onClick={() =>
+              navMenu === "collapsed"
+                ? setNavMenu("expanded")
+                : setNavMenu("collapsed")
+            }
+          >
             <HiMenu id="hamburgermenu" size={26} />
           </span>
         </Navbar.Toggle>
@@ -37,12 +47,18 @@ const NavBar = () => {
             {location.pathname !== "/" && (
               <>
                 <NavDropdown
-                  title="Options"
+                  title="Menu"
                   id="basic-nav-dropdown"
                   className="userDropdown"
                 >
                   <Link to="/myProfile">
                     <div className="dropDownMenuItem">My Profile</div>
+                  </Link>
+                  <Link to="/myCalendar">
+                    <div className="dropDownMenuItem">Calendar</div>
+                  </Link>
+                  <Link to="/myShoppingList">
+                    <div className="dropDownMenuItem">Shopping List</div>
                   </Link>
                   <Link to="/home">
                     <div className="dropDownMenuItem">Home</div>

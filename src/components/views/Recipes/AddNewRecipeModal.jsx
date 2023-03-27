@@ -6,23 +6,23 @@ import { addANewRecipe } from "../../../redux/actions";
 const AddNewRecipeModal = ({ setEdit }) => {
   const dispatch = useDispatch();
 
-  const [tags, setTags] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [catTags, setCatTags] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newIngredients, setNewIngredients] = useState("");
+  const [newInstructions, setNewInstructions] = useState("");
 
-  const recipeInfo = {
-    categoryTags: tags.split(","),
-    title: title,
-    description: description,
-    ingredients: ingredients.split(","),
-    instructions: instructions.split(","),
+  const newRecipeInfo = {
+    categoryTags: catTags.split(","),
+    title: newTitle,
+    description: newDescription,
+    ingredients: newIngredients.split(","),
+    instructions: newInstructions.split(","),
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addANewRecipe(recipeInfo));
+    dispatch(addANewRecipe(newRecipeInfo));
     setEdit(null);
   };
 
@@ -30,57 +30,59 @@ const AddNewRecipeModal = ({ setEdit }) => {
     <div id="addNewModal">
       <div id="newRecipeCloseBox">
         <h1>Add Something New!</h1>
-        <div onClick={() => setEdit(null)}>X</div>
+        <div onClick={() => setEdit(null)} className="addNewExitBtn">
+          X
+        </div>
       </div>
       <form onSubmit={onSubmitHandler}>
-        <div>
-          <label className="fw-bold">Title</label>
+        <div className="aFormBox">
+          <label>Title</label>
           <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
             type="text"
             placeholder="title"
           />
         </div>
-        <div>
-          <label className="fw-bold">Category</label>
+        <div className="aFormBox">
+          <label>Category</label>
           <input
-            onChange={(e) => setTags(e.target.value)}
-            value={tags}
+            onChange={(e) => setCatTags(e.target.value)}
+            value={catTags}
             type="text"
             placeholder="ex: oven,quick,dinner"
           />
         </div>
-        <div>
-          <label className="fw-bold">Description</label>
+        <div className="aFormBox">
+          <label>Description</label>
           <textarea
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            onChange={(e) => setNewDescription(e.target.value)}
+            value={newDescription}
             type="text"
             placeholder="description"
           />
         </div>
-        <div>
-          <label className="fw-bold">Ingredients</label>
+        <div className="aFormBox">
+          <label>Ingredients</label>
           <textarea
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
+            value={newIngredients}
+            onChange={(e) => setNewIngredients(e.target.value)}
             type="text"
-            placeholder="ingredients"
+            placeholder="be sure to separate each ingredient with a comma(,)"
           />
         </div>
-        <div>
-          <label className="fw-bold">Instructions</label>
+        <div className="aFormBox">
+          <label>Instructions</label>
           <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={newInstructions}
+            onChange={(e) => setNewInstructions(e.target.value)}
             type="text"
             style={{ height: "100px" }}
-            placeholder="instructions"
+            placeholder="be sure to separate each instruction with a comma(,)"
           />
         </div>
         <Button
-          className="login-80p mb-4 fw-bold"
+          className="login-80p my-2 fw-bold"
           variant="success"
           type="submit"
         >

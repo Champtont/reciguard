@@ -12,69 +12,378 @@
 
 .App {
   text-align: center;
-  min-width: 100dvw;
-  min-height: 100dvh;
+  width: 100dvw;
+  height: 100dvh;
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
-  background-color: oldlace;
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 500px;
   font-family: "Mali";
 }
 .App::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
+  background-color: transparent;
 }
 .App::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
 }
 
 /*styling*/
 /***Login***/
 .loginContainer {
-  padding-top: 5em;
+  padding-top: 8em;
+}
+.form-control {
+  transition: box-shadow 0.5s ease-in-out;
+}
+.form-control:focus {
+  border: var(--coral) solid 1pt;
+  box-shadow: #e17347d0 0 0 10px 2px;
+}
+
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg {
+  background-color: var(--viridian);
+  border: none;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg:hover {
+  background-color: #315d4e;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-lg:active {
+  background-color: #6dccab;
+}
+
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm {
+  background-color: var(--coral);
+  border: none;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm:hover {
+  background-color: #c56741;
+}
+#root
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > button.mb-4.w-100.btn.btn-primary.btn-sm:active {
+  background-color: #e17247;
+}
+
+#root > div > div > div:nth-child(1) > div > form > a > button {
+  background-color: var(--viridian);
+  border: none;
+}
+#root > div > div > div:nth-child(1) > div > form > a > button:hover {
+  background-color: #315d4e;
+}
+#root > div > div > div:nth-child(1) > div > form > a > button:active {
+  background-color: #6dccab;
 }
 
 /***NAV***/
+nav:has(#basic-navbar-nav .show) {
+  background-color: var(--coral);
+}
 #root > div > nav {
   padding: 0.5em;
-  background-color: #fa7f4eb8;
+  background-color: #fa7f4ed7;
   width: 100%;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 6000;
   display: flex;
   justify-content: space-between;
+}
+#basic-navbar-nav {
+  justify-content: flex-end;
+}
+#basic-navbar-nav > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 #root > div > nav a {
   text-decoration: none;
   color: var(--viridian);
 }
+#logoBox {
+  width: 50%;
+  text-align: left;
+}
 #navLogo {
   height: 50px;
   aspect-ratio: 1/1;
+}
+#basic-navbar-nav > div > div {
+  width: 100%;
 }
 .dropDownMenuItem {
   padding: 0.1em 1em;
 }
 .dropDownMenuItem:hover {
+  border-radius: 5px;
   background-color: var(--saffron);
+}
+#basic-navbar-nav > div > div > div > div:hover {
+  background-color: transparent;
 }
 .dropDownMenuItem > button {
   width: 100%;
   border: none;
+}
+#basic-navbar-nav > div > div > div {
+  background-color: transparent;
+  border: none;
+}
+#basic-navbar-nav > div > div > div > div > button {
+  width: 100%;
+  border-radius: 5px;
+  padding: 0 2em;
+  background-color: var(--raspberry);
+  font-weight: bold;
+  color: oldlace;
+  transition: box-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+#basic-navbar-nav > div > div > div > div > button:hover {
+  box-shadow: var(--coral) 0 0 10px;
+  color: var(--saffron);
 }
 #root > div > nav > div > button {
   border: none;
 }
 #root > div > nav > div > button:focus {
   border: none;
+  box-shadow: none;
 }
 #hamburgermenu {
   color: var(--viridian);
+}
+/****LoadingPage****/
+#loadingPage {
+  height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+#loadingOil {
+  position: absolute;
+  height: 300px;
+  top: 100px;
+  left: 300px;
+  animation: tipMeOver 1.5s infinite linear;
+}
+#loadingOil img {
+  height: 100%;
+  object-fit: cover;
+}
+#loadingBasket {
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+#loadingBasket div:nth-child(2) {
+  animation-delay: 0.1s;
+}
+#loadingBasket div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+#loadingBasket div:nth-child(4) {
+  animation-delay: 0.2s;
+}
+#loadingBasket div:nth-child(5) {
+  animation-delay: 0.5s;
+}
+#loadingBasket div:nth-child(6) {
+  animation-delay: 0.7s;
+}
+.loadingIngredients {
+  width: 70px;
+  position: absolute;
+  bottom: 21px;
+  right: 308px;
+  animation: toss 1.5s linear infinite;
+}
+.loadingIngredients img {
+  width: 100%;
+  object-fit: contain;
+}
+#loadingPan {
+  position: absolute;
+  top: 131px;
+  height: 200px;
+  width: 600px;
+  display: flex;
+  transform: rotate(-10deg);
+  z-index: 1;
+  animation: saute 1.5s infinite cubic-bezier(0.93, 0.85, 0.47, 0.02);
+}
+#loadingPan img {
+  width: 100%;
+  object-fit: cover;
+}
+#panCover {
+  width: 191px;
+  height: 52px;
+  position: absolute;
+  bottom: 26px;
+  left: 120px;
+  z-index: 3;
+  background-image: linear-gradient(180deg, #313030 60%, #2a2828);
+}
+#panCoverLow {
+  background-image: linear-gradient(180deg, #313030 50%, #2a2828);
+  height: 46px;
+  width: 145px;
+  position: absolute;
+  bottom: 17px;
+  left: 148px;
+  z-index: 3;
+  border-bottom: #ff840061 2pt solid;
+  border-radius: 10%;
+}
+#loadingBurner {
+  position: absolute;
+}
+#loadingText {
+  width: 45%;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+#loadingH3 {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: bold;
+  color: var(--raspberry);
+  background-image: linear-gradient(
+    90deg,
+    transparent 20%,
+    oldlace 60%,
+    transparent
+  );
+}
+#loadingH3 span {
+  animation: bounce 0.3s ease infinite alternate;
+}
+#loadingH3 span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+#loadingH3 span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+#loadingH3 span:nth-child(9) {
+  animation-delay: 0.7s;
+}
+
+#loadingH3 span:nth-child(11) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(14) {
+  animation-delay: 1.2s;
+}
+#loadingH3 span:nth-child(15) {
+  animation-delay: 1.3s;
+}
+#loadingH3 span:nth-child(17) {
+  animation-delay: 0.2s;
+}
+#loadingH3 span:nth-child(20) {
+  animation-delay: 0.1s;
+}
+#loadingH3 span:nth-child(21) {
+  animation-delay: 0.2s;
+}
+#loadingH3 span:nth-child(22) {
+  animation-delay: 0.3s;
+}
+#loadingH3 span:nth-child(23) {
+  animation-delay: 0.4s;
 }
 /***MainPage***/
 #homeMainBox {
   padding-top: 4.5em;
   padding-bottom: 5.5em;
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 500px;
+  /*height: 100dvh;
+  width: 100dvw;
+  overflow-x: hidden;
+  overflow-y: scroll;*/
+}
+/*#homeMainBox::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+#homeMainBox::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
+}*/
+#mainSearchBox {
+  padding: 0.8em 1em;
+}
+#allRecipeList {
+  padding-bottom: 2em;
 }
 /*recipeCards*/
 .recipeCard {
@@ -110,10 +419,12 @@
   align-items: center;
   padding: 0.5em;
   border-radius: 50%;
+  transition: background-color 0.5s ease-in-out;
 }
 .recipeEditButton:hover {
   background-color: #4d9078;
   color: var(--saffron);
+  box-shadow: none;
 }
 .recipeAvatarBox {
   height: 50px;
@@ -151,7 +462,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease-in-out;
 }
+.favoriteBox:hover {
+  transform: scale(1.1);
+}
+
 .singleDescription {
   position: absolute;
   bottom: 0;
@@ -172,7 +488,16 @@
   overflow: hidden;
 }
 #singleRecipeRequirements {
-  padding: 0 1em;
+  padding: 2em 1em;
+  background-color: #b4436ccf;
+  color: oldlace;
+}
+ul > li {
+  list-style-type: none;
+}
+ol > li {
+  text-align: start;
+  margin-bottom: 0.5em;
 }
 /*Calendar*/
 .rbc-calendar {
@@ -187,7 +512,203 @@
   border-radius: 5px;
   color: var(--coral);
 }
+/*Alt Calendar*/
+#calendarPage {
+  margin-top: 5.5em;
+  width: 100dvw;
+  padding: 0.5em;
+}
+#calendarToast {
+  position: absolute;
+  width: 90%;
+  left: 20px;
+  top: 300px;
+  background-color: var(--viridian);
+  color: white;
+  font-size: 20pt;
+  font-weight: bold;
+  border-radius: 5px;
+}
+#calendarPage .react-calendar {
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(253, 245, 230, 0.687);
+  color: var(--viridian);
+  font-family: "Mali";
+}
+#calendarPage .react-calendar .react-calendar__navigation button {
+  color: var(--saffron);
+  text-shadow: var(--viridian) 0 0 2px;
+  background: #488671cb;
+  font-size: 20px;
+  font-weight: bold;
+}
+#calendarPage
+  .react-calendar__viewContainer
+  .react-calendar__month-view__weekdays {
+  font-size: 16px;
+}
+
+#calendarPage
+  .react-calendar
+  .react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.6;
+  color: var(--raspberry);
+}
+#calendarPage .react-calendar__tile {
+  color: var(--viridian);
+  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+}
+#calendarPage .react-calendar__tile--active {
+  background: var(--raspberry);
+  border-radius: 5px;
+  font-weight: bold;
+  color: oldlace;
+}
+#calendarPage .react-calendar__tile--now {
+  background: var(--saffron);
+  box-shadow: #315d4e 0 0 10px;
+}
+#calendarPage .react-calendar__month-view__days :hover {
+  background-color: #f7825496;
+}
+#calendarPage .react-calendar__tile--range {
+  border-radius: 0;
+  background-color: #b4436c7d;
+  color: white;
+}
+#calendarPage .react-calendar .react-calendar__tile--rangeEnd {
+  border-radius: 0 5px 5px 0;
+  background-color: var(--raspberry);
+  color: white;
+}
+#calendarPage .react-calendar .react-calendar__tile--rangeStart {
+  border-radius: 5px;
+  background-color: var(--raspberry);
+  color: white;
+}
+.calendarReflectedDates {
+  border-radius: 5px;
+  background-image: linear-gradient(var(--saffron), transparent);
+  color: var(--viridian);
+}
+
+#calendarPage > button:nth-child(3) {
+  background-color: var(--coral);
+  border: none;
+  margin-bottom: 0.5em;
+}
+#calendarPage > button:nth-child(4) {
+  background-color: var(--viridian);
+  border: none;
+}
+
+#singleModalFilter {
+  background-color: #4d9079c0;
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+#singleDayBtnBox {
+  position: absolute;
+  top: 200px;
+  background-color: oldlace;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0.5em;
+  width: 95%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+#singleDaySwitch {
+  position: absolute;
+  z-index: 1;
+  top: 175px;
+  right: 46px;
+  background-color: var(--saffron);
+  border: none;
+  font-weight: bold;
+  text-shadow: #315d4e 0 0 2px;
+  box-shadow: var(--viridian) 0 0 2px;
+}
+#singleDayModal {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+#singleDayLeft {
+  width: 517.8px;
+  height: 239.5px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#singleDayUpper > h1 {
+  font-size: 16pt;
+}
+#singleModalExit {
+  position: absolute;
+  background-color: var(--raspberry);
+  color: oldlace;
+  border-radius: 5px;
+  right: 4px;
+  top: 170px;
+  z-index: 1;
+  padding: 0.5em;
+}
+#singleDayEditDelete {
+  display: flex;
+  justify-content: space-around;
+}
+#singleDayEditDelete button:first-child {
+  background-color: var(--viridian);
+  border: none;
+  font-weight: bold;
+}
+#singleDayEditDelete button:nth-child(2) {
+  background-color: var(--raspberry);
+  border: none;
+  font-weight: bold;
+}
+.draggableBoxes {
+  background-color: var(--coral);
+  color: oldlace;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  display: flex;
+  max-height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+.draggableBoxes p {
+  margin: 0;
+}
+#singleDayDowner {
+  min-height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  border: var(--viridian) 2pt solid;
+}
+#singleDayOptBox {
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 239.5px;
+}
 /*MyProfile*/
+#profileBox {
+  background-image: url("./components/assets/recigaurdTableCloth.png");
+  background-size: 500px;
+}
 .profilePage {
   padding-top: 6.5em;
   padding-bottom: 6em;
@@ -195,7 +716,7 @@
 }
 #userPicBox {
   width: 50%;
-  height: 164px;
+  height: 200px;
   overflow: hidden;
   border-radius: 10px 0 10px 0;
   position: relative;
@@ -216,20 +737,19 @@
   opacity: 1;
 }
 #userPicBox img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 /*picture Modal*/
 #changePicModal {
   position: absolute;
   background-color: #e17247;
+  box-shadow: var(--viridian) 0 0 10px 1px;
   border-radius: 0 10px 0 10px;
   padding: 0.5em;
   top: 104px;
   right: 40px;
   width: 75%;
-  height: 164px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -263,11 +783,18 @@
   display: flex;
   width: 100%;
 }
+#fileInputCover:hover {
+  cursor: pointer;
+}
 #fileInputCover button {
   font-size: 10pt;
   background-color: var(--viridian);
   border-radius: 5px 0 0 5px;
   border: none;
+}
+#fileInputCover button:hover {
+  background-color: #315d4e;
+  cursor: pointer;
 }
 #fileInputCover input {
   width: 60%;
@@ -286,11 +813,21 @@
   background-color: var(--viridian);
   border: none;
 }
+.photoInputs button:hover {
+  background-color: #315d4e;
+}
+.photoInputs button:active {
+  background-color: #5fb395;
+}
 .picModalBottom > input {
   opacity: 0;
   position: absolute;
-  top: 11px;
+  top: 27px;
   left: -7px;
+  z-index: 1;
+}
+#myFile:hover {
+  cursor: pointer;
 }
 
 #nameAndEdit {
@@ -304,7 +841,7 @@
 }
 #nameAndEdit input {
   font-size: 15pt;
-  width: 65%;
+  width: 68%;
   position: absolute;
   left: 0;
   border-radius: 0 10px 0 10px;
@@ -313,8 +850,10 @@
   padding: 0.2em 0.5em;
 }
 #nameAndEdit input:focus {
-  border: none;
+  outline: none;
+  box-shadow: grey 0 0 10px;
 }
+
 #submitName {
   background-color: #4d9078;
   position: absolute;
@@ -322,6 +861,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  transition: background-color 0.5s ease-in-out;
+}
+#submitName:hover {
+  background-color: #315d4e;
 }
 #cancelNameChange {
   position: absolute;
@@ -329,6 +873,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--raspberry);
+  color: oldlace;
+  border: none;
+  transition: background-color 0.5s ease-in-out;
+}
+#cancelNameChange:hover {
+  background-color: #68273f;
 }
 #nameAndEdit > h3 {
   margin: 0;
@@ -336,17 +887,77 @@
   justify-content: center;
   align-items: center;
 }
+#recipeInfoBox > .row {
+  margin-top: 0.5em;
+}
+#recipeInfoBox > .row > h3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0;
+}
 #addNewReciBtn {
   background-color: #4d9078;
   font-weight: bold;
+  border: none;
+  width: 50px;
+}
+#seeFavs {
+  background-color: #4d9078;
+  font-weight: bold;
+  border: none;
+  width: 50px;
+  padding: 0.5em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#recipeResults > div:first-child {
+  width: 90%;
+  margin: auto;
+}
+#recipeResults > div > input {
+  margin-bottom: 1em;
 }
 
 /*edit Recipe Modal*/
 #editRecipeModal {
   position: fixed;
-  top: 5.5em;
+  top: 4.1em;
   left: 0;
-  height: 75dvh;
+  width: 100dvw;
+  background-color: #4d9079e6;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0.5em;
+}
+#myEditFile {
+  opacity: 0;
+  position: absolute;
+  top: 122px;
+}
+#editFormBox {
+  width: 100%;
+}
+.addEditExitBtn {
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  background-color: var(--raspberry);
+  color: oldlace;
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+/*Add Recipe Modal*/
+#addNewModal {
+  position: fixed;
+  top: 4.8em;
+  left: 0;
   width: 100dvw;
   background-color: #4d9079e6;
   z-index: 100;
@@ -356,14 +967,296 @@
   align-items: center;
   padding: 0.5em;
 }
+.addNewExitBtn {
+  position: absolute;
+  background-color: var(--raspberry);
+  border-radius: 5px;
+  padding: 0.5em;
+  font-weight: bold;
+  color: white;
+  left: 3px;
+  top: 6px;
+}
+form {
+  width: 80%;
+  margin: auto;
+}
+.aFormBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.aFormBox input,
+textarea {
+  border-radius: 0.5em;
+  border: none;
+  padding: 0.5em;
+  outline: none;
+  caret-color: var(--coral);
+  color: var(--viridian);
+  background-color: oldlace;
+}
+/*Shopping List*/
+#shoppingPage {
+  padding-top: 5em;
+  padding-bottom: 7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#shoppingPage > button:first-of-type {
+  border: none;
+  background-color: var(--saffron);
+  color: var(--viridian);
+}
+#shoppingPage #shoppingSaveBox button {
+  border: none;
+  background-color: var(--coral);
+  color: oldlace;
+  font-weight: bold;
+}
+#shoppingList {
+  width: 100%;
+  padding: 1em;
+}
+#shoppingPage li {
+  list-style: none;
+  position: relative;
+  margin-bottom: 0.5em;
+  padding: 0 0 0 0.5em;
+  border-radius: 5px;
+  color: var(--saffron);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--viridian);
+}
+.shoppingListCheckCover {
+  position: relative;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: oldlace;
+}
+
+#shoppingPage li button {
+  border: none;
+  background-color: var(--raspberry);
+  color: oldlace;
+}
+#shoppingSaveBox {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+#shoppingSaveBox input {
+  border-radius: 5px;
+  margin-bottom: 0.5em;
+  border: var(--viridian) 1pt solid;
+  padding: 0.5em;
+  color: var(--viridian);
+  transition: box-shadow 0.5s ease-in-out;
+}
+#shoppingSaveBox input:focus {
+  outline: none;
+  border-color: var(--coral);
+  box-shadow: var(--coral) 0 0 10px;
+}
 /*Footer*/
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: var(--coral);
 }
 footer div {
   font-family: "Cabin Sketch";
+  font-size: 8pt;
   padding: 0.5em;
+}
+#iconbox > .row > .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#backToTop {
+  color: oldlace;
+}
+
+/*Animation!!!!*/
+
+@keyframes threesixty {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes bounce {
+  100% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes saute {
+  25% {
+    transform: rotate(0);
+    transform: translateX(80px);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+@keyframes toss {
+  25% {
+    transform: translateX(-100px);
+  }
+  50% {
+    transform: translateY(-200px) rotate(360deg);
+  }
+  75% {
+    transform: translateY(-100px) rotate(720deg);
+  }
+  100% {
+    transform: translateY(-20px) rotate(1080deg);
+  }
+}
+@keyframes tipMeOver {
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/*Media Queries*/
+@media only screen and (max-width: 400px) {
+  /*loading Screen*/
+  #loadingOil {
+    left: -52px;
+    top: 220px;
+    height: 200px;
+  }
+  #loadingBasket {
+    left: 180px;
+    bottom: -6px;
+  }
+  .loadingIngredients {
+    width: 45px;
+    bottom: 61px;
+  }
+  #loadingPan {
+    width: 320px;
+    top: 198px;
+  }
+  #panCover {
+    width: 140px;
+    height: 26px;
+    bottom: 63px;
+    left: 46px;
+    border-radius: 5px 5px 50px 50px;
+  }
+  #panCoverLow {
+    height: 33px;
+    width: 152px;
+    bottom: 54px;
+    left: 38px;
+    border-radius: 5px 5px 100px 100px;
+  }
+  #loadingBurner {
+    width: 100px;
+  }
+  #loadingBurner img {
+    width: 100%;
+    object-fit: cover;
+  }
+  #loadingText {
+  }
+  #loadingH3 {
+  }
+}
+@media only screen and (min-width: 992px) {
+  #basic-navbar-nav > div > div > div {
+    background-color: oldlace;
+    border-radius: 0 10px 0 10px;
+    box-shadow: #315d4e 0 0 10px;
+    right: 210px;
+  }
+  #basic-navbar-nav > div > a {
+    width: 200px;
+  }
+  #mainSearchBox > input {
+    width: 90%;
+    margin: auto;
+  }
+  #mainReciBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 90%;
+    margin: auto;
+  }
+  .reciBox {
+    width: 30%;
+  }
+  #userPicBox {
+    width: 22%;
+  }
+  #userPicBox img {
+    width: 100%;
+  }
+}
+/*JS CSS*/
+.hidden {
+  display: none;
+}
+.darker {
+  background-color: var(--coral) !important;
+}
+.checkedBox {
+  text-decoration: line-through;
+  background-color: #25463b !important;
+  font-style: italic;
+}
+.afterCheck {
+  position: relative;
+  border-radius: 5px;
+  border: var(--saffron) dotted 1pt;
+  width: 30px;
+  height: 30px;
+  background-color: #25463b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

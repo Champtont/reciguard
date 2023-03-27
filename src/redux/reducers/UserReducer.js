@@ -3,6 +3,10 @@ import {
   SAVE_RECIPES,
   SAVE_USER_RECIPES,
   SAVE_SINGLE_RECIPE,
+  SAVE_USER_MENUS,
+  SAVE_USER_SHOPPING,
+  SAVE_TO_FAV,
+  REMOVE_FROM_FAV,
 } from "../actions";
 
 const initialState = {
@@ -11,6 +15,9 @@ const initialState = {
   userRecipes: [],
   singleRecipe: null,
   recipeSearch: [],
+  favorites: [],
+  calendar: [],
+  shoppingList: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,6 +41,28 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userRecipes: action.payload,
+      };
+    case SAVE_USER_MENUS:
+      return {
+        ...state,
+        calendar: action.payload,
+      };
+    case SAVE_USER_SHOPPING:
+      return {
+        ...state,
+        shoppingList: action.payload,
+      };
+    case SAVE_TO_FAV:
+      return {
+        ...state,
+        favorites: action.payload,
+      };
+    case REMOVE_FROM_FAV:
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (recId) => recId._id !== action.payload
+        ),
       };
     default:
       return {
