@@ -200,7 +200,7 @@ nav:has(#basic-navbar-nav .show) {
 }
 /****LoadingPage****/
 #loadingPage {
-  height: calc(100dvh - 3em);
+  height: 100dvh;
   width: 100dvw;
   overflow: hidden;
   display: flex;
@@ -479,7 +479,6 @@ nav:has(#basic-navbar-nav .show) {
 /*singleRecipePage*/
 #singleRecipeContainer {
   margin-top: 5em;
-  padding-bottom: 6em;
 }
 #singleRecipeImageBox {
   border-radius: 10px 0 10px 0;
@@ -574,6 +573,9 @@ ol > li {
 #calendarPage .react-calendar__month-view__days :hover {
   background-color: #f7825496;
 }
+#calendarPage .react-calendar__month-view__days :focus {
+  border: var(--raspberry) 2pt solid;
+}
 #calendarPage .react-calendar__tile--range {
   border-radius: 0;
   background-color: #b4436c7d;
@@ -600,9 +602,15 @@ ol > li {
   border: none;
   margin-bottom: 0.5em;
 }
+#calendarPage > button:nth-child(3):hover {
+  background-color: #bf623d;
+}
 #calendarPage > button:nth-child(4) {
   background-color: var(--viridian);
   border: none;
+}
+#calendarPage > button:nth-child(4):hover {
+  background-color: #25463b;
 }
 
 #singleModalFilter {
@@ -638,6 +646,9 @@ ol > li {
   text-shadow: #315d4e 0 0 2px;
   box-shadow: var(--viridian) 0 0 2px;
 }
+#singleDaySwitch:hover {
+  background-color: #c0993e;
+}
 #singleDayModal {
   display: flex;
   margin-bottom: 0.5em;
@@ -648,6 +659,20 @@ ol > li {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+#singleDayLeft::-webkit-scrollbar {
+  width: 2px;
+  background-color: transparent;
+}
+#singleDayLeft::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
+}
 #singleDayUpper > h1 {
   font-size: 16pt;
 }
@@ -656,10 +681,13 @@ ol > li {
   background-color: var(--raspberry);
   color: oldlace;
   border-radius: 5px;
-  right: 4px;
-  top: 170px;
+  top: 126px;
   z-index: 1;
   padding: 0.5em;
+}
+#singleModalExit:hover {
+  background-color: #68273f;
+  cursor: pointer;
 }
 #singleDayEditDelete {
   display: flex;
@@ -670,10 +698,16 @@ ol > li {
   border: none;
   font-weight: bold;
 }
+#singleDayEditDelete button:first-child:hover {
+  background-color: #25463b;
+}
 #singleDayEditDelete button:nth-child(2) {
   background-color: var(--raspberry);
   border: none;
   font-weight: bold;
+}
+#singleDayEditDelete button:nth-child(2):hover {
+  background-color: #68273f;
 }
 .draggableBoxes {
   background-color: var(--coral);
@@ -703,6 +737,20 @@ ol > li {
   overflow-x: hidden;
   overflow-y: scroll;
   height: 239.5px;
+}
+#singleDayOptBox::-webkit-scrollbar {
+  width: 2px;
+  background-color: transparent;
+}
+#singleDayOptBox::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
 }
 /*MyProfile*/
 #profileBox {
@@ -819,11 +867,10 @@ ol > li {
 .photoInputs button:active {
   background-color: #5fb395;
 }
-.picModalBottom > input {
+#myFile {
   opacity: 0;
   position: absolute;
-  top: 27px;
-  left: -7px;
+  left: 0;
   z-index: 1;
 }
 #myFile:hover {
@@ -939,17 +986,17 @@ ol > li {
 /*edit Recipe Modal*/
 #editRecipeModal {
   position: fixed;
-  top: 4.1em;
+  top: 5.1em;
   left: 0;
   width: 100dvw;
   background-color: #4d9079e6;
   z-index: 100;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 1em 0.5em;
-  height: 606px;
+  height: 550px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -962,10 +1009,22 @@ ol > li {
 #myEditFile {
   opacity: 0;
   position: absolute;
-  top: 122px;
+  top: 0;
+  left: 0;
+}
+#myEditFile:hover {
+  cursor: pointer;
 }
 #editFormBox {
   width: 100%;
+}
+#editFormBox button {
+  background-color: var(--coral);
+  border: none;
+  margin: 0.5em 0;
+}
+#editFormBox button:hover {
+  background-color: #bf623d;
 }
 .addEditExitBtn {
   position: absolute;
@@ -976,6 +1035,11 @@ ol > li {
   font-weight: bold;
   padding: 0.5em;
   border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+.addEditExitBtn:hover {
+  background-color: #68273f;
+  cursor: pointer;
 }
 
 /*Add Recipe Modal*/
@@ -991,6 +1055,13 @@ ol > li {
   justify-content: center;
   align-items: center;
   padding: 0.5em;
+}
+#addNewModal button {
+  background-color: var(--coral);
+  border: none;
+}
+#addNewModal button:hover {
+  background-color: #bf623d;
 }
 .addNewExitBtn {
   position: absolute;
@@ -1036,16 +1107,39 @@ textarea {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+#shoppingPage::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+#shoppingPage::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    #bf623d,
+    var(--coral),
+    var(--saffron),
+    var(--mantis),
+    var(--viridian)
+  );
+}
 #shoppingPage > button:first-of-type {
   border: none;
   background-color: var(--saffron);
   color: var(--viridian);
+  transition: background-color 0.3s ease-in-out;
+}
+#shoppingPage > button:first-of-type:hover {
+  background-color: #c0993e;
+  color: oldlace;
 }
 #shoppingPage #shoppingSaveBox button {
   border: none;
   background-color: var(--coral);
   color: oldlace;
   font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+#shoppingPage #shoppingSaveBox button:hover {
+  background-color: #bf623d;
 }
 #shoppingList {
   width: 100%;
@@ -1062,6 +1156,13 @@ textarea {
   justify-content: space-between;
   align-items: center;
   background-color: var(--viridian);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+#shoppingPage li:hover {
+  background-color: #25463b;
+  color: oldlace;
+  transform: scale(1.01);
 }
 .shoppingListCheckCover {
   position: relative;
@@ -1095,6 +1196,11 @@ textarea {
   border-color: var(--coral);
   box-shadow: var(--coral) 0 0 10px;
 }
+/*About Page*/
+#AboutLogoBox {
+  animation: rotateOnZ 3s linear infinite;
+}
+
 /*Footer*/
 footer {
   position: fixed;
@@ -1188,6 +1294,22 @@ footer div {
     transform: rotate(0deg);
   }
 }
+@keyframes slideOutIn {
+  50% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes rotateOnZ {
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
 
 /*Media Queries*/
 @media only screen and (max-width: 400px) {
@@ -1274,11 +1396,61 @@ footer div {
     justify-content: space-evenly;
   }
   #editRecipeModal {
-    height: 654px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
     overflow: hidden;
+    height: auto;
   }
   #seeFavs {
     width: 100px;
+  }
+  #singleRecipeContainer {
+    position: relative;
+    height: 200dvh;
+  }
+
+  #singleRecipeImageBox {
+    margin-left: 135px;
+    width: 44%;
+    height: 550px;
+    position: absolute;
+    z-index: 0;
+    top: 56px;
+    left: 0;
+    z-index: 0;
+    transition: z-index 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  }
+  #singleRecipeImageBox:hover {
+    z-index: 1;
+    animation: slideOutIn 0.5s ease-in-out;
+    box-shadow: #25463b 0 0 10px;
+  }
+  #singleRecipeImageBox:hover ~ #singleRecipeRequirements {
+    transform: translateX(250px);
+  }
+  #singleRecipeRequirements {
+    border: oldlace 7pt double;
+    border-radius: 0 10px 0 10px;
+    width: 60%;
+    position: absolute;
+    top: 290px;
+    right: 100px;
+    transition: transform 0.5s ease-out;
+  }
+  #singleDayOptBox {
+    flex-direction: column;
+  }
+  /*calendar Big Screen*/
+  #singleDayLeft {
+    width: 50%;
+  }
+  #singleDayOptBox {
+    width: 50%;
+  }
+  #calendarPage > button:nth-child(3) {
+    margin-right: 1em;
+    margin-bottom: 0;
   }
 }
 /*JS CSS*/
@@ -1303,4 +1475,7 @@ footer div {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.afterHover {
+  animation: slideOutIn 0.5s ease-in-out;
 }

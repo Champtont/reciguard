@@ -73,17 +73,17 @@ const MyProfile = () => {
                 </div>
               </div>
               <div className="picModalBottom">
-                <input
-                  onChange={(e) => {
-                    setImage(e.target.files[0]);
-                    setFileName(e.target.files[0].name);
-                  }}
-                  type="file"
-                  id="myFile"
-                  name="filename"
-                ></input>
                 <div className="photoInputs">
                   <div id="fileInputCover">
+                    <input
+                      onChange={(e) => {
+                        setImage(e.target.files[0]);
+                        setFileName(e.target.files[0].name);
+                      }}
+                      type="file"
+                      id="myFile"
+                      name="filename"
+                    ></input>
                     <Button>Choose File</Button>
                     <input type="text" value={fileName} readOnly />
                   </div>

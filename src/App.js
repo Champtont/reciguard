@@ -13,6 +13,7 @@ import HomePage from "./components/views/main/HomePage";
 import MyProfile from "./components/views/myProfile/MyProfile";
 import SingleRecipePage from "./components/views/Recipes/SingleRecipePage";
 import MyShoppingList from "./components/views/myShoppingList/MyShoppingList";
+import AboutUs from "./components/views/aboutUs/AboutUs";
 
 function App() {
   let width = window.innerWidth;
@@ -29,6 +30,7 @@ function App() {
             <Route path="/recipe/:recipeId" element={<SingleRecipePage />} />
             <Route path="/myCalendar" element={<MyCalendar />} />
             <Route path="/myShoppingList" element={<MyShoppingList />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
           </Routes>
           <Footer />
         </div>

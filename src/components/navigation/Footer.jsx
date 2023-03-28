@@ -12,7 +12,7 @@ const Footer = () => {
         <Row>
           <Col>
             <div>
-              Copyright <AiOutlineCopyright /> 2023 ReciGaurd
+              Copyright <AiOutlineCopyright /> 2023 ReciGuard
             </div>
           </Col>
           {location.pathname !== "/" && location.pathname !== "/myCalendar" && (

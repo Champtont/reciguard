@@ -71,7 +71,7 @@ const MyCalendar = () => {
         )}
       </div>
       <Button
-        className={selectRange ? "mb-0 me-1" : "mb-1"}
+        className={selectRange ? "mb-0 me-1" : ""}
         onClick={() => {
           selectRange === false ? setSelectRange(true) : setSelectRange(false);
           setDate(new Date());

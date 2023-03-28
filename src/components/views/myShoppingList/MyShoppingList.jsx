@@ -44,7 +44,7 @@ const MyShoppingList = () => {
   stateRef.now = userRecentList;
 
   const newShopArray = stateRef.current.filter(function (elem, pos) {
-    return stateRef.current.indexOf(elem) == pos;
+    return stateRef.current.indexOf(elem) == pos; //here '==' is necessary as .indexOf(elem) and pos are not an exact match
   });
 
   const pushIntoArray = () => {

@@ -86,16 +86,16 @@ const EditRecipeModal = ({ recipe, setEdit, showFavs }) => {
                 <Accordion.Header>Add A Photo of your Recipe</Accordion.Header>
                 <Accordion.Body>
                   <div className="photoInputs">
-                    <input
-                      onChange={(e) => {
-                        setImage(e.target.files[0]);
-                        setFileName(e.target.files[0].name);
-                      }}
-                      type="file"
-                      id="myEditFile"
-                      name="filename"
-                    ></input>
-                    <div id="fileInputCover">
+                    <div id="fileInputCover" style={{ position: "relative" }}>
+                      <input
+                        onChange={(e) => {
+                          setImage(e.target.files[0]);
+                          setFileName(e.target.files[0].name);
+                        }}
+                        type="file"
+                        id="myEditFile"
+                        name="filename"
+                      ></input>
                       <Button>Choose File</Button>
                       <input type="text" value={fileName} readOnly />
                     </div>

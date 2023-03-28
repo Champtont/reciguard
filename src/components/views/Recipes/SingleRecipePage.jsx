@@ -1,22 +1,55 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchSingleRecipe } from "../../../redux/actions";
+import { current } from "immer";
+import { async } from "q";
 
 const SingleRecipePage = () => {
   const oneRecipe = useSelector((state) => state.user.singleRecipe);
+  const [hover, setHover] = useState(true);
 
   const dispatch = useDispatch();
   const params = useParams();
   const recipeId = params.recipeId;
+  const stateRef = useRef();
 
-  //const ingredients = oneRecipe.ingredients;
-  //const instructions = oneRecipe.instructions;
+  //attempting to add height dynamically
+  const getBoxHeight = async () => {
+    const requirementsBox = await document.getElementById(
+      "singleRecipeRequirements"
+    );
+    if (requirementsBox) {
+      const requirementsBoxHeight = requirementsBox.clientHeight;
+      if (requirementsBoxHeight !== null) {
+        setBoxHeight(requirementsBoxHeight);
+      }
+    }
+  };
+  const [boxHeight, setBoxHeight] = useState(getBoxHeight());
+  stateRef.current = boxHeight;
+
+  const addHeightToPage = async () => {
+    const recipeImgBox = document.getElementById("singleRecipeImageBox");
+    // const recipeBox = document.getElementById("singleRecipeContainer");
+    /*const requirementsBoxHeight = document.getElementById(
+      "singleRecipeRequirements"
+    ).clientHeight;*/
+    let width = window.innerWidth;
+    if (recipeImgBox) {
+      console.log(boxHeight);
+      if (width > 850) {
+        recipeImgBox.style.marginBottom = `${boxHeight}px`;
+      }
+    }
+  };
+  //end of experiment
 
   useEffect(() => {
     dispatch(fetchSingleRecipe(recipeId));
     console.log(oneRecipe === null);
+    addHeightToPage();
   }, []);
 
   return (

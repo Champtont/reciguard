@@ -70,7 +70,7 @@ const NavBar = () => {
                 </NavDropdown>
               </>
             )}
-            <Link href="#link">About Us</Link>
+            <Link to="/aboutUs">About Us</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
