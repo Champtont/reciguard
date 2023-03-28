@@ -479,6 +479,7 @@ nav:has(#basic-navbar-nav .show) {
 /*singleRecipePage*/
 #singleRecipeContainer {
   margin-top: 5em;
+  margin-bottom: 5em;
 }
 #singleRecipeImageBox {
   border-radius: 10px 0 10px 0;
