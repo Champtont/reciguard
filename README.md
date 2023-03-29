@@ -24,4 +24,4 @@ My wife has been a huge support and source of encouragement during Epicode Bootc
 - User can edit/save the shoping list
 - App is persisted with MongoDB back end
 
-The Back End for this project can be found here: https://github.com/Champtont/recigaurd_be
+The Back End for this project can be found here: https://github.com/Champtont/reciguard_be
