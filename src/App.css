@@ -1455,6 +1455,7 @@ footer div {
   }
   #calendarToast {
     width: 100%;
+    left: 0;
   }
 }
 /*JS CSS*/
