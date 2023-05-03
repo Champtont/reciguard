@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { baseAPI } from "../../../redux/actions/index.js";
 import { toast } from "react-toastify";
 import { logInAction, registerAction } from "../../../redux/actions/index.js";
+import LoginCarousel from "./LoginCarousel.jsx";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -137,6 +138,9 @@ const LoginPage = () => {
               </Button>
             </Form>
           )}
+        </Col>
+        <Col col="4" md="6">
+          <LoginCarousel />
         </Col>
       </Row>
       <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
