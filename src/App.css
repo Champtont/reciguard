@@ -1339,6 +1339,7 @@ footer {
   bottom: 0;
   width: 100%;
   background-color: var(--coral);
+  z-index: 200;
 }
 footer div {
   font-family: "Cabin Sketch";
@@ -1445,10 +1446,14 @@ footer div {
 
 /*Media Queries*/
 @media only screen and (max-width: 400px) {
+  /*Login*/
+  #root > div > div > div:nth-child(1) > div:nth-child(2) {
+    padding-bottom: 5em;
+  }
   /*loading Screen*/
   #loadingOil {
     left: -52px;
-    top: 220px;
+    top: 200px;
     height: 200px;
   }
   #loadingBasket {
@@ -1461,12 +1466,12 @@ footer div {
   }
   #loadingPan {
     width: 320px;
-    top: 198px;
+    top: 178px;
   }
   #panCover {
     width: 140px;
     height: 26px;
-    bottom: 63px;
+    bottom: 53px;
     left: 46px;
     border-radius: 5px 5px 50px 50px;
   }
