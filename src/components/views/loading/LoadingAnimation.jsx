@@ -12,36 +12,36 @@ const LoadingAnimation = () => {
   return (
     <>
       <div id="loadingOil">
-        <img src={Oil} alt="cooking oil" />
+        <img src={Oil} alt="cooking oil" loading="lazy" />
       </div>
       <div id="loadingPage">
         <div id="loadingPan">
-          <img src={Pan} alt="cooking skillet" />
+          <img src={Pan} alt="cooking skillet" loading="eager" />
           <div id="loadingBasket">
             <div className="loadingIngredients">
-              <img src={Onion} alt="cooking onion" />
+              <img src={Onion} alt="cooking onion" loading="lazy" />
             </div>
             <div className="loadingIngredients">
-              <img src={Padron} alt="cooking padron" />
+              <img src={Padron} alt="cooking padron" loading="lazy" />
             </div>
             <div className="loadingIngredients">
-              <img src={Carrot} alt="cooking carrot" />
+              <img src={Carrot} alt="cooking carrot" loading="lazy" />
             </div>
             <div className="loadingIngredients">
-              <img src={Mushroom} alt="cooking mushroom" />
+              <img src={Mushroom} alt="cooking mushroom" loading="lazy" />
             </div>
             <div className="loadingIngredients">
-              <img src={Tomato} alt="cooking tomato" />
+              <img src={Tomato} alt="cooking tomato" loading="lazy" />
             </div>
             <div className="loadingIngredients">
-              <img src={Potato} alt="cooking potato" />
+              <img src={Potato} alt="cooking potato" loading="lazy" />
             </div>
           </div>
           <div id="panCover"></div>
           <div id="panCoverLow"></div>
         </div>
         <div id="loadingBurner">
-          <img src={Fire} alt="fire" />
+          <img src={Fire} alt="fire" loading="lazy" />
         </div>
         <div id="loadingText">
           <h3 id="loadingH3">
