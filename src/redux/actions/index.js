@@ -24,6 +24,8 @@ export const logInAction = (userInfo) => {
     try {
       let response = await fetch(`${baseAPI}/users/login`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
+        credentials: "include",
         body: JSON.stringify(userInfo),
         headers: {
           "Content-Type": "application/json",
@@ -51,6 +53,8 @@ export const registerAction = (userInfo) => {
     try {
       let response = await fetch(`${baseAPI}/users/register`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
+        credentials: "include",
         body: JSON.stringify(userInfo),
         headers: {
           "Content-Type": "application/json",
@@ -81,6 +85,8 @@ export const fetchCurrentUser = () => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
+        credentials: "include",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -125,6 +131,8 @@ export const fetchCurrentGoogleUser = (googleAccessToken) => {
       const accessToken = localStorage.getItem("UserAccessToken");
       let response = await fetch(`${baseAPI}/users/me`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
+        credentials: "include",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -168,6 +176,7 @@ export const fetchAllRecipes = (isLoading) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/recipes`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -199,6 +208,7 @@ export const fetchSingleRecipe = (recipeId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/recipes/${recipeId}`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled    
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -227,6 +237,7 @@ export const fetchingMyRecipes = () => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me/recipes`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -255,6 +266,7 @@ export const editUser = (userInfo) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me`, {
         method: "PUT",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(userInfo),
         headers: {
           "Content-Type": "application/json",
@@ -280,6 +292,7 @@ export const changeUserAvatar = (image) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me/avatar`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: image,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -303,6 +316,7 @@ export const editRecipe = (recipeInfo, recipeId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me/${recipeId}`, {
         method: "PUT",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(recipeInfo),
         headers: {
           "Content-Type": "application/json",
@@ -328,6 +342,7 @@ export const changeRecipePhoto = (image, recipeId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/recipes/${recipeId}/photo`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: image,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -352,6 +367,7 @@ export const addANewRecipe = (recipeInfo) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/recipes`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(recipeInfo),
         headers: {
           "Content-Type": "application/json",
@@ -379,6 +395,7 @@ export const deleteThisRecipe = (recipeId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/me/${recipeId}`, {
         method: "DELETE",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -413,6 +430,7 @@ export const getMyCalenderItems = () => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/calendar`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -441,6 +459,7 @@ export const postNewMenu = (menuEvent, date) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/calendar/${date}`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(menuEvent),
         headers: {
           "Content-Type": "application/json",
@@ -466,6 +485,7 @@ export const getMenusInRange = (start, end) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/calendar/${start}/${end}`, {
         method: "GET",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -495,6 +515,7 @@ export const editMenu = (menuInfo, menuId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/calendar/${menuId}`, {
         method: "PUT",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(menuInfo),
         headers: {
           "Content-Type": "application/json",
@@ -520,6 +541,7 @@ export const deleteThisMenu = (menuId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/calendar/${menuId}`, {
         method: "DELETE",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -544,6 +566,7 @@ export const postNewList = (newList) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/list`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(newList),
         headers: {
           "Content-Type": "application/json",
@@ -569,6 +592,7 @@ export const addToFavs = (newReci) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/favorites`, {
         method: "POST",
+        mode: "cors", // Ensures CORS is handled
         body: JSON.stringify(newReci),
         headers: {
           "Content-Type": "application/json",
@@ -594,6 +618,7 @@ export const removeFromFavs = (reciId) => {
       const token = accessToken.split('"').join("");
       let response = await fetch(`${baseAPI}/users/favorite/${reciId}`, {
         method: "DELETE",
+        mode: "cors", // Ensures CORS is handled
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
